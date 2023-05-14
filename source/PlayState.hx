@@ -4922,6 +4922,15 @@ class PlayState extends MusicBeatState
 					#end
 					FlxG.switchState(new PlayState());
 					return;
+				case 'bananacore' | 'eletric-cockadoodledoo' | 'electric-cockaldoodledoo':
+					isStoryMode = false;
+					storyPlaylist = [];
+					
+					PlayState.SONG = Song.loadFromJson("secret-mod-leak"); // for you
+					isStoryMode = false;
+					FlxG.save.data.secretUnlocked = true;
+					shakeCam = false;
+					FlxG.switchState(new PlayState());
 				case 'kabunga':
 					fancyOpenURL("https://benjaminpants.github.io/muko_firefox/index.html"); //banger game
 					System.exit(0);
