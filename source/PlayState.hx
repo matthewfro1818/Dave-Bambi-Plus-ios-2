@@ -1654,6 +1654,9 @@ class PlayState extends MusicBeatState
 		exbungo_funny = FlxG.sound.load(Paths.sound('amen_' + FlxG.random.int(1, 6)));
 		exbungo_funny.volume = 0.91;
 
+		if (FlxG.save.data.hitSound != 0)
+			precacheThing("hitsounds/" + HitSounds.getSoundByID(FlxG.save.data.hitSound).toLowerCase(), 'sound', 'shared');
+
 		hidehphud();
 
 		super.create();
@@ -5749,6 +5752,17 @@ class PlayState extends MusicBeatState
 			noteLimbo = null;
 		}
 
+		if (FlxG.save.data.hitSound != 0 && releaseArray.contains(true))
+			{
+				if (FlxG.save.data.strumHit)
+				{
+					var daHitSound:FlxSound = new FlxSound().loadEmbedded(Paths.sound('hitsounds/${HitSounds.getSoundByID(FlxG.save.data.hitSound).toLowerCase()}',
+						'shared'));
+					daHitSound.volume = FlxG.save.data.hitVolume;
+					daHitSound.play();
+				}
+			}
+
 		// FlxG.watch.addQuick('asdfa', upP);
 		var ankey = (upP || rightP || downP || leftP);
 		if (mania == 1) ankey = (upP || rightP || centerP || downP || leftP);
@@ -6206,8 +6220,20 @@ class PlayState extends MusicBeatState
 	{
 		if (!note.wasGoodHit)
 		{
+
 			if (!note.isSustainNote)
 			{
+				if (FlxG.save.data.hitSound != 0)
+					{
+						if (!FlxG.save.data.strumHit)
+						{
+							var daHitSound:FlxSound = new FlxSound()
+								.loadEmbedded(Paths.sound('hitsounds/${HitSounds.getSoundByID(FlxG.save.data.hitSound).toLowerCase()}', 'shared'));
+							daHitSound.volume = FlxG.save.data.hitVolume;
+							daHitSound.play();
+						}
+					}
+
 				if(combo >= maxCombo)
                 	maxCombo += 1;
 
@@ -6216,11 +6242,6 @@ class PlayState extends MusicBeatState
 
 				if(combo > 9999)
 					combo = 9999;
-
-				if (FlxG.save.data.donoteclick)
-				{
-					FlxG.sound.play(Paths.sound('note_click'));
-				}
 			}
 			else
 				totalNotesHit += 1;
@@ -9507,7 +9528,19 @@ class PlayState extends MusicBeatState
 		expungedSpr.graphics.drawRect(0, 0, dad.pixels.width, dad.pixels.height);
 		expungedSpr.graphics.endFill();
 	}
-	
+
+	public function precacheThing(target:String, type:String, ?library:String)
+	{
+		switch (type)
+		{
+			case 'image':
+				Paths.image(target, library);
+			case 'sound':
+				Paths.sound(target, library);
+			case 'music':
+				Paths.music(target, library);
+		}
+	}
 }
 enum ExploitationModchartType
 {
