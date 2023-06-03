@@ -33,6 +33,8 @@ class AnimationDebug extends MusicBeatState
 	var camFollow:FlxObject;
 	var _file:FileReference;
 
+	public var noAnimation:Bool = false;
+
 	public function new(daAnim:String = 'spooky')
 	{
 		super();

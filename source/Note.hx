@@ -18,6 +18,7 @@ import StringTools;
 
 class Note extends FlxSprite
 {
+	public var row:Int = 0;
 	public var strumTime:Float = 0;
 
 	public var mustPress:Bool = false;
@@ -33,10 +34,7 @@ class Note extends FlxSprite
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
 
-	private var CharactersWith3D:Array<String> = ['dave-angey', 'bambi-3d', 'expunged', 'bambi-unfair', 'exbungo',
-	'dave-festival-3d', 'dave-3d-recursed', 'bf-3d', 'nofriend', 'dave-angey-old', 'dave-insanity-3d', 'dave-3d-standing-bruh-what',
-	'furiosity-dave', 'furiosity-dave-alpha-4', 'bambi-unfair', 'bambi-3d-scrapped', 'bambi-3d-old',
-	'bambi-unfair-old', 'cockey', 'old-cockey', 'older-cockey', 'pissey', 'old-pissey', 'shartey'];
+	private var CharactersWith3D:Array<String> = ["dave-angey", "bambi-3d", 'bambi-unfair', 'exbungo', 'expunged', 'dave-festival-3d', 'dave-3d-recursed', 'bf-3d', 'nofriend'];
 
 	public var mania:Int = 0;
 
@@ -50,6 +48,10 @@ class Note extends FlxSprite
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
+
+	public var colorSwap:ColorSwap;
+
+	public var texture:String = null;
 
 	private var notetolookfor = 0;
 
@@ -82,6 +84,14 @@ class Note extends FlxSprite
 		this.originalType = noteData;
 		this.guitarSection = guitarSection;
 		this.noteData = noteData;
+
+		if(noteData > -1) {
+			texture = '';
+			colorSwap = new ColorSwap();
+			shader = colorSwap.shader;
+
+			x += swagWidth * (noteData % 4);
+		}
 
 		x += 78 - posRest[mania];
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -245,7 +255,7 @@ class Note extends FlxSprite
 				}
 				setGraphicSize(Std.int(width * 1.2 * (noteSize / 0.7)));
 				updateHitbox();
-				antialiasing = true;
+				antialiasing = FlxG.save.data.globalAntialiasing;
 				// noteOffset = -(width - 78 + (mania == 4 ? 30 : 0));
 
 			case 'guitarHero':
@@ -274,7 +284,7 @@ class Note extends FlxSprite
 
 				setGraphicSize(Std.int(width * 0.7));
 				updateHitbox();
-				antialiasing = true;
+				antialiasing = FlxG.save.data.globalAntialiasing;
 			case 'phone' | 'phone-alt':
 				if (!isSustainNote)
 				{
@@ -319,7 +329,7 @@ class Note extends FlxSprite
 				
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
-				antialiasing = true;
+				antialiasing = FlxG.save.data.globalAntialiasing;
 				
 				// noteOffset = 20;
 
@@ -331,10 +341,9 @@ class Note extends FlxSprite
 			if (state.localFunny == CharacterFunnyEffect.Dave)
 			{
 				str = 'cheating';
-				str = 'rigged';
 			}
 		}
-		if (str == 'cheating' || str == 'rigged' && PlayState.modchartoption) {
+		if (str == 'cheating' && PlayState.modchartoption) {
 			if (mania == 0) {
 				switch (originalType)
 				{
@@ -401,7 +410,7 @@ class Note extends FlxSprite
 		}
 		if (!isSustainNote) {
 			if (!PlayState.modchartoption) {
-				if (PlayState.SONG.song.toLowerCase() == 'cheating' || PlayState.SONG.song.toLowerCase() == 'rigged')
+				if (PlayState.SONG.song.toLowerCase() == 'cheating')
 					LocalScrollSpeed = 0.75; // target practice old
 				if (PlayState.SONG.song.toLowerCase() == 'kabunga')
 					LocalScrollSpeed = 0.81;

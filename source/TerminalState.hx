@@ -549,7 +549,6 @@ class TerminalState extends MusicBeatState
 				{
 					FlxG.save.data.exploitationState = 'awaiting';
 					FlxG.save.data.exploitationFound = true;
-                    FlxG.save.data.importumaniaFound = true;
 					FlxG.save.flush();
 
 					var programPath:String = Sys.programPath();

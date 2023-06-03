@@ -19,11 +19,8 @@ class Alphabet extends FlxSpriteGroup
 	public var paused:Bool = false;
 
 	// for menu shit
-	public var forceX:Float = Math.NEGATIVE_INFINITY;
 	public var targetY:Float = 0;
 	public var isMenuItem:Bool = false;
-	public var isMenuItemCenter:Bool = false;
-
 
 	public var text:String = "";
 
@@ -40,10 +37,7 @@ class Alphabet extends FlxSpriteGroup
 	public var widthOfWords:Float = FlxG.width;
 
 	var yMulti:Float = 1;
-	public var yMult:Float = 120;
 
-	public var xAdd:Float = 0;
-	public var yAdd:Float = 0;
 
 	public var unlockY:Bool = false;
 
@@ -278,26 +272,6 @@ class Alphabet extends FlxSpriteGroup
 					x = FlxMath.lerp(x, Math.exp(Math.abs(scaledY * 0.8)) * -70 + (FlxG.width * 0.35), 0.16 / (openfl.Lib.application.window.frameRate / 60));
 			}
 		}
-		if (isMenuItemCenter)
-		{
-		
-			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-			
-			var lerpVal:Float = CoolUtil.boundTo(elapsed * 9.6, 0, 1);
-			
-			y = FlxMath.lerp(y, (scaledY * yMult) + (FlxG.height * 0.48) + yAdd, lerpVal);
-			
-			if(forceX != Math.NEGATIVE_INFINITY) {
-			
-				screenCenter(X);
-			
-			} else {
-			
-				screenCenter(X);
-			
-			}
-			
-		}
 		super.update(elapsed);
 	}
 }
@@ -319,7 +293,7 @@ class AlphaCharacter extends FlxSprite
 		var tex = Paths.getSparrowAtlas('ui/alphabet');
 		frames = tex;
 
-		antialiasing = true;
+		antialiasing = FlxG.save.data.globalAntialiasing;
 	}
 	public function createBoldLetter(letter:String)
 	{

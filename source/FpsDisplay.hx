@@ -6,6 +6,9 @@ import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import flixel.util.FlxColor;
+import flixel.FlxG;
+import openfl.Lib;
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -34,6 +37,20 @@ class FpsDisplay extends TextField
 	@:noCompletion private var times:Array<Float>;
 
     public var fuckFps:Bool = false;
+
+	var array:Array<FlxColor> = [
+		FlxColor.fromRGB(148, 0, 211),
+		FlxColor.fromRGB(75, 0, 130),
+		FlxColor.fromRGB(0, 0, 255),
+		FlxColor.fromRGB(0, 255, 0),
+		FlxColor.fromRGB(255, 255, 0),
+		FlxColor.fromRGB(255, 127, 0),
+		FlxColor.fromRGB(255, 0, 0)
+	];
+
+	var skippedFrames = 0;
+
+	public static var currentColor = 0;
 
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
 	{
@@ -67,6 +84,19 @@ class FpsDisplay extends TextField
 	@:noCompletion
 	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
 	{
+		if (MusicBeatState.initSave)
+			if (FlxG.save.data.fpsRain)
+			{
+				if (currentColor >= array.length)
+					currentColor = 0;
+				currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / (FlxG.save.data.fpsCap / 3)));
+				(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
+				currentColor++;
+				skippedFrames++;
+				if (skippedFrames > (FlxG.save.data.fpsCap / 3))
+					skippedFrames = 0;
+			}
+
 		currentTime += deltaTime;
 		times.push(currentTime);
 

@@ -8,6 +8,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
+import flixel.FlxG;
 
 typedef SongHeading = {
 	var path:String;
@@ -37,9 +38,7 @@ class CreditsPopUp extends FlxSpriteGroup
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'warmup' | 'house' | 'insanity' | 'polygonized' | 'bonus-song' | 'blocked' | 'corn-theft' | 'maze' | 'indignancy' |  'splitathon' | 'shredder' | 'greetings' |
-				'interdimensional' | 'cheating' | 'escape-from-california' | 'five-nights' | 'kabunga' | 'secret' | 'unfairness' | 'rano' | 'master' | 'house-2.5' | 'insanity-2.5' |
-				'polygonized-2.5' | 'blocked-2.5' | 'corn-theft-2.5' | 'maze-2.5' | 'vs-dave-thanksgiving' |'bonus-song-2.5' | 'old-house' | 'old-insanity' | 'furiosity' | 'old-blocked' |
-				'old-maze' | 'old-corn-theft' | 'beta-maze' | 'old-splitathon' | 'roots'| 'threedimensional' | 'second-tristan-song' | 'secret' | 'bf-ugh' | 'secret-mod-leak' | 'oppression':
+				'interdimensional' | 'cheating' | 'escape-from-california' | 'five-nights' | 'kabunga' | 'secret' | 'unfairness' | 'rano' | 'master':
 				songCreator = 'MoldyGH';
 			case 'exploitation':
 				songCreator = 'Oxygen';
@@ -48,56 +47,21 @@ class CreditsPopUp extends FlxSpriteGroup
 			case 'glitch':
 				songCreator = 'DeadShadow & PixelGH\nRemix by MoldyGH';
 				songCreatorIcon = 'DeadShadow & PixelGH';
-			case 'old-glitch':
-				songCreator = 'DeadShadow & PixelGH';
-				songCreatorIcon = 'DeadShadow & PixelGH';
 			case 'overdrive':
 				songCreator = 'Top 10 Awesome';
 			case 'supernovae':
 				songCreator = 'ArchWk\nRemix by MoldyGH';
 				songCreatorIcon = 'ArchWk';
-			case 'old-supernovae':
-				songCreator = 'ArchWk\nRemix by MoldyGH';
-				songCreatorIcon = 'ArchWk';
 			case 'vs-dave-rap' | 'vs-dave-rap-two':
 				songCreator = 'Your mom';
-				case 'recursed' | 'blitz' | 'duper':
-					songCreator = 'Aadsta';
+			case 'recursed':
+				songCreator = 'Aadsta';
 			case 'adventure':
 				songCreator = 'Ruby';
 			case 'bot-trot':
 				songCreator = 'TH3R34LD34L';
 			case 'roofs':
 				songCreator = 'sibottle';
-			case 'cob':
-				songCreator = 'joolian\nCover by Expunged DX';
-				songCreatorIcon = 'joolian & Expunged DX';
-			case 'confronting-yourself':
-				songCreator = 'jotamr\nOG by Saster\nCover by Cuzsie';
-				songCreatorIcon = 'Saster, jotamr & Cuzsie';
-			case 'foolhardy':
-				songCreator = 'Rozebud\n Expunged DX';
-				songCreatorIcon = 'Rozebud & Expunged DX';
-			case 'importumania':
-				songCreator = 'The CupGamer12!';
-			case 'no-legs':
-				songCreator = 'Hazetal';
-			case 'crop':
-				songCreator = 'joolian';
-			case 'eletric-cockadoodledoo' | 'electric-cockaldoodledoo' | 'bananacore':
-				songCreator = 'Cuzsie';
-			case 'cuzsie-x-kapi-shipping-cute':
-				songCreator = 'Sky!\nCover by Cuzsie';
-				songCreatorIcon = 'Cuzsie & Sky!';
-			case 'super-saiyan':
-				songCreator = 'perez\nCover by Expunged DX';
-				songCreatorIcon = 'perez & Expunged DX';
-			case 'screwed' | 'old-screwed' | 'screwed-v2':
-				songCreator = 'Ms. That Pizza Tower Fan';
-			case 'bonkers':
-				songCreator = 'Cynda';
-			case 'rigged':
-				songCreator = 'pixe';
 		}
 		switch (PlayState.storyWeek)
 		{
@@ -138,18 +102,10 @@ class CreditsPopUp extends FlxSpriteGroup
 			case 16:
 				headingPath = {path: 'songHeadings/expungedHeading', antiAliasing: true,
 				animation: new Animation('expunged', 'Expunged', 24, true, [false, false]), iconOffset: 0};
-			case 17:
-				headingPath = {path: 'songHeadings/fuckHeading', antiAliasing: false, iconOffset: 0};
-			case 18:
-				headingPath = {path: 'songHeadings/fuckHeading', antiAliasing: false, iconOffset: 0};
-			case 19:
-				headingPath = {path: 'songHeadings/longnosejohn', antiAliasing: false, iconOffset: 0};
-			case 20:
-				headingPath = {path: 'songHeadings/loveHeading', antiAliasing: false, iconOffset: 0};
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'polygonized' | 'Polygonized-2.5' | 'furiosity':
+			case 'polygonized':
 				headingPath = {path: 'songHeadings/3D-daveHeading', antiAliasing: false, iconOffset: 0};
 			case 'interdimensional':
 				headingPath = {path: 'songHeadings/interdimensionalHeading', antiAliasing: false, iconOffset: 0};
@@ -207,7 +163,7 @@ class CreditsPopUp extends FlxSpriteGroup
 				bg.animation.play(info.name);
 			}
 		}
-		bg.antialiasing = newHeading.antiAliasing;
+		bg.antialiasing = FlxG.save.data.globalAntialiasing;
 		curHeading = newHeading;
 		add(bg);
 		
@@ -239,7 +195,7 @@ class CreditsPopUp extends FlxSpriteGroup
 		funnyText = new FlxText(1, 0, 650, text, 16);
 		funnyText.setFormat('Comic Sans MS Bold', 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		funnyText.borderSize = 2;
-		funnyText.antialiasing = true;
+		funnyText.antialiasing = FlxG.save.data.globalAntialiasing;
 		add(funnyText);
 	}
 	public function rescaleIcon()

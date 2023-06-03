@@ -53,7 +53,7 @@ class HealthIcon extends FlxSprite
 		offset.set(Std.int(FlxMath.bound(width - 150, 0)), Std.int(FlxMath.bound(height - 150, 0)));
 
 		if (sprTracker != null)
-			setPosition(sprTracker.x - 170, sprTracker.y - 30);
+			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
 	public function changeState(charState:String)
 	{

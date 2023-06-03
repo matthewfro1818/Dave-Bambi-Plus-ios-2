@@ -19,8 +19,19 @@ class MusicBeatState extends FlxUIState
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
 
+	public static var initSave:Bool = false;
+
 	override function create()
 	{
+		if (initSave)
+		{
+			if (FlxG.save.data.laneTransparency < 0)
+				FlxG.save.data.laneTransparency = 0;
+			
+			if (FlxG.save.data.laneTransparency > 1)
+				FlxG.save.data.laneTransparency = 1;
+		}
+
 		if (transIn != null)
 			//trace('reg ' + transIn.region);
 

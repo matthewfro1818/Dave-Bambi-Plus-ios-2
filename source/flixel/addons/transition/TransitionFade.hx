@@ -41,12 +41,14 @@ class TransitionFade extends TransitionEffect
 
 		back = makeSprite(data.direction.x, data.direction.y, data.region);
 		back.scrollFactor.set(1, 1);
-		#if SHADERS_ENABLED
-		if(CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
-		{
-			back.shader = dShader.shader;
+		if(FlxG.save.data.shaders){
+			#if SHADERS_ENABLED
+			if(CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
+			{
+				back.shader = dShader.shader;
+			}
+			#end
 		}
-		#end
 		add(back);
 	}
 

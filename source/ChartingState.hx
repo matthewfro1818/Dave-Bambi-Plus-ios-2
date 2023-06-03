@@ -111,6 +111,10 @@ class ChartingState extends MusicBeatState
 	override function create()
 	{
 		curSection = lastSection;
+		#if not web
+		Paths.clearUnusedMemory();
+        Paths.clearStoredMemory();
+		#end
 
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(MainMenuState.randomizeBG());
 		bg.scrollFactor.set();
@@ -1512,16 +1516,11 @@ class ChartingState extends MusicBeatState
 
 			var songCheckThing:Array<Dynamic> = [
 				['cheating', FlxG.save.data.cheatingFound],
-				['oppression', FlxG.save.data.oppressionFound],
-				['cheating', FlxG.save.data.cheatingFound],
-				['importumania', FlxG.save.data.importumaniaFound],
-				['rigged', FlxG.save.data.riggedFound],
 				['exploitation', FlxG.save.data.exploitationFound],
 				['supernovae', FlxG.save.data.hasPlayedMasterWeek],
 				['glitch', FlxG.save.data.hasPlayedMasterWeek],
 				['master', FlxG.save.data.hasPlayedMasterWeek],
 				['kabunga', FlxG.save.data.exbungoFound],
-				['electric-cockaldoodledoo', FlxG.save.data.electricCockaldoodledooUnlocked],
 				['recursed', FlxG.save.data.recursedUnlocked],
 				['roofs', FlxG.save.data.roofsUnlocked],
 				['vs-dave-rap-two', FlxG.save.data.vsDaveRapTwoFound]

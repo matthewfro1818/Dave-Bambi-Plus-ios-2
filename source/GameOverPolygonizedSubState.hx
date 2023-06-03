@@ -34,10 +34,10 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 		var sheetInfo:String = '';
 		switch (char)
 		{
-			case 'dave-angey' | 'dave-3d-recursed' | 'furiosity-dave' | 'furiosity-dave-alpha-4' | 'dave-angey-old' | 'dave-insanity-3d' | 'dave-3d-standing-bruh-what':
+			case 'dave-angey' | 'dave-3d-recursed':
 				deathSuffix = '-dave';
 				bgSuffix = 'void/redsky';
-			case 'bambi-3d' | 'bambi-unfair' | 'expunged' | 'bambi-3d-scrapped' | 'bambi-3d-old' | 'bambi-unfair-old' | 'bambi-3d-recursed':
+			case 'bambi-3d':
 				deathSuffix = '-bambi';
 				bgSuffix = 'cheating/cheater';
 		}
@@ -59,14 +59,16 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 		bg.setGraphicSize(Std.int(bg.width * 1.5));
 		add(bg);
 		
-		#if SHADERS_ENABLED
-		voidShader = new Shaders.GlitchEffect();
-		voidShader.waveAmplitude = 0.1;
-		voidShader.waveFrequency = 5;
-		voidShader.waveSpeed = 2;
-		
-		bg.shader = voidShader.shader;
-		#end
+		if(FlxG.save.data.waving){
+			#if SHADERS_ENABLED
+			voidShader = new Shaders.GlitchEffect();
+			voidShader.waveAmplitude = 0.1;
+			voidShader.waveFrequency = 5;
+			voidShader.waveSpeed = 2;
+			
+			bg.shader = voidShader.shader;
+			#end
+		}
 
 		Conductor.songPosition = 0;
 
@@ -103,7 +105,7 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 					polygonizedText = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString('3d_gameOver_polygonized'), 32);
 					polygonizedText.setFormat(Paths.font('comic.ttf'), 40, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 					polygonizedText.borderSize = 2.5;
-					polygonizedText.antialiasing = true;
+					polygonizedText.antialiasing = FlxG.save.data.globalAntialiasing;
 					polygonizedText.screenCenter();
 					polygonizedText.scrollFactor.set();
 					polygonizedText.scale.set();
@@ -124,7 +126,7 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 						restartText = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString('3d_gameOver_restart'), 32);
 						restartText.setFormat(Paths.font('comic.ttf'), 40, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 						restartText.borderSize = 2.5;
-						restartText.antialiasing = true;
+						restartText.antialiasing = FlxG.save.data.globalAntialiasing;
 						restartText.screenCenter();
 						restartText.y += 300;
 						restartText.scrollFactor.set();
@@ -146,9 +148,11 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		#if SHADERS_ENABLED
-		voidShader.shader.uTime.value[0] += elapsed;
-		#end
+		if(FlxG.save.data.waving){
+			#if SHADERS_ENABLED
+			voidShader.shader.uTime.value[0] += elapsed;
+			#end
+		}
 
 		if (controls.ACCEPT)
 		{
@@ -158,7 +162,6 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			FlxG.sound.music.stop();
-			PlayState.deathCounter = 0;
 			Application.current.window.title = Main.applicationName;
 
 			if (PlayState.SONG.song.toLowerCase() == "exploitation")

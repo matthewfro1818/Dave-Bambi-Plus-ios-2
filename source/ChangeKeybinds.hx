@@ -102,6 +102,11 @@ class ChangeKeybinds extends MusicBeatState
 
 	public override function create()
 	{
+		#if not web
+		Paths.clearUnusedMemory();
+        Paths.clearStoredMemory();
+		#end
+		
 		bg.color = 0xFFea71fd;
 		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.scrollFactor.set();

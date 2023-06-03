@@ -121,7 +121,7 @@ class DialogueBox extends FlxSpriteGroup
 		box.updateHitbox();
 		box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
-		box.antialiasing = true;
+		box.antialiasing = FlxG.save.data.globalAntialiasing;
 		
 		if (!PlayState.instance.hasDialogue)
 			return;
@@ -205,25 +205,25 @@ class DialogueBox extends FlxSpriteGroup
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 				dropText.font = 'Comic Sans MS Bold';
 				dropText.color = PlayState.instance.localFunny != PlayState.CharacterFunnyEffect.Recurser ? 0xFFFFFFFF : 0xFF00137F;
-				dropText.antialiasing = true;
+				dropText.antialiasing = FlxG.save.data.globalAntialiasing;
 				add(dropText);
 			
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.antialiasing = true;
+				swagDialogue.antialiasing = FlxG.save.data.globalAntialiasing;
 				add(swagDialogue);
 			default:
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 				dropText.font = 'Comic Sans MS Bold';
 				dropText.color = 0xFF00137F;
-				dropText.antialiasing = true;
+				dropText.antialiasing = FlxG.save.data.globalAntialiasing;
 				add(dropText);
 		
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.antialiasing = true;
+				swagDialogue.antialiasing = FlxG.save.data.globalAntialiasing;
 				add(swagDialogue);
 		}
 		dialogue = new Alphabet(0, 80, "", false, true);
@@ -234,12 +234,14 @@ class DialogueBox extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
-		#if SHADERS_ENABLED
-		if (curshader != null)
-		{
-			curshader.shader.uTime.value[0] += elapsed;
+		if(FlxG.save.data.waving){
+			#if SHADERS_ENABLED
+			if (curshader != null)
+			{
+				curshader.shader.uTime.value[0] += elapsed;
+			}
+			#end
 		}
-		#end
 		dropText.text = swagDialogue.text;
 		switch (curCharacter)
 		{
@@ -413,26 +415,32 @@ class DialogueBox extends FlxSpriteGroup
 				shad.waveSpeed = 1;
 				shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
 				shad.shader.uampmul.value[0] = 1;*/
-				#if SHADERS_ENABLED
-				PlayState.screenshader.Enabled = true;
-				#end
-			case 'undistort':
-				#if SHADERS_ENABLED
-				PlayState.screenshader.Enabled = false;
-				#end
-			case 'distortbg':
-				#if SHADERS_ENABLED
-				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
-				curshader = shad;
-				shad.waveAmplitude = 0.1;
-				shad.waveFrequency = 5;
-				shad.waveSpeed = 2;
-				if (curCharacter != 'generic')
-				{
-					portraitLeft.shader = shad.shader;
-					portraitRight.shader = shad.shader;
+				if(FlxG.save.data.waving){
+					#if SHADERS_ENABLED
+					PlayState.screenshader.Enabled = true;
+					#end
 				}
-				#end
+			case 'undistort':
+				if(FlxG.save.data.waving){
+					#if SHADERS_ENABLED
+					PlayState.screenshader.Enabled = false;
+					#end
+				}
+			case 'distortbg':
+				if(FlxG.save.data.waving){
+					#if SHADERS_ENABLED
+					var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
+					curshader = shad;
+					shad.waveAmplitude = 0.1;
+					shad.waveFrequency = 5;
+					shad.waveSpeed = 2;
+					if (curCharacter != 'generic')
+					{
+						portraitLeft.shader = shad.shader;
+						portraitRight.shader = shad.shader;
+					}
+					#end
+				}
 			case 'setfont_normal':
 				dropText.font = 'Comic Sans MS Bold';
 				swagDialogue.font = 'Comic Sans MS Bold';
