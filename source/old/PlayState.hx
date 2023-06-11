@@ -262,6 +262,7 @@ class PlayState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camTransition:FlxCamera;
 
+
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	public var hasDialogue:Bool = false;
 	

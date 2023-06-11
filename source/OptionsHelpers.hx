@@ -17,7 +17,7 @@ class OptionsHelpers
         public static var IconsBopArray = ['Dave and Bambi Plus', 'Dave and Bambi', 'Golden Apple', 'Bambi Purgatory', 'Grafex', 'Old Psych', 'New Psych', 'VS Steve'];
         public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];
         public static var ColorBlindArray = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
-        public static var AccuracyTypeArray = ['Grafex', 'Kade', 'Mania', 'Andromeda', 'Leather', 'Mic\'d Up', 'Project FNF (0.4a)', 'Forever', 'Cube', '0x9', 'Psych', 'Strident Crisis', 'Unknown', 'Lore', 'Joalor64', 'Theoyeah', '900n1', 'Denpa', 'Blueberry', 'OS'];
+        public static var AccuracyTypeArray = ['Grafex', 'Kade', 'Mania', 'Andromeda', 'Leather', 'Mic\'d Up', 'Project FNF (0.4a)', 'Forever', 'Cube', 'Furry', '0x9', 'Psych', 'Strident Crisis', 'Unknown', 'No Botplay Lag', 'Lore', 'Joalor64', 'Theoyeah', '900n1', 'Denpa', 'Blueberry', 'OS'];
 //
 	/*public static function getNoteskinByID(id:Int)
 	{

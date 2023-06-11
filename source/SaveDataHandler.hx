@@ -38,9 +38,6 @@ class SaveDataHandler
 		if (FlxG.save.data.ratingSystemNum == null)
 			FlxG.save.data.ratingSystemNum = 0;
 
-		if (FlxG.save.data.mirror == null)
-			FlxG.save.data.mirror = false;
-
 		if (FlxG.save.data.colorBars == null)
 			FlxG.save.data.colorBars = true;
 
@@ -109,6 +106,9 @@ class SaveDataHandler
 			FlxG.save.data.gpuRender = true;
 			#end
 		}
+
+		if (FlxG.save.data.moreMaxHP == null)
+			FlxG.save.data.moreMaxHP = false;
 		
 		if (FlxG.save.data.masterWeekUnlocked == null)
 			FlxG.save.data.masterWeekUnlocked = false;
@@ -159,15 +159,18 @@ class SaveDataHandler
     }
 
 	public static function resetModifiers():Void
-		{
-			FlxG.save.data.hgain = 1;
-			FlxG.save.data.hloss = 1;
-			FlxG.save.data.hdrain = false;
-			FlxG.save.data.sustains = true;
-			FlxG.save.data.noMisses = false;
-			FlxG.save.data.modcharts = true;
-			FlxG.save.data.practice = false;
-			FlxG.save.data.opponent = false;
-			FlxG.save.data.mirror = false;
-		}
+	{
+		FlxG.save.data.hgain = 1;
+		FlxG.save.data.hloss = 1;
+		FlxG.save.data.hdrain = false;
+		FlxG.save.data.sustains = true;
+		FlxG.save.data.noMisses = false;
+		FlxG.save.data.modcharts = true;
+		FlxG.save.data.practice = false;
+		FlxG.save.data.opponent = false;
+		FlxG.save.data.mirror = false;
+		FlxG.save.data.random = false;
+		FlxG.save.data.stair = false;
+		FlxG.save.data.jackingtime = 0;
+	}
 }

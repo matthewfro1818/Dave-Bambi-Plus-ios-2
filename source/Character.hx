@@ -10,6 +10,7 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxEase;
 
+
 using StringTools;
 
 class Character extends FlxSprite

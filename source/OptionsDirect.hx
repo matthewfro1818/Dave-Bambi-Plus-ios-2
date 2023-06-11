@@ -7,6 +7,7 @@ class OptionsDirect extends MusicBeatState
 {
 	var bgShader:Shaders.GlitchEffect;
 	var awaitingExploitation:Bool;
+	var menuBG:FlxSprite = new FlxSprite();
 
 	var colorArray:Array<FlxColor> = [
 		FlxColor.fromRGB(148, 0, 211),
@@ -27,8 +28,6 @@ class OptionsDirect extends MusicBeatState
 		#end
 
 		persistentUpdate = true;
-
-		var menuBG:FlxSprite = new FlxSprite();
 
 		awaitingExploitation = (FlxG.save.data.exploitationState == 'awaiting');
 

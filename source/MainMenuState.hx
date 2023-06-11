@@ -25,6 +25,7 @@ import flixel.util.FlxColor;
 import lime.app.Application;
 import flixel.addons.display.FlxBackdrop;
 import flixel.input.keyboard.FlxKey;
+import flixel.util.FlxGradient;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -113,6 +114,7 @@ class MainMenuState extends MusicBeatState
 		'sk0rbias',
 		'SwagnotrllyTheMod',
 		'zombought',
+		'srPerez',
 	];
 
 	var logoBl:FlxSprite;
@@ -130,13 +132,11 @@ class MainMenuState extends MusicBeatState
 
 	var black:FlxSprite;
 
+	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('ui/checkeredBG'), 0.2, 0.2, true, true);
+	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFfd719b);
+
 	override function create()
 	{
-		#if not web
-        Paths.clearUnusedMemory();
-        Paths.clearStoredMemory();
-        #end
-
 		awaitingExploitation = (FlxG.save.data.exploitationState == 'awaiting');
 		if (!FlxG.sound.music.playing)
 		{
@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
 		
 		MathGameState.accessThroughTerminal = false;
 
-		// daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
+		daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
 
 		if (awaitingExploitation)
 		{
@@ -165,16 +165,14 @@ class MainMenuState extends MusicBeatState
 			bg.color = FlxColor.multiply(bg.color, FlxColor.fromRGB(50, 50, 50));
 			add(bg);
 			
-			if(FlxG.save.data.waving){
-				#if SHADERS_ENABLED
-				voidShader = new Shaders.GlitchEffect();
-				voidShader.waveAmplitude = 0.1;
-				voidShader.waveFrequency = 5;
-				voidShader.waveSpeed = 2;
-				
-				bg.shader = voidShader.shader;
-				#end
-			}
+			#if SHADERS_ENABLED
+			voidShader = new Shaders.GlitchEffect();
+			voidShader.waveAmplitude = 0.1;
+			voidShader.waveFrequency = 5;
+			voidShader.waveSpeed = 2;
+			
+			bg.shader = voidShader.shader;
+			#end
 
 			magenta = new FlxSprite(-600, -200).loadGraphic(bg.graphic);
 			magenta.scrollFactor.set();
@@ -183,11 +181,9 @@ class MainMenuState extends MusicBeatState
 			magenta.color = FlxColor.multiply(0xFFfd719b, FlxColor.fromRGB(50, 50, 50));
 			add(magenta);
 
-			if(FlxG.save.data.waving){
-				#if SHADERS_ENABLED
-				magenta.shader = voidShader.shader;
-				#end
-			}
+			#if SHADERS_ENABLED
+			magenta.shader = voidShader.shader;
+			#end
 		}
 		else
 		{
@@ -196,7 +192,7 @@ class MainMenuState extends MusicBeatState
 			bg.setGraphicSize(Std.int(bg.width * 1.1));
 			bg.updateHitbox();
 			bg.screenCenter();
-			bg.antialiasing = FlxG.save.data.globalAntialiasing;
+			bg.antialiasing = true;
 			bg.color = 0xFFFDE871;
 			add(bg);
 	
@@ -206,24 +202,35 @@ class MainMenuState extends MusicBeatState
 			magenta.updateHitbox();
 			magenta.screenCenter();
 			magenta.visible = false;
-			magenta.antialiasing = FlxG.save.data.globalAntialiasing;
+			magenta.antialiasing = true;
 			magenta.color = 0xFFfd719b;
 			add(magenta);
+
+			gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x558DE7E5, 0xAAE6F0A9], 1, 90, true);
+			gradientBar.y = FlxG.height - gradientBar.height;
+			gradientBar.scrollFactor.set(0, 0);
+			add(gradientBar);
+			gradientBar.antialiasing = FlxG.save.data.globalAntialiasing;
+
+			checker.scrollFactor.set(0, 0.07);
+			checker.antialiasing = FlxG.save.data.globalAntialiasing;
+			add(checker);
 		}
 		selectUi = new FlxSprite(0, 0).loadGraphic(Paths.image('mainMenu/Select_Thing', 'preload'));
 		selectUi.scrollFactor.set(0, 0);
-		selectUi.antialiasing = FlxG.save.data.globalAntialiasing;
+		selectUi.antialiasing = true;
 		selectUi.updateHitbox();
 		add(selectUi);
 
 		bigIcons = new FlxSprite(0, 0);
 		bigIcons.frames = Paths.getSparrowAtlas('ui/menu_big_icons');
+		FlxTween.tween(bigIcons, {y: bigIcons.y + 80}, 1, {ease: FlxEase.quadInOut, type: PINGPONG});
 		for (i in 0...optionShit.length)
 		{
 			bigIcons.animation.addByPrefix(optionShit[i], optionShit[i] == 'freeplay' ? 'freeplay0' : optionShit[i], 24);
 		}
 		bigIcons.scrollFactor.set(0, 0);
-		bigIcons.antialiasing = FlxG.save.data.globalAntialiasing;
+		bigIcons.antialiasing = true;
 		bigIcons.updateHitbox();
 		bigIcons.animation.play(optionShit[0]);
 		bigIcons.screenCenter(X);
@@ -233,7 +240,7 @@ class MainMenuState extends MusicBeatState
 		curOptText.setFormat("Comic Sans MS Bold", 48, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptText.scrollFactor.set(0, 0);
 		curOptText.borderSize = 2.5;
-		curOptText.antialiasing = FlxG.save.data.globalAntialiasing;
+		curOptText.antialiasing = true;
 		curOptText.screenCenter(X);
 		curOptText.y = FlxG.height / 2 + 28;
 		add(curOptText);
@@ -242,7 +249,7 @@ class MainMenuState extends MusicBeatState
 		curOptDesc.setFormat("Comic Sans MS Bold", 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		curOptDesc.scrollFactor.set(0, 0);
 		curOptDesc.borderSize = 2;
-		curOptDesc.antialiasing = FlxG.save.data.globalAntialiasing;
+		curOptDesc.antialiasing = true;
 		curOptDesc.screenCenter(X);
 		curOptDesc.y = FlxG.height - 58;
 		add(curOptDesc);
@@ -297,10 +304,8 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
-
 		var versionShit:FlxText = new FlxText(1, FlxG.height - 50, 0, '${daRealEngineVer} Engine v${engineVer}\nExtra Keys Addon v2.0.2\n', 12);
-		versionShit.antialiasing = FlxG.save.data.globalAntialiasing;
+		versionShit.antialiasing = true;
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -308,7 +313,7 @@ class MainMenuState extends MusicBeatState
 		var pressR:FlxText = new FlxText(150, 10, 0, LanguageManager.getTextString("main_resetdata"), 12);
 		pressR.setFormat("Comic Sans MS Bold", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		pressR.x -= versionShit.textField.textWidth;
-		pressR.antialiasing = FlxG.save.data.globalAntialiasing;
+		pressR.antialiasing = true;
 		pressR.alpha = 0;
 		pressR.scrollFactor.set();
 		add(pressR);
@@ -330,14 +335,15 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if(FlxG.save.data.waving){
-			#if SHADERS_ENABLED
-			if (voidShader != null)
-			{
-				voidShader.shader.uTime.value[0] += elapsed;
-			}
-		#end
+		checker.x -= 0.21;
+		checker.y -= 0.51;
+		
+		#if SHADERS_ENABLED
+		if (voidShader != null)
+		{
+			voidShader.shader.uTime.value[0] += elapsed;
 		}
+		#end
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -426,7 +432,7 @@ class MainMenuState extends MusicBeatState
 					switch (optionShit[curSelected])
 					{
 						case 'discord':
-							fancyOpenURL("https://www.discord.gg/vsdave");
+							fancyOpenURL("https://discord.gg/UCKcZbu2Up");
 					}
 				}
 				else
@@ -456,7 +462,7 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story mode':
-										FlxG.switchState(new StoryMenuState());
+										FlxG.switchState(new PlaySelectionState());
 									case 'freeplay' | 'freeplay glitch':
 										if (FlxG.random.bool(0.05))
 										{
@@ -464,7 +470,7 @@ class MainMenuState extends MusicBeatState
 										}
 										FlxG.switchState(new FreeplayState());
 									case 'options':
-										FlxG.switchState(new OptionsMenu());
+										FlxG.switchState(new OptionsDirect());
 									case 'ost':
 										FlxG.switchState(new MusicPlayerState());
 									case 'credits':
@@ -581,7 +587,7 @@ class Prompt extends FlxSpriteGroup
 		promptText.screenCenter(X);
 		promptText.scrollFactor.set(0, 0);
 		promptText.borderSize = 2.5;
-		promptText.antialiasing = FlxG.save.data.globalAntialiasing;
+		promptText.antialiasing = true;
 		add(promptText);
 
 		noText = new FlxText(0, FlxG.height / 2 + 100, 0, "No", 16);
@@ -590,7 +596,7 @@ class Prompt extends FlxSpriteGroup
 		noText.setFormat("Comic Sans MS Bold", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		noText.scrollFactor.set(0, 0);
 		noText.borderSize = 1.5;
-		noText.antialiasing = FlxG.save.data.globalAntialiasing;
+		noText.antialiasing = true;
 		add(noText);
 
 		yesText = new FlxText(0, FlxG.height / 2 + 100, 0, "Yes", 16);
@@ -599,7 +605,7 @@ class Prompt extends FlxSpriteGroup
 		yesText.setFormat("Comic Sans MS Bold", 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		yesText.scrollFactor.set(0, 0);
 		yesText.borderSize = 1.5;
-		yesText.antialiasing = FlxG.save.data.globalAntialiasing;
+		yesText.antialiasing = true;
 		add(yesText);
 		
 		texts = [yesText, noText];

@@ -1121,36 +1121,6 @@ class AntialiasingOption extends Option
 	}
 }
 
-class EasyMode extends Option
-{
-	public function new(desc:String)
-	{
-		super();
-		if (OptionsMenu.isInPause)
-			description = "This option cannot be toggled in the pause menu.";
-		else
-			description = desc;
-	}
-
-	public override function left():Bool
-	{
-		FlxG.save.data.modchart = !FlxG.save.data.modchart;
-		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
-		return true;
-	}
-
-	private override function updateDisplay():String
-	{
-		return "Mod Chart: < " + (!FlxG.save.data.modchart ? "off" : "on") + " >";
-	}
-}
-
 class MissSoundsOption extends Option
 {
 	public function new(desc:String)
@@ -1775,6 +1745,36 @@ class JudgementCounter extends Option
 	private override function updateDisplay():String
 	{
 		return "Judgement Counter: < " + (FlxG.save.data.judgementCounter ? "Enabled" : "Disabled") + " >";
+	}
+}
+
+class MoreMaxHP extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.moreMaxHP = !FlxG.save.data.moreMaxHP;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "More Max Health: < " + (FlxG.save.data.moreMaxHP ? "Enabled" : "Disabled") + " >";
 	}
 }
 

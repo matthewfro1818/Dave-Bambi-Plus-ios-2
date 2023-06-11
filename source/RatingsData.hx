@@ -200,6 +200,19 @@ class RatingsData
 		['S++', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 
+	public static var noBotplayLagRatings:Array<Dynamic> = [
+		['you suck ass lol', 0.2], //From 0% to 19%
+		['you aint doin good', 0.4], //From 20% to 39%
+		['Bad', 0.5], //From 40% to 49%
+		['Bruh', 0.6], //From 50% to 59%
+		['Meh', 0.69], //From 60% to 68%
+		['funny number', 0.7], //69%
+		['nice', 0.8], //From 70% to 79%
+		['awesome', 0.9], //From 80% to 89%
+		['thats amazing', 1], //From 90% to 99%
+		['PERFECT!!!!!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+
 	public static var theoyeahRatings:Array<Dynamic> = [
 		['Its not hard you just suck as hell', 0.2], //From 0% to 19%
 		['skill issue', 0.4], //From 20% to 39%

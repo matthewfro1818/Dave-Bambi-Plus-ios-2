@@ -213,6 +213,7 @@ class PlayState extends MusicBeatState
 	public var health:Float = 1;
 	var judgementCounter:FlxText;
 	public var combo:Int = 0;
+	public var totalNotesPlayed:Int = 0;
 	public var maxCombo:Int = 0;
 
 	public static var misses:Int = 0;
@@ -220,6 +221,7 @@ class PlayState extends MusicBeatState
 	private var accuracy:Float = 0.00;
 	private var totalNotesHit:Float = 0;
 	private var totalPlayed:Int = 0;
+	public var totalNotes:Int = 0;
 	private var ss:Bool = false;
 
 	var loseVin:FlxSprite;
@@ -276,6 +278,8 @@ class PlayState extends MusicBeatState
 	var kadeEngineWatermark3:FlxText;
 	var creditsWatermark:FlxText;
 	var songName:FlxText;
+
+	public static var inDaPlay:Bool = false;
 
 	public static var campaignScore:Int = 0;
 
@@ -415,6 +419,8 @@ class PlayState extends MusicBeatState
 	public var guitarSection:Bool;
 	public var dadStrumAmount = 4;
 	public var playerStrumAmount = 4;
+
+	public static var arrowLane:Int = 0;
 	
 	//explpit
 	var expungedBG:BGSprite;
@@ -451,6 +457,9 @@ class PlayState extends MusicBeatState
 	var doorClosed:Bool;
 	var doorChanging:Bool;
 
+	private var displayedHealth:Float;
+	public var maxHealth:Float = 2;
+
 	var banbiWindowNames:Array<String> = ['when you realize you have school this monday', 'industrial society and its future', 'my ears burn', 'i got that weed card', 'my ass itch', 'bruh', 'alright instagram its shoutout time'];
 
 	var barType:String;
@@ -468,6 +477,15 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+
+		if (FlxG.save.data.moreMaxHP)
+		{
+			maxHealth = 3;
+		} else
+		{ 
+			maxHealth = 2;
+		}
+
 		instance = this;
 
 		paused = false;
@@ -546,6 +564,9 @@ class PlayState extends MusicBeatState
 		theFunne = FlxG.save.data.newInput;
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
+		
+		inDaPlay = true;
+
 		eyesoreson = FlxG.save.data.eyesores;
 		botPlay = FlxG.save.data.botplay;
 		modchartoption = !FlxG.save.data.modchart;
@@ -784,7 +805,7 @@ class PlayState extends MusicBeatState
 		{
 			gfVersion = 'stereo';
 		}
-		
+			
 		if (noGFSongs.contains(SONG.song.toLowerCase()) || !['none', 'bf', 'bf-pixel'].contains(formoverride))
 		{
 			gfVersion = 'gf-none';
@@ -838,6 +859,8 @@ class PlayState extends MusicBeatState
 				add(bfTrailGroup);
 				add(bfGroup);
 		}
+		health = maxHealth / 2;	
+		displayedHealth = maxHealth / 2;	
 
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
@@ -1310,7 +1333,7 @@ class PlayState extends MusicBeatState
 		add(healthBarBG);
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, inFiveNights ? LEFT_TO_RIGHT : RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+			'displayedHealth', 0, maxHealth);
 		healthBar.scrollFactor.set();
 		healthBar.visible = !FlxG.save.data.hideHud;
 		healthBar.createFilledBar(dad.barColor, boyfriend.barColor);
@@ -1529,14 +1552,14 @@ class PlayState extends MusicBeatState
 		botplayTxt.visible = botPlay;
 		add(botplayTxt);
 
-		judgementCounter = new FlxText(20, 0, 0, "", 20);
+		judgementCounter = new FlxText(50, 0, 0, "", 20);
 		judgementCounter.setFormat((SONG.song.toLowerCase() == "overdrive") ? Paths.font("ariblk.ttf") : font, 20 * fontScaler, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		judgementCounter.borderSize = 1.5;
 		judgementCounter.borderQuality = 2;
 		judgementCounter.scrollFactor.set();
 		judgementCounter.cameras = [camHUD];
 		judgementCounter.screenCenter(Y);
-		judgementCounter.text = 'Max Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
+		judgementCounter.text = 'Total Notes Hit: ${totalNotesPlayed} / ${totalNotes}\nMax Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
         if(FlxG.save.data.judgementCounter) 
         judgementCounter.visible = !FlxG.save.data.hideHud;
         else
@@ -2415,7 +2438,7 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness' || SONG.song.toLowerCase() == 'exploitation')
 		{
-			if(FlxG.save.data.botplay)
+			if(botPlay)
 			{
 				FlxG.switchState(new SusState());
 			}
@@ -2770,6 +2793,7 @@ class PlayState extends MusicBeatState
 	}
 
 	var debugNum:Int = 0;
+	var stair:Int = 0;
 
 	private function generateSong(dataPath:String):Void
 	{
@@ -2788,6 +2812,8 @@ class PlayState extends MusicBeatState
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
 
+		var random = null;
+
 		var noteData:Array<SwagSection>;
 
 		// NEW SHIT
@@ -2796,72 +2822,152 @@ class PlayState extends MusicBeatState
 		var playerCounter:Int = 0;
 
 		for (section in noteData)
-		{
-			var sectionCount = noteData.indexOf(section);
-
-			var isGuitarSection = (sectionCount >= 64 && sectionCount < 80) && SONG.song.toLowerCase() == 'shredder'; //wtf
-
-			var coolSection:Int = Std.int(section.lengthInSteps / 4);
-
-			for (songNotes in section.sectionNotes)
 			{
-				var daStrumTime:Float = songNotes[0];
-				var daNoteData:Int = Std.int(songNotes[1] % (isGuitarSection ? 5 : Main.keyAmmo[mania]));
-				var OGNoteDat = daNoteData;
-				if (localFunny == CharacterFunnyEffect.Bambi)
+				var sectionCount = noteData.indexOf(section);
+	
+				var isGuitarSection = (sectionCount >= 64 && sectionCount < 80) && SONG.song.toLowerCase() == 'shredder'; //wtf
+	
+				var coolSection:Int = Std.int(section.lengthInSteps / 4);
+	
+				for (songNotes in section.sectionNotes)
 				{
-					daNoteData = 2;
-				}
-				var daNoteStyle:String = songNotes[3];
-				if (localFunny == CharacterFunnyEffect.Recurser)
-				{
-					daNoteStyle = 'normal';
-				}
-
-				var gottaHitNote:Bool = section.mustHitSection;
-
-				if (songNotes[1] > (isGuitarSection ? 4 : Main.keyAmmo[mania] - 1))
-				{
-					gottaHitNote = !section.mustHitSection;
-				}
-
-				var oldNote:Note;
-				if (unspawnNotes.length > 0)
-					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-				else
-					oldNote = null;
-
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false, isGuitarSection);
-				swagNote.originalType = OGNoteDat;
-				swagNote.sustainLength = songNotes[2];
-				swagNote.scrollFactor.set(0, 0);
-
-				var susLength:Float = swagNote.sustainLength;
-
-				susLength = susLength / Conductor.stepCrochet;
-				unspawnNotes.push(swagNote);
-
-				var floorSus:Int = Math.floor(susLength);
-				if (floorSus > 0) {
-					for (susNote in 0...floorSus+1)
+					var daStrumTime:Float = songNotes[0];
+					var daNoteData:Int = Std.int(songNotes[1] % (isGuitarSection ? 5 : Main.keyAmmo[mania]));
+					var OGNoteDat = daNoteData;
+					if (localFunny == CharacterFunnyEffect.Bambi)
 					{
+						daNoteData = 2;
+					}
+					var daNoteStyle:String = songNotes[3];
+					if (localFunny == CharacterFunnyEffect.Recurser)
+					{
+						daNoteStyle = 'normal';
+					}
+	
+					var gottaHitNote:Bool = section.mustHitSection;
+	
+					if (songNotes[1] > (isGuitarSection ? 4 : Main.keyAmmo[mania] - 1))
+					{
+						gottaHitNote = !section.mustHitSection;
+					}
+
+					if(FlxG.save.data.mirror){
+						if (gottaHitNote)
+						{
+							// B-SIDE FLIP???? very real lol
+							if (mania == 1)
+								daNoteData = 4 - Std.int(songNotes[1] % 5);
+							else if (mania == 2)
+								daNoteData = 5 - Std.int(songNotes[1] % 6);
+							else if (mania == 3)
+								daNoteData = 6 - Std.int(songNotes[1] % 7);
+							else if (mania == 4)
+								daNoteData = 8 - Std.int(songNotes[1] % 9);
+							else if (mania == 5)
+								daNoteData = 11 - Std.int(songNotes[1] % 12);
+							else 
+								daNoteData = 3 - Std.int(songNotes[1] % 4);
+						}
+					}
+
+					if(FlxG.save.data.random){
+						if (mania == 1)
+							daNoteData = FlxG.random.int(0, 4);
+						else if (mania == 2)
+							daNoteData = FlxG.random.int(0, 5)
+						else if (mania == 3)
+							daNoteData = FlxG.random.int(0, 6)
+						else if (mania == 4)
+							daNoteData = FlxG.random.int(0, 8)
+						else if (mania == 5)
+							daNoteData = FlxG.random.int(0, 11)
+						else 
+							daNoteData = FlxG.random.int(0, 3);
+					}
+
+					if(FlxG.save.data.stair){
+						if (mania == 1)
+							daNoteData = stair % 5;
+						else if (mania == 2)
+							daNoteData = stair % 6;
+						else if (mania == 3)
+							daNoteData = stair % 7;
+						else if (mania == 4)
+							daNoteData = stair % 9;
+						else if (mania == 5)
+							daNoteData = stair % 12;
+						else 
+							daNoteData = stair % 4;
+						stair++;
+					}
+
+					if(FlxG.save.data.onearrow){
+						daNoteData = arrowLane;
+					}
+	
+					var oldNote:Note;
+					if (unspawnNotes.length > 0)
 						oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+					else
+						oldNote = null;
 	
-						var notespd = SONG.speed;
-						if (SONG.song.toLowerCase() == "exploitation") notespd = SONG.speed * 3;
-						var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + (Conductor.stepCrochet / FlxMath.roundDecimal(notespd, 2)), daNoteData, oldNote, true,
-							gottaHitNote, daNoteStyle, false, isGuitarSection);
-						sustainNote.originalType = OGNoteDat;
-						sustainNote.scrollFactor.set();
-						unspawnNotes.push(sustainNote);
+					var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle, false, isGuitarSection);
+					swagNote.originalType = OGNoteDat;
+					swagNote.sustainLength = songNotes[2];
+					swagNote.scrollFactor.set(0, 0);
 	
-						sustainNote.mustPress = gottaHitNote;
+					var susLength:Float = swagNote.sustainLength;
+	
+					susLength = susLength / Conductor.stepCrochet;
+					unspawnNotes.push(swagNote);
+	
+					var floorSus:Int = Math.floor(susLength);
+					if (floorSus > 0) {
+						for (susNote in 0...floorSus+1)
+						{
+							oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+		
+							var notespd = SONG.speed;
+							if (SONG.song.toLowerCase() == "exploitation") notespd = SONG.speed * 3;
+							var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + (Conductor.stepCrochet / FlxMath.roundDecimal(notespd, 2)), daNoteData, oldNote, true,
+								gottaHitNote, daNoteStyle, false, isGuitarSection);
+							sustainNote.originalType = OGNoteDat;
+							sustainNote.scrollFactor.set();
+							unspawnNotes.push(sustainNote);
+		
+							sustainNote.mustPress = gottaHitNote;
+						}
+					}
+	
+					swagNote.mustPress = gottaHitNote;
+
+					if (swagNote.mustPress)
+					{
+						swagNote.x += FlxG.width / 2; // general offset
+						totalNotes += 1;
+					}
+					var jackNote:Note;
+
+					if (FlxG.save.data.jackingtime > 0)
+					{
+						for (i in 0...Std.int(FlxG.save.data.jackingtime))
+						{
+							jackNote = new Note(swagNote.strumTime + 70 * (i + 1), swagNote.noteData, oldNote, false);
+							jackNote.scrollFactor.set(0, 0);
+
+							jackNote.mustPress = swagNote.mustPress;
+
+							unspawnNotes.push(jackNote);
+
+							if (jackNote.mustPress)
+							{
+								jackNote.x += FlxG.width / 2; // general offset
+								totalNotes += 1;
+							}
+						}
 					}
 				}
-
-				swagNote.mustPress = gottaHitNote;
 			}
-		}
 
 		// trace(unspawnNotes.length);
 		// playerCounter += 1;
@@ -3159,6 +3265,16 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (FlxG.save.data.fpsCap > 60)
+		{
+			displayedHealth = FlxMath.lerp(displayedHealth, health, .1);
+		} else if (FlxG.save.data.fpsCap == 60) 
+		{
+			displayedHealth = FlxMath.lerp(displayedHealth, health, .4);
+		}
+
+		healthBar.setRange(0, maxHealth);
+
 		if (perlinElapsed == null)
 			perlinElapsed = FlxPoint.get();
 
@@ -3831,6 +3947,11 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
+		if(botplayTxt.visible) {
+			botplaySine += 180 * elapsed;
+			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+		}
+
 		super.update(elapsed);
 
 		switch (SONG.song.toLowerCase())
@@ -3842,7 +3963,7 @@ class PlayState extends MusicBeatState
 					/*extraTxt.text =
 					LanguageManager.getTextString('play_opponentnotecount') + opponentnotecount;*/
 					judgementCounter.text =
-					'Max Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
+					'Toval NoIes Hit: ${totalNotesPlayed} / ${totalNotes}\nM3x Cowbo: ${maxCombo}\nSidks: ${sicks}\nG54ds: ${goods}\nBeds: ${bads}\nS87ts: ${shits}\nAvefdge: ${Math.round(averageMs)}ms \nHe8sth: ${Math.floor(health * 500)} %';
 					scoreTxt.text = 
 					//"N9S: " + nps + " (" + maxNPS + ") ~ " + 
 					"Scor3: " + (songScore * FlxG.random.int(1,9)) + 
@@ -3855,7 +3976,7 @@ class PlayState extends MusicBeatState
 					/*extraTxt.text =
 					LanguageManager.getTextString('play_opponentnotecount') + opponentnotecount;*/
 					judgementCounter.text =
-					'Max Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
+					'Toval NoIes Hit: ${totalNotesPlayed} / ${totalNotes}\nM3x Cowbo: ${maxCombo}\nSidks: ${sicks}\nG54ds: ${goods}\nBeds: ${bads}\nS87ts: ${shits}\nAvefdge: ${Math.round(averageMs)}ms \nHe8sth: ${Math.floor(health * 500)} %';
 					scoreTxt.text = 
 					//"N9S: " + nps + " (" + maxNPS + ") ~ " + 
 					"Scor3: " + (songScore * FlxG.random.int(1,9)) + 
@@ -3870,7 +3991,7 @@ class PlayState extends MusicBeatState
 					/*extraTxt.text =
 					LanguageManager.getTextString('play_opponentnotecount') + opponentnotecount;*/
 					judgementCounter.text =
-					'Max Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
+					'Total Notes Hit: ${totalNotesPlayed} / ${totalNotes}\nMax Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
 					scoreTxt.text =
 					//"NPS: " + nps + " (" + maxNPS + ") ~ " + 
 					LanguageManager.getTextString('play_score') + Std.string(songScore) + " ~ " + 
@@ -3883,7 +4004,7 @@ class PlayState extends MusicBeatState
 					/*extraTxt.text =
 					LanguageManager.getTextString('play_opponentnotecount') + opponentnotecount;*/
 					judgementCounter.text =
-					'Max Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
+					'Total Notes Hit: ${totalNotesPlayed} / ${totalNotes}\nMax Combo: ${maxCombo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nAverage: ${Math.round(averageMs)}ms \nHealth: ${Math.floor(health * 500)} %';
 					scoreTxt.text =
 					//"NPS: " + nps + " (" + maxNPS + ") ~ " + 
 					LanguageManager.getTextString('play_score') + Std.string(songScore) + " ~ " + 
@@ -4147,8 +4268,8 @@ class PlayState extends MusicBeatState
 			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 		}
 
-		if (health > 2)
-			health = 2;
+		if (health > maxHealth)
+			health = maxHealth;
 
 		if(isHealthCheckingEnabled)
 			{
@@ -5406,7 +5527,6 @@ class PlayState extends MusicBeatState
 		});
 	}
 
-
 	private function popUpScore(strumtime:Float, note:Note):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);
@@ -6022,7 +6142,7 @@ class PlayState extends MusicBeatState
 			{
 				health -= 0.04;
 			}
-			if (combo > 5)
+			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
 			}
@@ -6237,6 +6357,7 @@ class PlayState extends MusicBeatState
 				if(combo >= maxCombo)
                 	maxCombo += 1;
 
+				totalNotesPlayed += 1;
 				combo += 1;
 				popUpScore(note.strumTime, note);
 
@@ -8040,6 +8161,9 @@ class PlayState extends MusicBeatState
 			var fonts = ['arial', 'chalktastic', 'openSans', 'pkmndp', 'barcode', 'vcr'];
 			var chosenFont = fonts[FlxG.random.int(0, fonts.length)];
 			kadeEngineWatermark.font = Paths.font('exploit/${chosenFont}.ttf');
+			kadeEngineWatermark2.font = Paths.font('exploit/${chosenFont}.ttf');
+			kadeEngineWatermark3.font = Paths.font('exploit/${chosenFont}.ttf');
+			judgementCounter.font = Paths.font('exploit/${chosenFont}.ttf');
 			creditsWatermark.font = Paths.font('exploit/${chosenFont}.ttf');
 			scoreTxt.font = Paths.font('exploit/${chosenFont}.ttf');
 			botplayTxt.font = Paths.font('exploit/${chosenFont}.ttf');
@@ -9364,9 +9488,12 @@ class PlayState extends MusicBeatState
 			// LORE ENGINE: https://github.com/sayofthelor/lore-engine
 			case "Lore":
 				ratings = RatingsData.denpaRatings;
-				// JOALOR64  ENGINE: https://github.com/sayofthelor/lore-engine
+				// JOALOR64  ENGINE: https://github.com/Joalor64GH/Joalor64-Engine
 			case "Joalor64":
 				ratings = RatingsData.joalor64Ratings;
+			// NO BOTPLAY LAG: https://github.com/JordanSantiagoYT/FNF-PsychEngine-NoBotplayLag
+			case "No Botplay Lag":
+				ratings = RatingsData.noBotplayLagRatings;
 			case "Theoyeah":
 				ratings = RatingsData.theoyeahRatings;
 			// stole this script from vs 900n1 lmao
