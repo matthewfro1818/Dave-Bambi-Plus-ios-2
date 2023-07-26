@@ -30,7 +30,7 @@ class GameOverState extends FlxTransitionableState
 		loser.frames = loseTex;
 		loser.animation.addByPrefix('lose', 'lose', 24, false);
 		loser.animation.play('lose');
-		loser.antialiasing = FlxG.save.data.globalAntialiasing;
+		loser.antialiasing = true;
 		add(loser);
 
 		var bf:Boyfriend = new Boyfriend(bfX, bfY,charr);
@@ -44,7 +44,7 @@ class GameOverState extends FlxTransitionableState
 		restart.setGraphicSize(Std.int(restart.width * 0.6));
 		restart.updateHitbox();
 		restart.alpha = 0;
-		restart.antialiasing = FlxG.save.data.globalAntialiasing;
+		restart.antialiasing = true;
 		add(restart);
 
 		FlxG.sound.music.fadeOut(2, FlxG.sound.music.volume * 0.6);
@@ -108,6 +108,4 @@ class GameOverState extends FlxTransitionableState
 		}
 		super.update(elapsed);
 	}
-
-	var isEnding:Bool = false;
 }

@@ -89,11 +89,11 @@ class FpsDisplay extends TextField
 			{
 				if (currentColor >= array.length)
 					currentColor = 0;
-				currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / (FlxG.save.data.fpsCap / 3)));
+				currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / (FlxG.save.data.framerate / 3)));
 				(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
 				currentColor++;
 				skippedFrames++;
-				if (skippedFrames > (FlxG.save.data.fpsCap / 3))
+				if (skippedFrames > (FlxG.save.data.framerate / 3))
 					skippedFrames = 0;
 			}
 
@@ -107,11 +107,7 @@ class FpsDisplay extends TextField
 
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
-
-		if (currentFPS > Main.framerate)
-		{
-			currentFPS = Main.framerate;
-		}
+		if (currentFPS > FlxG.save.data.framerate) currentFPS = FlxG.save.data.framerate;
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
@@ -137,6 +133,12 @@ class FpsDisplay extends TextField
 			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
 			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
 			#end
+
+			textColor = 0xFFFFFFFF;
+			if (memoryMegas > 3000 || currentFPS <= FlxG.save.data.framerate / 2)
+			{
+				textColor = 0xFFFF0000;
+			}
 		}
 
 		cacheCount = currentCount;

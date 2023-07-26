@@ -46,6 +46,7 @@ class ModifiersState extends FlxSubState
 	public var titleObject:FlxText;
 
 	public var text:FlxText;
+	
 
 	var changedMod = false;
 
@@ -60,7 +61,7 @@ class ModifiersState extends FlxSubState
 			new OneArrow("All packed into one arrow lane."),
 			new Random("Timing the same, placement randomized."),
 			new Jacks("Old Whitty Ballistic chart be like."),
-			new NoMissesMode("Skill issuen't? Try this, a single miss you die!"),
+			new PlaybackRate("Skill issuen't? Try this, a single miss you die!"),
 			new Sustains("Toggle Hold Notes in song chart."),
 			new Modchart("Toggle game will be easier without the need of having Mod Chart"),
 			new HealthDrain("Toggle Opponent Health Drain when singing."),

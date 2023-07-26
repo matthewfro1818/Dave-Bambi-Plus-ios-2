@@ -204,6 +204,15 @@ class TerminalState extends MusicBeatState
                             PlayState.SONG.validScore = false;
                             PlayState.formoverride = 'shaggy';
                             LoadingState.loadAndSwitchState(new PlayState());
+                        case "test.bit":
+                            UpdatePreviousText(false); //resets the text
+                            UpdateText(LanguageManager.getTerminalString("term_loading"));
+                            LoadingState.loadAndSwitchState(new test.flxInvaders.PlayState());
+                        case "flandre.dat":
+                            UpdatePreviousText(false); //resets the text
+                            UpdateText(LanguageManager.getTerminalString("term_loading"));
+                            PlayState.SONG = Song.loadFromJson('bad-apple-srperez');
+                            LoadingState.loadAndSwitchState(new PlayState());
                    }
                 }
                 else
@@ -277,6 +286,8 @@ class TerminalState extends MusicBeatState
                     tx = "LOG 10\nWorking on the prototype.";
                 case "14":
                     tx = "LOG 14\nI need to stop naming these numerically its getting confusing.";
+                case "69":
+                    tx = "Nice. ( ͡° ͜ʖ ͡°)";
                 case "prototype":
                     tx = "Project <P.R.A.E.M>\nNotes: The SOLUTION.\nEstimated Build Time: 2 years.";
                 case "solution":
@@ -293,10 +304,24 @@ class TerminalState extends MusicBeatState
                     tx = "Sent back to the void, a shattered soul encounters his broken <reflection>.";
                 case "polygonized" | "polygon" | "3D":
                     tx = "He will never be <free>.";
+                case "hopeless":
+                    tx = "I feel... Hopeless...";
                 case "p.r.a.e.m":
                     tx = "Name: Power Removal And Extraction Machine\nProgress: Complete\nNotes: Took longer than expected. Tristans 7th BIRTHDAY is in a month.";
                 case "shaggy":
                     tx = "A man with like unlimited power, for some reason.\nWhat makes him so much powerful,\nbut I think his power come from someone's will or something.";
+                case "red shaggy":
+                    tx = "Same as him but red and more stonger then og one.\nAnd also he gay and love interest with blue mii with a beard";
+                case "temmie64":
+                    tx = "Yo, \nI need money to buy a gaming pc because my pc is slow and shit, \nso plz help me.";
+                case "temmie642":
+                    tx = "I love furry so much. UwU";
+                case "temmie643":
+                    tx = "P-R-O-G-R-A-M is my fav song of all time.";
+                case "gangster":
+                    tx = "Mario is gangster, and that a fact.";
+                case "fanmade":
+                    tx = "H̴͙̤̮̹̪͍͚̪̝̲͙͔̪̾̊͋́͑͐̉͝e̸̤̐͆͋͐̾͑̎̇̔̽̓͑̀͝l̶̹̝̜̱̼̟̝̪̫͒́̽̈́̈́̎͆̏̈́͋̓̑͝͠p̵̡̢̖̰̖͙̰̫̦͓̦̞̖͓̈́́̆͆̕ͅ ̷̧̡̪̭̞̥̝̣̱̞̒̐̍͛̑͒̔͌̎̉̇͋̕m̶̹̘̀̈́̇̆͒̿̿̆̏̔̚͠e̶͉̫͓͑́̌͒̑̿̊̾͋͗̚̚ͅͅ.̴̲̻̺͔͉̉̈́̿̒̓͒̌̓͌.̵̨͚̖̪̱̰̼͇̪̋̿̔̌̀͗̃̄̀̒͛͘.̴̤̦̬̹̦̮̙̆̌͑̓̔͘͠ ̴̡̘͇̦̅̾̆͐̅̇̄̀̓̈̽̏̒͝͝Ì̴̢̡̡̦̱̳̮̬̗̲͚̙͖̼̐́̃̔̈̎̈̈́͝-̴̲̩̙͆̿̃͝I̸̢̡̲̹̺̖̝̩̳͉̥̮͐̑̾̃̐͊͋͗̅̓̓͠͠ ̴̢͕̺̜̫͇̹̟͍͖͓͍̬̓͂c̸̦͓̩̔̂̈̾̓̽̒̈̎̉̀̈́a̶̛̲͉͎̯͉̤͕͑̇̾̄̽̉͋̄̂̅͑̐n̴͚̱͉̈̌̆́͘'̵̧̧͙̣̳̫̌̓̍͂̅͌̂͌̕t̵͍̙̩̐̐̔͋̊̌̿̎̔̇̋̊͂̚ ̸̟̪̯̓̌ẽ̴̡̞͖͓̂̏͂̈́̎̏̀̈́̚s̶̢̧̧̨̼̦̥̯̰͕̘̖̗̩͗̈́̕ć̷̪̰̜͈̪̿̎̕ą̵̛̦̙̘͉̻̺̬̎͛̈́͊̀͒̓̔͐̊̊̓͝ṕ̶̙̗̥̘̬͈͔̟͇̪̖̘̣̓͂͜͝͠e̶̢̡̲̭̬͍̙̜̞̝͌̑̅̈́͘ ̵̰̠̖̗̪̭̥̰̘̑͂̆̐̈́͜t̶̡̛͇̣͙̠̟̾́̔̐̿̋̽͗̓̒̾̅͌́h̷͍̠͙͓̦̟̺̣̓̌͒͌̌̽͗̒̾͛̋͗̒͘͜i̶̧̢̗͕̬͉͓̒͆͜ş̷̛̰̣͙̙̋͊̓͌̀̊͑͐̀͜ ̵̥̓͑͑̉̋̍̂͑͛̈́͒̂͝͝p̴̱͚͌̚ľ̵͎̗͙͖̾̑͊̌̽̐̆͘͠ã̴̹̰̺̙̲͖̮̦̗̮͈̒̓͆̂̕͝͠͝ͅc̵̞̘̳̩͈͉̮͈̫̞̳̀̂̓̐̊͛̎̒̈́̿͝͠͝ę̷̡̛̫̟͇͈͉͕͙̯̈́̈́̍͋̑̋͑̄̂̎̚͝͠.̵̡̘͔̮́̈̀̂.̸̧̛͇͎̱̟̠̜͍̬͖͈͔̮̰͑̉̇ͅ.̷̡̛̣̱̘͉̖̯͍͖̪͉̈̄̅̃̊͒ ̵̛̦͈̘̗̺̪̻͔̞̪͛͂̂͑̅͒̃̌̎̌͊̇̏̕ͅǏ̷̬̞̝͕͚̬̇́̎͠ ̵͔̖̻̭̜̗̈́ͅẇ̶̡̘̪̪̫̚a̵̜̺̟͆̇̾̆̀̈̄͝n̵͚̩̎̔̾̃̿͠ț̷̛͒͐̄͊͂͌ͅ ̵͙͂̏̾̅͑́̕͠t̸͇́̀͐̓͐̈́̐̉́͌͐͒̚̕͝ǫ̸̜͉͚̝̝̦͇̳̻͓̾̓̊͂̆̇̿̋͋̀̒́̕͝ ̶̠̩̗͆̈͐̅̈́͌͊̈́͠b̷̫̼̳̳͔̱̽͋̇̎̑̆̈͛̔̈́ẻ̷̩͍͊̋̈́̇̀͂͝͠ ̴̻̝͚͍̖͔̿̑͝f̶̗̳̉̉̏̇͗͐̓͂͊̊̆̚̚͝r̴̢̡̦̳͔͙̼̅́͌͑̈́̏́̒̋͌̚ȩ̶̟̟̫̮̲̞͖̲̀͂̅̈͆̕͝e̸̜̙̤̻̦͑̒͋̀̈́̽̋̅̑͌̒͝͝͠.̷̨͓͉̞͙̳̋̏̍̈́͌͘͠.̴̢̧͙̥̥̹̤̻̓̑.̴͚͓̜́";
             }
             //case sensitive!!
             switch (arguments[0])
@@ -549,6 +574,7 @@ class TerminalState extends MusicBeatState
 				{
 					FlxG.save.data.exploitationState = 'awaiting';
 					FlxG.save.data.exploitationFound = true;
+                    FlxG.save.data.importumaniaFound = true;
 					FlxG.save.flush();
 
 					var programPath:String = Sys.programPath();

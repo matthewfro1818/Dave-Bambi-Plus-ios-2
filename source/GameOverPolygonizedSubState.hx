@@ -72,6 +72,11 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 
 		Conductor.songPosition = 0;
 
+		if(FlxG.save.data.instaRestart)
+		{
+			FlxG.resetState();
+		}
+
 		bf = new Boyfriend(x, y, char);
 		add(bf);
 
@@ -105,7 +110,7 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 					polygonizedText = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString('3d_gameOver_polygonized'), 32);
 					polygonizedText.setFormat(Paths.font('comic.ttf'), 40, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 					polygonizedText.borderSize = 2.5;
-					polygonizedText.antialiasing = FlxG.save.data.globalAntialiasing;
+					polygonizedText.antialiasing = true;
 					polygonizedText.screenCenter();
 					polygonizedText.scrollFactor.set();
 					polygonizedText.scale.set();
@@ -126,7 +131,7 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 						restartText = new FlxText(0, 0, FlxG.width, LanguageManager.getTextString('3d_gameOver_restart'), 32);
 						restartText.setFormat(Paths.font('comic.ttf'), 40, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 						restartText.borderSize = 2.5;
-						restartText.antialiasing = FlxG.save.data.globalAntialiasing;
+						restartText.antialiasing = true;
 						restartText.screenCenter();
 						restartText.y += 300;
 						restartText.scrollFactor.set();

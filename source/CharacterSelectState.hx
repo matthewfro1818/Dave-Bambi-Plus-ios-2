@@ -99,21 +99,116 @@ class CharacterSelectState extends MusicBeatState
 		]),
 		new CharacterInSelect('dave', [0.25, 0.25, 2, 2], [
 			new CharacterForm('dave', 'Dave', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-2.5', 'Dave (2.5)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-2.1', 'Dave (2.1)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-2.0', 'Dave (2.0)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-1.0', 'Dave (1.0)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-alpha-4', 'Dave (Alpha 4)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-alpha', 'Dave (Alpha)', [0.25, 0.25, 2, 2])
+		]),
+		new CharacterInSelect('dave-annoyed', [0.25, 0.25, 2, 2], [
+			new CharacterForm('dave-annoyed', 'Insanity Dave', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-annoyed-2.5', 'Insanity Dave (2.5)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-annoyed-2.1', 'Insanity Dave (2.1)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-annoyed-2.0', 'Insanity Dave (2.0)', [0.25, 0.25, 2, 2])
+		]),
+		new CharacterInSelect('dave-splitathon', [0.25, 0.25, 2, 2], [
+			new CharacterForm('dave-splitathon', 'Splitathon Dave', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-splitathon-2.5', 'Splitathon Dave (2.5)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-splitathon-2.0', 'Splitathon Dave (2.0)', [0.25, 0.25, 2, 2]),
+			new CharacterForm('dave-splitathon-1.0', 'Splitathon Dave (1.0)', [0.25, 0.25, 2, 2])
+		]),
+		new CharacterInSelect('old-dave cool', [0.25, 0.25, 2, 2], [
+			new CharacterForm('old-dave-cool', 'Old Cool Dave', [0.25, 0.25, 2, 2]),
+		]),
+		new CharacterInSelect('dave-pre-alpha', [2, 0.25, 0.25, 2], [
+			new CharacterForm('dave-pre-alpha', 'Dave Pre Alpha', [2, 0.25, 0.25, 2]),
+			new CharacterForm('dave-pre-alpha-hd', 'Dave Pre Alpha HD', [2, 0.25, 0.25, 2]),
 		]),
 		new CharacterInSelect('bambi', [0, 0, 3, 0], [
 			new CharacterForm('bambi-new', 'Bambi', [0, 0, 3, 0]),
+			new CharacterForm('bambi-scrapped-3.0', 'Bambi (Scrapped 3.0)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-2.5', 'Bambi (2.5)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-2.0', 'Bambi (2.0)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-1.0', 'Bambi (1.0)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-beta-2', 'Bambi (Beta 2)', [0, 0, 3, 0])
+		]),
+		new CharacterInSelect('bambi-splitathon', [0, 0, 3, 0], [
+			new CharacterForm('bambi-splitathon', 'Splitathon Bambi', [0, 0, 3, 0]),
+			new CharacterForm('bambi-splitathon-2.5', 'Splitathon Bambi (2.5)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-splitathon-2.0', 'Splitathon Bambi (2.0)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-splitathon-1.0', 'Splitathon Bambi (1.0)', [0, 0, 3, 0]),
+		]),
+		new CharacterInSelect('bambi-angey', [0, 0, 3, 0], [
+			new CharacterForm('bambi-angey', 'Bambi (Angey)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-angey-old', 'Old Bambi (Angey)', [0, 0, 3, 0]),
+		]),
+		new CharacterInSelect('bambi-mad', [0, 0, 3, 0], [
+			new CharacterForm('bambi-mad', 'Bambi (Mad)', [0, 0, 3, 0]),
+			new CharacterForm('bambi-angey-oldest', 'Old Bambi (Mad)', [0, 0, 3, 0])
+		]),
+		new CharacterInSelect('bambi-joke', [0, 0, 0, 3], [
+			new CharacterForm('bambi-joke', 'Joke Bambi', [0, 0, 0, 3]),
+			new CharacterForm('bambi-joke-mad', 'Joke Bambi Mad', [0, 0, 0, 3]),
+			new CharacterForm('bambi-old', 'Old Joke Bambi', [0, 0, 0, 3])
+		]),
+		new CharacterInSelect('mr-bambi', [1, 1, 1, 1], [
+			new CharacterForm('mr-bambi', 'Mr. Bambi', [1, 1, 1, 1]),
+			new CharacterForm('mr-bambi-car', 'Mr. Bambi (Car)', [1, 1, 1, 1]),
+			new CharacterForm('mr-bambi-christmas', 'Christmas Mr. Bambi', [1, 1, 1, 1]),
+			new CharacterForm('mr-bambi-pixel', 'Pixel Mr. Bambi', [1, 1, 1, 1]),
+			new CharacterForm('mr-bambi-v2', 'Mr. Bambi (V2)', [1, 1, 1, 1])
 		]),
 		new CharacterInSelect('tristan', [2, 0.5, 0.5, 0.5], [
 			new CharacterForm('tristan', 'Tristan', [2, 0.5, 0.5, 0.5]),
+			new CharacterForm('tristan-2.0', 'Tristan (2.0)', [2, 0.5, 0.5, 0.5]),
+			new CharacterForm('tristan-beta', 'Tristan (beta 1)', [2, 0.5, 0.5, 0.5])
 		]),
 		new CharacterInSelect('tristan-golden', [0.25, 0.25, 0.25, 2], [
-			new CharacterForm('tristan-golden', 'Golden Tristan', [0.25, 0.25, 0.25, 2])
+			new CharacterForm('tristan-golden', 'Golden Tristan', [0.25, 0.25, 0.25, 2]),
+			new CharacterForm('tristan-golden-2.5', 'Golden Tristan (2.5)', [0.25, 0.25, 0.25, 2])
 		]),
 		new CharacterInSelect('dave-angey', [2, 2, 0.25, 0.25], [
-			new CharacterForm('dave-angey', '3D Dave', [2, 2, 0.25, 0.25], '3D')
+			new CharacterForm('dave-angey', '3D Dave', [2, 2, 0.25, 0.25], '3D'),
+			new CharacterForm('dave-angey-old', 'Old 3D Dave', [2, 2, 0.25, 0.25], '3D'),
+			new CharacterForm('dave-insanity-3d', '3D Dave insanity', [2, 2, 0.25, 0.25], '3D'),
+			new CharacterForm('dave-3d-standing-bruh-what', 'Dave WTF', [2, 2, 0.25, 0.25], '3D')
 		]),
-		new CharacterInSelect('bambi-3d', [0, 3, 0, 0], [
+		new CharacterInSelect('furiosity-dave', [0.25, 2, 0.25, 2], [
+			new CharacterForm('furiosity-dave', 'Furiosity Dave', [0.25, 2, 0.25, 2]),
+			new CharacterForm('furiosity-dave-alpha-4', 'Furiosity Dave (Alpha 4)', [0.25, 2, 0.25, 2]),
+		]),
+		new CharacterInSelect('[Data_Expunged]', [0, 3, 0, 0], [
 			new CharacterForm('bambi-3d', 'Expunged', [0, 3, 0, 0], '3D'),
+			new CharacterForm('bambi-unfair', 'Expunged (Unfair From)', [0, 3, 0, 0], '3D'),
+			new CharacterForm('expunged', 'Expunged (True Form)', [0, 3, 0, 0], '3D'),
+			new CharacterForm('bambi-3d-scrapped', 'Expunged (Scrapped 3.0)', [0, 3, 0, 0], '3D'),
+			new CharacterForm('bambi-3d-old', 'Old Expunged', [0, 3, 0, 0], '3D'),
+			new CharacterForm('bambi-unfair-old', 'Old Expunged (Unfair From)', [0, 3, 0, 0], '3D'),
+		]),
+		new CharacterInSelect('cockey', [1, 1, 1, 1], [
+			new CharacterForm('cockey', 'Cockey', [1, 1, 1, 1], '3D'),
+			new CharacterForm('old-cockey', 'Old Cockey', [1, 1, 1, 1], '3D'),
+			new CharacterForm('older-cockey', 'Oldest Cockey', [1, 1, 1, 1], '3D')
+		]),
+		new CharacterInSelect('pissey', [1, 1, 1, 1], [
+			new CharacterForm('pissey', 'Pissey', [1, 1, 1, 1], '3D'),
+			new CharacterForm('old-pissey', 'Old Pissey', [1, 1, 1, 1], '3D'),
+		]),
+		new CharacterInSelect('shartey', [1, 1, 1, 1], [
+			new CharacterForm('shartey-playable', 'Shartey', [1, 1, 1, 1], '3D'),
+		]),
+		new CharacterInSelect('marcello-dave', [3, 3, 3, 3], [
+			new CharacterForm('marcello-dave', 'Marcello Dave', [3, 3, 3, 3]),
+		]),
+		new CharacterInSelect('tb-funny-man', [0.5, 0.5, 2, 0.5], [
+			new CharacterForm('tb-funny-man', 'TheBuilderXD', [0.5, 0.5, 2, 0.5]),
+		]),
+		new CharacterInSelect('long-nose-john', [1, 1, 1, 1], [
+			new CharacterForm('longnosejohn', 'Long Nose John', [1, 1, 1, 1]),
+		]),
+		new CharacterInSelect('kapi', [1, 1, 1, 1], [
+			new CharacterForm('kapi', 'Kapi', [1, 1, 1, 1]),
 		]),
 		new CharacterInSelect('shaggy', [1, 1, 1, 1], [
 			new CharacterForm('shaggy', 'Shaggy', [1, 1, 1, 1]),
@@ -122,7 +217,6 @@ class CharacterSelectState extends MusicBeatState
 			new CharacterForm('redshaggy', 'Red Shaggy', [1, 1, 1, 1]),
 		]),
 	];
-
 	#if SHADERS_ENABLED
 	var bgShader:Shaders.GlitchEffect;
 	#end
@@ -176,7 +270,7 @@ class CharacterSelectState extends MusicBeatState
 		//create BG
 
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/shared/sky_night'));
-		bg.antialiasing = FlxG.save.data.globalAntialiasing;
+		bg.antialiasing = true;
 		bg.scrollFactor.set(0.75, 0.75);
 		bg.active = false;
 		
@@ -237,7 +331,7 @@ class CharacterSelectState extends MusicBeatState
 		legs.frames = Paths.getSparrowAtlas('characters/shaggy_god', 'shared');
 		legs.animation.addByPrefix('legs', "solo_legs", 30);
 		legs.animation.play('legs');
-		legs.antialiasing = FlxG.save.data.globalAntialiasing;
+		legs.antialiasing = true;
 		legs.flipX = true;
 		legs.updateHitbox();
 		legs.offset.set(legs.frameWidth / 2, 10);
@@ -271,7 +365,7 @@ class CharacterSelectState extends MusicBeatState
 		characterText.borderSize = 5;
 		characterText.screenCenter(X);
 		characterText.cameras = [camHUD];
-		characterText.antialiasing = FlxG.save.data.globalAntialiasing;
+		characterText.antialiasing = true;
 		characterText.y = FlxG.height - 180;
 		add(characterText);
 		
@@ -283,26 +377,26 @@ class CharacterSelectState extends MusicBeatState
 		resetText.y -= resetText.textField.textHeight - 100;
 		resetText.borderSize = 3;
 		resetText.cameras = [camHUD];
-		resetText.antialiasing = FlxG.save.data.globalAntialiasing;
+		resetText.antialiasing = true;
 		resetText.visible = false;
 		add(resetText);
 
 		funnyIconMan = new HealthIcon('bf', true);
 		funnyIconMan.cameras = [camHUD];
 		funnyIconMan.visible = false;
-		funnyIconMan.antialiasing = FlxG.save.data.globalAntialiasing;
+		funnyIconMan.antialiasing = true;
 		updateIconPosition();
 		add(funnyIconMan);
 
 		var tutorialThing:FlxSprite = new FlxSprite(-110, -30).loadGraphic(Paths.image('ui/charSelectGuide'));
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.5));
-		tutorialThing.antialiasing = FlxG.save.data.globalAntialiasing;
+		tutorialThing.antialiasing = true;
 		tutorialThing.cameras = [camHUD];
 		add(tutorialThing);
 
 		var arrowLeft:FlxSprite = new FlxSprite(10,0).loadGraphic(Paths.image("ui/ArrowLeft_Idle", "preload"));
 		arrowLeft.screenCenter(Y);
-		arrowLeft.antialiasing = FlxG.save.data.globalAntialiasing;
+		arrowLeft.antialiasing = true;
 		arrowLeft.scrollFactor.set();
 		arrowLeft.cameras = [camHUD];
 		arrows[0] = arrowLeft;
@@ -310,7 +404,7 @@ class CharacterSelectState extends MusicBeatState
 
 		var arrowRight:FlxSprite = new FlxSprite(-5,0).loadGraphic(Paths.image("ui/ArrowRight_Idle", "preload"));
 		arrowRight.screenCenter(Y);
-		arrowRight.antialiasing = FlxG.save.data.globalAntialiasing;
+		arrowRight.antialiasing = true;
 		arrowRight.x = 1280 - arrowRight.width - 5;
 		arrowRight.scrollFactor.set();
 		arrowRight.cameras = [camHUD];
@@ -353,7 +447,7 @@ class CharacterSelectState extends MusicBeatState
 			babyArrow.animation.addByPrefix('purple', 'arrowLEFT0');
 			babyArrow.animation.addByPrefix('red', 'arrowRIGHT0');
 
-			babyArrow.antialiasing = FlxG.save.data.globalAntialiasing;
+			babyArrow.antialiasing = true;
 			babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
 
 			babyArrow.x += 160 * 0.7 * i;

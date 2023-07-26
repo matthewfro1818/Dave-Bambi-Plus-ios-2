@@ -23,17 +23,22 @@ compat_no==Não
 
 // Main Menu Descriptions //
 desc_story==Jogue o modo história para desbloquear novos personagens, e entender a história em si!
-desc_freeplay==Jogue qualquer música de escolha sua e alcance novas pontuações!
-desc_freeplay_glitch==Toque minha música como eu desejo e falhe.
+desc_freeplay==Jogue qualquer música de escolha sua e alcançe novas pontuações!
+desc_freeplay_glitch==Toque minha música como eu desejo e falho.
 desc_credits==Dê uma olhada no pessoal que trabalhou e contribuiu para o mod!
 desc_ost==Escute as músicas do mod.
 desc_options==Ajuste suas configurações e preferências.
-desc_discord==Junte-se ao servidor do Discord oficial de Vs. Dave & Bambi!
+desc_discord==Junte-se ao servidor do Discord Dave & Bambi Plus! (se você quiser)
 
 // Freeplay State // (freeplay_finale, freeplay_fucked, freeplay_lmao)
 freeplay_dave==Dave
-freeplay_joke==Piadas
+freeplay_joke==PiadasSucateado
 freeplay_extra==Extra
+freeplay_dave2.5==Novo
+freeplay_classic==Velho
+freeplay_classic==Cover
+freeplay_scrapped==Sucateado
+freeplay_terminal==Console
 
 freeplay_personalBest==Rec. Pessoal:
 freeplay_hard==Difícil
@@ -45,7 +50,7 @@ freeplay_fucked==CÊ TÁ FUDIDO
 freeplay_fuckedek==NÃO PODE FAZER ISTO
 freeplay_lmao==KKKKKKK
 
-freeplay_skipChar==Segure o CTRL para pular a Seleção de Personagem
+freeplay_skipchar==Segure o CTRL para pular a Seleção de Personagem
 
 // Pause State //
 pause_Resume==Resumir
@@ -55,26 +60,26 @@ pause_Exit to menu==Sair para o Menu
 pause_No Miss Mode==Invencibilidade
 
 // Credits State //
+credits_plus==Mais
 credits_dev==Desenvolvedores
 credits_translator==Tradutores
 credits_contributor==Contribuidores
 credits_betaTester==Beta Testers
 credits_specialThanks==Agradecimentos Especiais
-credits_ekaCreator==Criador de Chaves Extra Addon
 
-credits_songby==Música por
+credits_songby==Música de
 
 // Credits Words //
 supernovae_credit==Música original feita por ArchWk!
+confronting-yourself_credit==Música original feita por Saster e Jota_MR!
 glitch_credit==Música original feita por DeadShadow e PixelGH!
 mealie_credit==Música original feita por Alexander Cooper 19!
 overdrive_credit==Música original feita por Top 10 Awesome!
 unfairness_credit==Ghost Tapping foi desligado! SE FODEU!
 cheating_credit==Notas embaralhadas! SE FODEU!
-cheating_nomod_credit==SE FODEU!
 exploitation_credit==Você não sobreviverá
-exploitation_nomod_credit==Seu idiota de merda...
 kabunga_credit==CARALHO EU MURCHEI
+electric-cockaldoodledoo_credit==Música original feita por Cuzsie! (ESSA MÚSICA NÃO É CANON)
 
 // Options State // (pt-br, ru-RU, option_noteCamera_on, option_noteCamera_off)
 option_change_keybinds==Mudar Teclas
@@ -85,14 +90,14 @@ option_ghostTapping_off==Sem Ghost Tapping
 option_downscroll==Downscroll
 option_upscroll==Upscroll
 
-option_songPosition_on==Posicao da Musica On
-option_songPosition_off==Posicao da Musica Off
+option_songPosition_on==Posição da Música On
+option_songPosition_off==Posição da Música Off
 
 option_eyesores_enabled==Efeitos Ativados
 option_eyesores_disabled==Efeitos Desativados
 
-option_selfAwareness_on==Autoconsciencia Ativada
-option_selfAwareness_off==Autoconsciencia Desativada
+option_selfAwareness_on==Autoconsciência Ativada
+option_selfAwareness_off==Autoconsciência Desativada
 
 option_hitsound_on==Hitsounds Ativos
 option_hitsound_off==Hitsounds Desativados
@@ -102,23 +107,23 @@ option_fpsCap==idk
 option_freeplay_cutscenes_off==Cutscenes no Modo Livre Off
 option_freeplay_cutscenes_on==Cutscenes no Modo Livre On
 
-option_noteCamera_on==Movimento de Camera por Pose
-option_noteCamera_off==Camera Normal
+option_noteCamera_on==Movimento de Câmera por Pose
+option_noteCamera_off==Câmera Normal
 
 option_change_langauge==Mudar idioma
-option_disable_fps==Nao mostrar FPS
-option_enable_fps==Mostrar FPS
-
-option_songBarType_Time Left==Tipo da Barra de Música: Tempo Restante
-option_songBarType_Song Name==Tipo da Barra de Música: Nome da Música
+option_disable_fps==Não mostra FPS e memória
+option_enable_fps==Mostrar FPS e Memória
 
 option_enable_compat==Ativar o modo de compatibilidade
 option_disable_compat==Desabilitar o modo de compatibilidade
 
+option_rating_on==Pop-ups de pontuação Ativar
+option_rating_off==Pop-ups de pontuação Desabilitar
+
 cur_language==Idioma Atual
-en-US==Ingles
+en-US==Inglês
 es-US==Espanhol
-pt-br==Portugues BR
+pt-br==Português Brasileiro
 ru-RU==Russian
 
 // Keybind State //
@@ -143,7 +148,7 @@ character_reset==Pressione R para Reiniciar
 // Cool Util / Diffs //
 play_hard==Difícil
 play_normal==Normal
-play_easy==Chaves Extra
+play_easy==Fácil
 
 // Play State //
 play_score==Pontuação:
@@ -322,7 +327,7 @@ daveraptwo_sub5==Meu pipi coça(yum)
 daveraptwo_sub6==3.0
 daveraptwo_sub7==Vs Dave, eu sou gay
 daveraptwo_sub8==Mr. Bambi ama quebrar celular (ha)
-daveraptwo_sub9==Mergulho gamestop com comprar game xbox
+daveraptwo_sub9==Dive going gamestop with buy game Xbox
 daveraptwo_sub10==Jogue o mod Vs Dave and Bambi 3.0
 daveraptwo_sub11==Disponível no GameBanana!
 daveraptwo_sub12==Yum.
@@ -336,11 +341,15 @@ indignancy_sub5==AuuuuuuAAAAAAAAAAAAAAA
 3d_gameOver_polygonized==Você foi Poligonizado!
 3d_gameOver_restart==Tentar de novo?
 
+//plus
+credit_Expunged DX==Programador & Desenvolvedor principal do Plus
+
 //developers 
 credit_MoldyGH==Diretor, Criador, Programador, Compositor, Desenvolvedor Principal
 credit_MissingTextureMan101==Desenvolvedor Secundário e Programador
 credit_rapparep lol==Artista Principal
 credit_TheBuilderXD==Artista Secundário
+credit_Cuzsie==Programador, Compositor
 credit_Erizur==Programador do novo Menu Principal, Artista & Tradutor Espanhol
 credit_T5mpler==Programador e Assistente
 credit_Zmac==Cenários 3D, ajuda com os intro texts
@@ -363,11 +372,8 @@ credit_Aadsta==Compositor, Artista de Cenário
 credit_Project Tea==Charter
 credit_Top 10 Awesome==Compositor, Carinha engraçado
 credit_BombasticHype==Fez a cutscene da House
-credit_Sky!==Fez o voice bank nas novas músicas do Bambi feitas pelo Moldy
 credit_Ruby==Compositor (Adventure)
 credit_Lancey==Artista pros Cenários no Menu
-credit_Cup==Fez os cabeçalhos das músicas
-credit_ShiftyTM==Fez a voz do Bambi afinado na Maze & Indignancy
 credit_Paraso==Artista pros Cenários no Menu
 credit_SAMMYPIGZY==Artista
 credit_R34LD34L==Compositor
@@ -375,7 +381,6 @@ credit_Devianator==Ajudou com os ícones nos créditos
 credit_sk0rbias==Artista pro Menu
 credit_Your mom==Compôs o Vs Dave Rap, 100% real.
 credit_sibottle==Compositor
-credit_chromasen==Ajuda com código nas janelas
 
 //Beta Testers
 credit_letsy==Beta Tester
@@ -393,7 +398,7 @@ credit_Gorbini==Beta Tester
 credit_Log Man==Beta Tester
 credit_Mooncakeez==Beta Tester
 credit_Foxnap==Beta Tester
-credit_lotuswaterz==Beta Tester
+credit_nihilistt==Beta Tester
 credit_mantis==Beta Tester
 credit_ArturSef==Beta Tester
 credit_normal==Beta Tester
@@ -402,8 +407,5 @@ credit_Lordryan1999==Beta Tester
 credit_Vanquiler==Beta Tester
 credit_Villezen==Beta Tester
 credit_TecheVent==Beta Tester
-credit_miko==Beta Tester
+credit_emiko==Beta Tester
 credit_Cotiles==Beta Tester
-
-//Extra Keys Addon Creator
-credit_Magman==Carta de Chaves Extra, Coder, Capas de Shaggy, Sprite de Notas 3D de Chaves Extra

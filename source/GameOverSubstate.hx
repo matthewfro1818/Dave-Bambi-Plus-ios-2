@@ -30,16 +30,22 @@ class GameOverSubstate extends MusicBeatSubstate
 			case 'tb-funny-man':
 				FlxG.openURL("https://www.youtube.com/watch?v=paS2p60AEUY");
 				System.exit(0);
-			case 'dave' | 'dave-recursed' | 'dave-angey':
+			case 'dave' | 'dave-recursed' | 'dave-angey' | 'dave-2.5' | 'dave-2.1' | 'dave-2.0' | 'dave-1.0' | 'dave-alpha-4' |
+			 'dave-alpha' | 'dave-annoyed' | 'dave-annoyed-2.5' | 'dave-annoyed-2.1' | 'dave-annoyed-2.0' | 'dave-splitathon' |
+			 'dave-splitathon-2.5' | 'dave-splitathon-2.0' | 'dave-splitathon-1.0' | 'old-dave-cool' | 'dave-pre-alpha' |
+			 'dave-pre-alpha-hd' | 'marcello-dave' | 'dave-angey-old' | 'dave-insanity-3d' | 'dave-3d-standing-bruh-what' | 'furiosity-dave':
 				daBf = 'dave-death';
 				deathSuffix = '-dave';
-			case 'tristan' | 'tristan-recursed':
+			case 'tristan' | 'tristan-recursed' | 'tristan-2.0' | 'tristan-beta' | 'tristan':
 				daBf = 'tristan-death';
 				deathSuffix = '-tristan';
-			case 'tristan-golden':
+			case 'tristan-golden' | 'tristan-golden-2.5':
 				daBf = 'tristan-golden-death';
 				deathSuffix = '-tristan';
-			case 'bambi-new' | 'bambi-recursed':
+			case 'bambi-new' | 'bambi-recursed' | 'bambi-scrapped-3.0' | 'bambi-2.5' | 'bambi-2.0' | 'bambi-1.0' | 'bambi-beta-2' | 'bambi-splitathon' | 'bambi-splitathon-2.5' |
+			'dave-alpha' | 'dave-annoyed' | 'dave-annoyed-2.5' | 'dave-annoyed-2.1' | 'dave-annoyed-2.0' | 'dave-splitathon' |
+			'bambi-splitathon-2.0' | 'bambi-splitathon-1.0' | 'bambi-angey' | 'bambi-angey-old' | 'bambi-mad' |
+			'mr-bambi' | 'mr-bambi-car' | 'mr-bambi-christmas' | 'mr-bambi-pixel' | 'mr-bambi-v2':
 				daBf = 'bambi-death';
 				deathSuffix = '-bambi';
 			case 'nofriend':
@@ -66,7 +72,17 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		super();
 
+		if(FlxG.save.data.instaRestart)
+		{
+			FlxG.resetState();
+		}
+
 		Conductor.songPosition = 0;
+
+		if(FlxG.save.data.instaRestart)
+		{
+			FlxG.resetState();
+		}
 
 		bf = new Boyfriend(x, y, daBf);
 		if(bf.animation.getByName('firstDeath') == null)

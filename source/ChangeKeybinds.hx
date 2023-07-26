@@ -102,11 +102,6 @@ class ChangeKeybinds extends MusicBeatState
 
 	public override function create()
 	{
-		#if not web
-		Paths.clearUnusedMemory();
-        Paths.clearStoredMemory();
-		#end
-		
 		bg.color = 0xFFea71fd;
 		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.scrollFactor.set();
@@ -270,7 +265,7 @@ class ChangeKeybinds extends MusicBeatState
 			{
 				case SelectControl:
 					KeybindPrefs.saveControls();
-					FlxG.switchState(new OptionsMenu());
+					FlxG.switchState(new OptionsDirect());
 				case SelectKeybind:
 					updateText(currentKeybind, false);
 					state = SelectControl;

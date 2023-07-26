@@ -18,7 +18,6 @@ import StringTools;
 
 class Note extends FlxSprite
 {
-	public var row:Int = 0;
 	public var strumTime:Float = 0;
 
 	public var mustPress:Bool = false;
@@ -48,10 +47,6 @@ class Note extends FlxSprite
 	public static var GREEN_NOTE:Int = 2;
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
-
-	public var colorSwap:ColorSwap;
-
-	public var texture:String = null;
 
 	private var notetolookfor = 0;
 
@@ -85,24 +80,21 @@ class Note extends FlxSprite
 		this.guitarSection = guitarSection;
 		this.noteData = noteData;
 
-		if(noteData > -1) {
-			texture = '';
-			colorSwap = new ColorSwap();
-			shader = colorSwap.shader;
-
-			x += swagWidth * (noteData % 4);
-		}
-
 		x += 78 - posRest[mania];
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		//NOW IT SHALL FOR REALLY ALWAYS BE OFF SCREEN.
 		//luckily i think only the devs really noticed that you can see the notes spawn in at the bottom of the screen when there is a modchart.
 		y -= 9000;
 		
-		inCharter ? this.strumTime = strumTime : {
+		/*inCharter ? this.strumTime = strumTime : {
 			this.strumTime = Math.round(strumTime);
 			alpha = 0;
-		}
+		}*/
+
+		if (inCharter)
+			this.strumTime = strumTime;
+		else 
+			this.strumTime = Math.round(strumTime);
 		
 		if (this.strumTime < 0)
 			this.strumTime = 0;
@@ -255,7 +247,10 @@ class Note extends FlxSprite
 				}
 				setGraphicSize(Std.int(width * 1.2 * (noteSize / 0.7)));
 				updateHitbox();
-				antialiasing = FlxG.save.data.globalAntialiasing;
+				if(FlxG.save.data.antialiasing)
+					{
+						antialiasing = true;
+					}
 				// noteOffset = -(width - 78 + (mania == 4 ? 30 : 0));
 
 			case 'guitarHero':
@@ -284,7 +279,10 @@ class Note extends FlxSprite
 
 				setGraphicSize(Std.int(width * 0.7));
 				updateHitbox();
-				antialiasing = FlxG.save.data.globalAntialiasing;
+				if(FlxG.save.data.antialiasing)
+					{
+						antialiasing = true;
+					}
 			case 'phone' | 'phone-alt':
 				if (!isSustainNote)
 				{
@@ -329,7 +327,10 @@ class Note extends FlxSprite
 				
 				setGraphicSize(Std.int(width * noteSize));
 				updateHitbox();
-				antialiasing = FlxG.save.data.globalAntialiasing;
+				if(FlxG.save.data.antialiasing)
+					{
+						antialiasing = true;
+					}
 				
 				// noteOffset = 20;
 

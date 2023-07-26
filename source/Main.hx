@@ -19,7 +19,7 @@ class Main extends Sprite
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = StartStateSelector; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
-	public static var framerate:Int = 140; // How many frames per second the game should run at.
+	var framerate:Int = 140; // How many frames per second the game should run at.
 	var skipSplash:Bool = false; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var keyAmmo:Array<Int> = [4, 5, 6, 7, 9, 12];
@@ -27,7 +27,7 @@ class Main extends Sprite
 
 	public static var fps:FpsDisplay;
 
-	public static var applicationName:String = "Friday Night Funkin' | VS. Dave and Bambi 3.0b | Extra Keys Addon 2.0.2";
+	public static var applicationName:String = "Friday Night Funkin' | VS. Dave and Bambi 3.0b | Extra Keys Addon 2.0.2 | Plus 1.0";
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 

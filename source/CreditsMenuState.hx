@@ -62,6 +62,30 @@ class CreditsMenuState extends MusicBeatState
    
    var peopleInCredits:Array<Person> = 
    [
+      // Plus //
+      new Person("Expunged DX", CreditsType.Plus,
+      [
+         new Social('youtube', 'https://www.youtube.com/channel/UC24wMC3uqFYDlPttTJ28Rpg'), 
+         new Social('gamebanana', 'https://gamebanana.com/members/1730983')
+      ]),
+
+      new Person("pixe", CreditsType.Plus,
+      [
+         new Social('youtube', 'https://www.youtube.com/@pixe8008/featured'),
+      ]),
+
+      new Person("0cksell", CreditsType.Plus,
+      [
+         new Social('youtube', 'https://www.youtube.com/channel/UCTsFYoxsx5i36HK9kGGHl5Q'),
+      ]),
+
+      //extra keys addon creator
+      new Person("Magman", CreditsType.EKACreator,
+      [
+         new Social('youtube', 'https://www.youtube.com/channel/UC1IWpXJIB0wYTCnQI0E9HMQ'),
+         new Social('twitter', 'https://twitter.com/magar_manh')
+      ]),
+
       // Developers //
       new Person("MoldyGH", CreditsType.Dev,
       [
@@ -88,6 +112,17 @@ class CreditsMenuState extends MusicBeatState
       [
          new Social('youtube', 'https://www.youtube.com/user/99percentMember'),
          new Social('twitter', 'https://twitter.com/TheBuilderXD')
+      ]),
+
+      new Person("Cuzsie", CreditsType.Dev,
+      [
+         new Social('gamebanana', 'https://gamebanana.com/members/1833894'),
+         new Social('twitter', 'https://twitter.com/cuzsiedev')
+      ]),
+
+      new Person("cynda", CreditsType.Dev,
+      [
+         new Social('youtube', 'https://www.youtube.com/c/CyndaReal')
       ]),
 
       new Person("Erizur", CreditsType.Dev,
@@ -162,6 +197,32 @@ class CreditsMenuState extends MusicBeatState
          new Social('twitter', 'https://twitter.com/oxygenboi2000'),
          new Social('youtube', 'https://youtube.com/channel/UCgTW7cQcfqduIqlu-bSZGZg')
       ]),
+
+      new Person("Ms. That Pizza Tower Fan", CreditsType.Contributor,
+      [
+         new Social('soundcloud', 'https://soundcloud.com/inverted-timeline-4'),
+         new Social('twitter', 'https://twitter.com/abithorrified'),
+         new Social('youtube', 'https://www.youtube.com/@ThatPizzaTowerFan')
+      ]),
+
+      new Person("Hazetal", CreditsType.Contributor,
+      [
+         new Social('soundcloud', 'https://soundcloud.com/hazetal'),
+         new Social('youtube', 'https://www.youtube.com/watch?v=72f8KHtIk00&t=4s')
+      ]),
+
+      new Person("The CupGamer12!", CreditsType.Contributor,
+      [
+         new Social('youtube', 'https://www.youtube.com/@cupgamer1285')
+      ]),
+
+      new Person("joolian", CreditsType.Contributor,
+      [
+         new Social('twitter', 'https://twitter.com/joolianiscool'),
+         new Social('youtube', 'https://www.youtube.com/@joolianiscool'),
+         new Social('roblox', 'https://www.roblox.com/users/407715481/profile')
+      ]),
+
       new Person("Alexander Cooper 19", CreditsType.Contributor,
       [
          new Social('youtube', 'https://www.youtube.com/channel/UCNz20AHJq41rkBUsq8RmUfQ'),
@@ -382,12 +443,6 @@ class CreditsMenuState extends MusicBeatState
          new Social('twitter', 'https://twitter.com/Ctiles1'),
          new Social('youtube', 'https://www.youtube.com/channel/UClNnrTqtgzAQ16w4_eC7rwA'),
       ]),
-      //extra keys addon creator
-      new Person("Magman", CreditsType.EKACreator,
-      [
-         new Social('youtube', 'https://www.youtube.com/channel/UC1IWpXJIB0wYTCnQI0E9HMQ'),
-         new Social('twitter', 'https://twitter.com/magar_manh')
-      ]),
 	  // Special Thanks //
      new Person("You!", CreditsType.SpecialThanks, [])
    ];
@@ -435,34 +490,42 @@ class CreditsMenuState extends MusicBeatState
          bg.scrollFactor.set();
          add(bg);
       }
-      
+   
+      var plus:Array<Person> = new Array<Person>();
+      var ekaCreator:Array<Person> = new Array<Person>();
       var developers:Array<Person> = new Array<Person>();
       var translators:Array<Person> = new Array<Person>();
       var contributors:Array<Person> = new Array<Person>();
       var betaTesters:Array<Person> = new Array<Person>();
       var specialThanks:Array<Person> = new Array<Person>();
-      var ekaCreator:Array<Person> = new Array<Person>();
 
       for (person in peopleInCredits) 
       {
          switch (person.creditsType)
          {
+            case Plus: plus.push(person);
+            case EKACreator: ekaCreator.push(person);
             case Dev: developers.push(person);
             case Translator: translators.push(person);
             case Contributor: contributors.push(person);
             case BetaTester: betaTesters.push(person);
             case SpecialThanks: specialThanks.push(person);
-            case EKACreator: ekaCreator.push(person);
          }
       }
 
       for (i in 0...peopleInCredits.length)
       {
          var currentPerson = peopleInCredits[i];
-         if (currentPerson == developers[0] || currentPerson == translators[0] || currentPerson == contributors[0] || currentPerson == betaTesters[0] || currentPerson == specialThanks[0] || currentPerson == ekaCreator[0])
+         if (currentPerson == plus[0] || currentPerson == developers[0] || currentPerson == translators[0] || currentPerson == contributors[0] || currentPerson == betaTesters[0] || currentPerson == specialThanks[0] || currentPerson == ekaCreator[0])
          {
             switch (currentPerson.creditsType)
             {
+               case Plus:
+                  creditsTypeString = 'Plus';
+                  translatedCreditsType = LanguageManager.getTextString('credits_plus');
+               case EKACreator:
+                  creditsTypeString = 'Extra Keys Addon Creator';
+                  translatedCreditsType = LanguageManager.getTextString('credits_ekaCreator');
                case Dev:
                   creditsTypeString = 'Developers';
                   translatedCreditsType = LanguageManager.getTextString('credits_dev');
@@ -478,9 +541,6 @@ class CreditsMenuState extends MusicBeatState
                case SpecialThanks:
                   creditsTypeString = 'Special Thanks';
                   translatedCreditsType = LanguageManager.getTextString('credits_specialThanks');
-               case EKACreator:
-                  creditsTypeString = 'Extra Keys Addon Creator';
-                  translatedCreditsType = LanguageManager.getTextString('credits_ekaCreator');
             }
             var titleText:FlxText = new FlxText(0, 0, 0, translatedCreditsType);
             titleText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -969,7 +1029,7 @@ class SocialButton
 }
 enum CreditsType
 {
-   Dev; Translator; Contributor; BetaTester; SpecialThanks; EKACreator;
+   Plus; EKACreator; Dev; Translator; Contributor; BetaTester; SpecialThanks;
 }
 enum State
 {

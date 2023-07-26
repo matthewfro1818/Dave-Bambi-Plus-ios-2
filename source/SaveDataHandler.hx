@@ -17,8 +17,14 @@ class SaveDataHandler
 		if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
 
+		if (FlxG.save.data.ghost == null)
+			FlxG.save.data.ghost = true;
+
 	    if (FlxG.save.data.fpsRain == null)
 		   FlxG.save.data.fpsRain = false;
+
+		if (FlxG.save.data.framerate == null)
+			FlxG.save.data.framerate = 140;
 
 		if (FlxG.save.data.blurNotes == null)
 			FlxG.save.data.blurNotes = false;
@@ -32,20 +38,29 @@ class SaveDataHandler
 		if (FlxG.save.data.showCombo == null)
 			FlxG.save.data.showCombo = true;
 
+		if (FlxG.save.data.camZooms == null)
+			FlxG.save.data.camZooms = true;
+
+		if (FlxG.save.data.scoreZoom == null)
+			FlxG.save.data.scoreZoom = true;
+
+		if (FlxG.save.data.resetButton == null)
+			FlxG.save.data.resetButton = false;
+
+		if (FlxG.save.data.instaRestart == null)
+			FlxG.save.data.instaRestart = false;
+
 		if (FlxG.save.data.hideHud == null)
 			FlxG.save.data.hideHud = false;
 
 		if (FlxG.save.data.ratingSystemNum == null)
 			FlxG.save.data.ratingSystemNum = 0;
 
+		if (FlxG.save.data.middlescroll == null)
+			FlxG.save.data.middlescroll = false;
+
 		if (FlxG.save.data.colorBars == null)
 			FlxG.save.data.colorBars = true;
-
-	    if (FlxG.save.data.fpsCap == null)
-		   FlxG.save.data.fpsCap = 120;
-
-	    if (FlxG.save.data.fpsCap < 60)
-		   FlxG.save.data.fpsCap = 120; // baby proof so you can't hard lock ur copy of kade engine
 		
 		if (FlxG.save.data.downscroll == null)
 			FlxG.save.data.downscroll = false;
@@ -56,6 +71,21 @@ class SaveDataHandler
 		if (FlxG.save.data.hitVolume == null)
 			FlxG.save.data.hitVolume = 0.5;
 
+		if (FlxG.save.data.freeplayCuts == null)
+			FlxG.save.data.freeplayCuts = false;
+
+		if (FlxG.save.data.npsDisplay == null)
+			FlxG.save.data.npsDisplay = false;
+
+		if (FlxG.save.data.accuracyDisplay == null)
+			FlxG.save.data.accuracyDisplay = true;
+
+		if (FlxG.save.data.kadeInput == null)
+			FlxG.save.data.kadeInput = false;
+
+		if (FlxG.save.data.donoteclickoppo == null)
+			FlxG.save.data.donoteclickoppo = false;
+
 		if (FlxG.save.data.missSounds == null)
 			FlxG.save.data.missSounds = true;
 
@@ -64,9 +94,6 @@ class SaveDataHandler
 
 		if (FlxG.save.data.shaders == null)
 			FlxG.save.data.shaders = true;
-
-		if (FlxG.save.data.fpsRain == null)
-			FlxG.save.data.fpsRain = false;
 
 		if (FlxG.save.data.newInput != null && FlxG.save.data.lastversion == null)
 			FlxG.save.data.lastversion = "pre-beta2";
@@ -85,6 +112,15 @@ class SaveDataHandler
 
 		if (FlxG.save.data.selfAwareness == null)
 			FlxG.save.data.selfAwareness = true;
+
+		if (FlxG.save.data.comboSound == null)
+			FlxG.save.data.comboSound = false;
+
+		if (FlxG.save.data.cpuStrums == null)
+			FlxG.save.data.cpuStrums = false;
+
+		if (FlxG.save.data.comboFlash == null)
+			FlxG.save.data.comboFlash = false;
 		
 		if (FlxG.save.data.wasInCharSelect == null)
 			FlxG.save.data.wasInCharSelect = false;
@@ -94,9 +130,6 @@ class SaveDataHandler
 
 		if (FlxG.save.data.disableFps == null)
 			FlxG.save.data.disableFps = false;
-
-		if (FlxG.save.data.optimize == null)
-			FlxG.save.data.optimize = false;
 
 		if (FlxG.save.data.gpuRender == null)
 		{
@@ -118,9 +151,15 @@ class SaveDataHandler
 			
 		if (FlxG.save.data.hasSeenCreditsMenu == null)
 			FlxG.save.data.hasSeenCreditsMenu = false;
+
+		if (FlxG.save.data.communityGameMode  == null)
+			FlxG.save.data.communityGameMode  = false;
 		
 		if (FlxG.save.data.songBarOption == null)
 			FlxG.save.data.songBarOption = 'ShowTime';
+
+		if (FlxG.save.data.timeBarType == null)
+			FlxG.save.data.timeBarType = 'Time Left';
 
 		if (FlxG.save.data.ColorBlindType == null)
 			FlxG.save.data.ColorBlindType = 'None';
@@ -131,11 +170,17 @@ class SaveDataHandler
 		if (FlxG.save.data.doubleGhost == null)
 			FlxG.save.data.doubleGhost = true;
 
+		if (FlxG.save.data.smoothHealth == null)
+			FlxG.save.data.smoothHealth = 'Golden Apple 1.5';
+
 		if (FlxG.save.data.ColorBlindTypeNum == null)
 			FlxG.save.data.ColorBlindTypeNum = false;
 
+		if (FlxG.save.data.greenscreenmode == null)
+			FlxG.save.data.greenscreenmode = false;
+
 		if (FlxG.save.data.lowQuality == null)
-			FlxG.save.data.lowQuality = 0;
+			FlxG.save.data.lowQuality = false;
 
 		if (FlxG.save.data.botplay == null)
 			FlxG.save.data.botplay = false;
@@ -143,19 +188,29 @@ class SaveDataHandler
 		if (FlxG.save.data.hitSound == null)
 			FlxG.save.data.hitSound = 0;
 
-		if (FlxG.save.data.shitMs == null)
-			FlxG.save.data.shitMs = 160.0;
+		/*if (FlxG.save.data.shitMs == null)
+			FlxG.save.data.shitMs = 160.0;*/
 
-		if (FlxG.save.data.badMs == null)
-			FlxG.save.data.badMs = 135.0;
+		if (FlxG.save.data.badWindow == null)
+			FlxG.save.data.badWindow = 135;
 
-		if (FlxG.save.data.goodMs == null)
-			FlxG.save.data.goodMs = 90.0;
+		if (FlxG.save.data.goodWindow == null)
+			FlxG.save.data.goodWindow = 90;
 
-		if (FlxG.save.data.sickMs == null)
-			FlxG.save.data.sickMs = 45.0;
+		if (FlxG.save.data.sickWindow == null)
+			FlxG.save.data.sickWindow = 45;
 
-		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		/*Ratings.timingWindows = [
+			FlxG.save.data.shitMs,
+			FlxG.save.data.badMs,
+			FlxG.save.data.goodMs,
+			FlxG.save.data.sickMs
+		];*/
+
+		if (FlxG.save.data.safeFrames == null)
+			FlxG.save.data.safeFrames = 10;
+
+		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.framerate);
     }
 
 	public static function resetModifiers():Void
@@ -172,5 +227,6 @@ class SaveDataHandler
 		FlxG.save.data.random = false;
 		FlxG.save.data.stair = false;
 		FlxG.save.data.jackingtime = 0;
+		FlxG.save.data.randomspeed = 1;
 	}
 }

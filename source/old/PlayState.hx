@@ -5414,7 +5414,6 @@ class PlayState extends MusicBeatState
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image("ui/" + assetPath + "combo"));
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
-		comboSpr.visible = (!FlxG.save.data.hideHud && FlxG.save.data.showCombo);
 		comboSpr.acceleration.y = 600;
 		comboSpr.velocity.y -= 150;
 

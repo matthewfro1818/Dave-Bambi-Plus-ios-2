@@ -16,6 +16,7 @@ class OptionsHelpers
 	public static var noteskinArray = ["Default", "Chip", "Future", "Grafex"];
         public static var IconsBopArray = ['Dave and Bambi Plus', 'Dave and Bambi', 'Golden Apple', 'Bambi Purgatory', 'Grafex', 'Old Psych', 'New Psych', 'VS Steve'];
         public static var TimeBarArray = ['Time Left', 'Time Elapsed', 'Disabled'];
+        public static var SmoothHealthArray = ['Golden Apple 1.5', 'Indie Cross'];
         public static var ColorBlindArray = ['None', 'Deuteranopia', 'Protanopia', 'Tritanopia'];
         public static var AccuracyTypeArray = ['Grafex', 'Kade', 'Mania', 'Andromeda', 'Leather', 'Mic\'d Up', 'Project FNF (0.4a)', 'Forever', 'Cube', 'Furry', '0x9', 'Psych', 'Strident Crisis', 'Unknown', 'No Botplay Lag', 'Lore', 'Joalor64', 'Theoyeah', '900n1', 'Denpa', 'Blueberry', 'OS'];
 //
@@ -27,6 +28,16 @@ class OptionsHelpers
         {
                 FlxG.save.data.noteSkin = getNoteskinByID(id);
         }*/
+//
+
+        public static function getSmoothHealthByID(id:Int)
+	{
+		return SmoothHealthArray[id];
+	}
+        static public function ChangeSmoothHealth(id:Int)
+        {
+                FlxG.save.data.smoothHealthType = getSmoothHealthByID(id);
+        }
 //
         public static function getIconBopByID(id:Int)
 	{

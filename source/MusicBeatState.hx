@@ -12,6 +12,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
+import flixel.FlxState;
 
 class MusicBeatState extends FlxUIState
 {
@@ -28,7 +29,7 @@ class MusicBeatState extends FlxUIState
 
 	override function create()
 	{
-		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.framerate);
 
 		if (initSave)
 		{
@@ -58,6 +59,33 @@ class MusicBeatState extends FlxUIState
 
 	var skippedFrames = 0;
 
+	public static function switchState(nextState:FlxState) {
+		// Custom made Trans in
+		var curState:Dynamic = FlxG.state;
+		var leState:MusicBeatState = curState;
+		if(!FlxTransitionableState.skipNextTransIn) {
+			leState.openSubState(new CustomFadeTransition(0.6, false));
+			if(nextState == FlxG.state) {
+				CustomFadeTransition.finishCallback = function() {
+					FlxG.resetState();
+				};
+				//trace('resetted');
+			} else {
+				CustomFadeTransition.finishCallback = function() {
+					FlxG.switchState(nextState);
+				};
+				//trace('changed state');
+			}
+			return;
+		}
+		FlxTransitionableState.skipNextTransIn = false;
+		FlxG.switchState(nextState);
+	}
+
+	public static function resetState() {
+		MusicBeatState.switchState(FlxG.state);
+	}
+
 	override function update(elapsed:Float)
 	{
 		//everyStep();
@@ -80,8 +108,8 @@ class MusicBeatState extends FlxUIState
 			else
 				skippedFrames++;
 
-		if ((cast (Lib.current.getChildAt(0), Main)).getFPSCap != FlxG.save.data.fpsCap)
-			(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		if ((cast (Lib.current.getChildAt(0), Main)).getFPSCap != FlxG.save.data.framerate)
+			(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.framerate);
 
 		super.update(elapsed);
 	}

@@ -77,6 +77,31 @@ class Option
 	}
 }
 
+class LanguageOption extends Option
+{
+	public function new()
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+		description = "Change your Language";
+	}
+
+	public override function press():Bool
+	{
+		if (OptionsMenu.isInPause)
+			return false;
+		FlxG.switchState(new ChangeLanguageState());
+             		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Change Language";
+	}
+}
+
 class DFJKOption extends Option
 {
 	public function new()
@@ -445,16 +470,16 @@ class SickMSOption extends Option
 
 	public override function left():Bool
 	{
-		FlxG.save.data.sickMs--;
-		if (FlxG.save.data.sickMs < 0)
-			FlxG.save.data.sickMs = 0;
+		FlxG.save.data.sickWindow--;
+		if (FlxG.save.data.sickWindow < 0)
+			FlxG.save.data.sickWindow = 0;
 		display = updateDisplay();
 		return true;
 	}
 
 	public override function right():Bool
 	{
-		FlxG.save.data.sickMs++;
+		FlxG.save.data.sickWindow++;
 		display = updateDisplay();
 		return true;
 	}
@@ -462,12 +487,12 @@ class SickMSOption extends Option
 	public override function onType(char:String)
 	{
 		if (char.toLowerCase() == "r")
-			FlxG.save.data.sickMs = 45;
+			FlxG.save.data.sickWindow = 45;
 	}
 
 	private override function updateDisplay():String
 	{
-		return "SICK: < " + FlxG.save.data.sickMs + " ms >";
+		return "SICK: < " + FlxG.save.data.sickWindow + " ms >";
 	}
 }
 
@@ -482,16 +507,16 @@ class GoodMsOption extends Option
 
 	public override function left():Bool
 	{
-		FlxG.save.data.goodMs--;
-		if (FlxG.save.data.goodMs < 0)
-			FlxG.save.data.goodMs = 0;
+		FlxG.save.data.goodWindow--;
+		if (FlxG.save.data.goodWindow < 0)
+			FlxG.save.data.goodWindow = 0;
 		display = updateDisplay();
 		return true;
 	}
 
 	public override function right():Bool
 	{
-		FlxG.save.data.goodMs++;
+		FlxG.save.data.goodWindow++;
 		display = updateDisplay();
 		return true;
 	}
@@ -499,12 +524,12 @@ class GoodMsOption extends Option
 	public override function onType(char:String)
 	{
 		if (char.toLowerCase() == "r")
-			FlxG.save.data.goodMs = 90;
+			FlxG.save.data.goodWindow = 90;
 	}
 
 	private override function updateDisplay():String
 	{
-		return "GOOD: < " + FlxG.save.data.goodMs + " ms >";
+		return "GOOD: < " + FlxG.save.data.goodWindow + " ms >";
 	}
 }
 
@@ -519,16 +544,16 @@ class BadMsOption extends Option
 
 	public override function left():Bool
 	{
-		FlxG.save.data.badMs--;
-		if (FlxG.save.data.badMs < 0)
-			FlxG.save.data.badMs = 0;
+		FlxG.save.data.badWindow--;
+		if (FlxG.save.data.badWindow < 0)
+			FlxG.save.data.badWindow = 0;
 		display = updateDisplay();
 		return true;
 	}
 
 	public override function right():Bool
 	{
-		FlxG.save.data.badMs++;
+		FlxG.save.data.badWindow++;
 		display = updateDisplay();
 		return true;
 	}
@@ -536,12 +561,12 @@ class BadMsOption extends Option
 	public override function onType(char:String)
 	{
 		if (char.toLowerCase() == "r")
-			FlxG.save.data.badMs = 135;
+			FlxG.save.data.badWindow = 135;
 	}
 
 	private override function updateDisplay():String
 	{
-		return "BAD: < " + FlxG.save.data.badMs + " ms >";
+		return "BAD: < " + FlxG.save.data.badWindow + " ms >";
 	}
 }
 
@@ -1034,7 +1059,7 @@ class ResetButtonOption extends Option
 	}
 }
 
-class InstantRespawn extends Option
+class Shouldcameramove extends Option
 {
 	public function new(desc:String)
 	{
@@ -1042,22 +1067,16 @@ class InstantRespawn extends Option
 		description = desc;
 	}
 
-	public override function left():Bool
+	public override function press():Bool
 	{
-		FlxG.save.data.InstantRespawn = !FlxG.save.data.InstantRespawn;
+		FlxG.save.data.noteCamera= !FlxG.save.data.noteCamera;
 		display = updateDisplay();
-		return true;
-	}
-
-	public override function right():Bool
-	{
-		left();
 		return true;
 	}
 
 	private override function updateDisplay():String
 	{
-		return "Instant Respawn: < " + (!FlxG.save.data.InstantRespawn ? "off" : "on") + " >";
+		return "Camera: < " + (!FlxG.save.data.noteCamera ? "Static" : "Moving") + " >";
 	}
 }
 
@@ -1151,6 +1170,78 @@ class MissSoundsOption extends Option
 	}
 }
 
+class ComboFlashModeOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.comboFlash = !FlxG.save.data.comboFlash;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Flash on Combo: < " + (!FlxG.save.data.comboFlash ? "off" : "on") + " >";
+	}
+}
+
+class ComboSoundModeOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.comboSound = !FlxG.save.data.comboSound;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "GF Blup on Combo: < " + (!FlxG.save.data.comboSound ? "off" : "on") + " >";
+	}
+}
+
+class SelfAwarenessOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = desc + " (RESTART REQUIRED)";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.selfAwareness = !FlxG.save.data.selfAwareness;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Self Awareness: < " + (!FlxG.save.data.selfAwareness ? "Disabled" : "Enabled") + " >";
+	}
+}
+
 class ShowInput extends Option
 {
 	public function new(desc:String)
@@ -1227,7 +1318,34 @@ class FPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Counter: < " + (!FlxG.save.data.fps ? "off" : "on") + " >";
+		return "FPS Counter: < " + (!FlxG.save.data.disableFps ? "off" : "on") + " >";
+	}
+}
+
+class CommunityGameMode extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.communityGameMode = !FlxG.save.data.communityGameMode;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Community Game: < " + (FlxG.save.data.communityGameMode ? "Enabled" : "Disabled") + " >";
 	}
 }
 
@@ -1290,6 +1408,38 @@ class BlurNotes extends Option
 	}
 }
 
+class SmoothHealth extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+              if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+           	if (OptionsMenu.isInPause)
+			return false;
+		FlxG.save.data.smoothHealth = !FlxG.save.data.smoothHealth;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Health Tweening: < " + (FlxG.save.data.smoothHealth ? "Blured" : "UnBlured") + " >";
+	}
+}
+
 class FPSCapOption extends Option
 {
 	public function new(desc:String)
@@ -1306,7 +1456,7 @@ class FPSCapOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Cap: < " + FlxG.save.data.fpsCap + " >";
+		return "FPS Cap: < " + FlxG.save.data.framerate + " >";
 	}
 
 	override function right():Bool
@@ -1314,14 +1464,14 @@ class FPSCapOption extends Option
 		#if html5
 		return false;
 		#end
-		if (FlxG.save.data.fpsCap >= 300)
+		if (FlxG.save.data.framerate >= 300)
 		{
-			FlxG.save.data.fpsCap = 300;
+			FlxG.save.data.framerate = 300;
 			(cast(Lib.current.getChildAt(0), Main)).setFPSCap(700);
 		}
 		else
-			FlxG.save.data.fpsCap = FlxG.save.data.fpsCap + 10;
-		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+			FlxG.save.data.framerate = FlxG.save.data.framerate + 10;
+		(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.framerate);
 
 		return true;
 	}
@@ -1331,13 +1481,13 @@ class FPSCapOption extends Option
 		#if html5
 		return false;
 		#end
-		if (FlxG.save.data.fpsCap > 300)
-			FlxG.save.data.fpsCap = 300;
-		else if (FlxG.save.data.fpsCap < 60)
-			FlxG.save.data.fpsCap = Application.current.window.displayMode.refreshRate;
+		if (FlxG.save.data.framerate > 300)
+			FlxG.save.data.framerate = 300;
+		else if (FlxG.save.data.framerate < 60)
+			FlxG.save.data.framerate = Application.current.window.displayMode.refreshRate;
 		else
-			FlxG.save.data.fpsCap = FlxG.save.data.fpsCap - 10;
-				(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+			FlxG.save.data.framerate = FlxG.save.data.framerate - 10;
+				(cast(Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.framerate);
 		return true;
 	}
 
@@ -1358,7 +1508,8 @@ class RainbowFPSOption extends Option
 	public override function left():Bool
 	{
 		FlxG.save.data.fpsRain = !FlxG.save.data.fpsRain;
-		(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(FlxColor.WHITE);
+		(cast (Lib.current.getChildAt(0), Main)).changeFPSColor(FlxColor.WHITE);
+		display = updateDisplay();
 		return true;
 	}
 
@@ -1564,6 +1715,69 @@ class BotPlay extends Option
 		return "BotPlay: < " + (FlxG.save.data.botplay ? "on" : "off") + " >";
 }
 
+class FreeplayCutscenesOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.freeplayCuts = !FlxG.save.data.freeplayCuts;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Freeplay Cutscene: < " + (!FlxG.save.data.freeplayCuts ? "off" : "on") + " >";
+	}
+}
+
+class EyesoresOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.eyesores = !FlxG.save.data.eyesores;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Eyesores: < " + (!FlxG.save.data.eyesores ? "off" : "on") + " >";
+	}
+}
+
+class KadeInputOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.kadeInput = !FlxG.save.data.kadeInput;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Input System: < " + (!FlxG.save.data.kadeInput ? "VDAB Input" : "Kade Input") + " >";
+	}
+}
+
 class CamZoomOption extends Option
 {
 	public function new(desc:String)
@@ -1591,6 +1805,65 @@ class CamZoomOption extends Option
 	private override function updateDisplay():String
 	{
 		return "Camera Zoom: < " + (!FlxG.save.data.camzoom ? "off" : "on") + " >";
+	}
+}
+
+class GreenScreenMode extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		if (OptionsMenu.isInPause)
+			return false;
+		FlxG.save.data.greenscreenmode = !FlxG.save.data.greenscreenmode;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Green screen: < " + (!FlxG.save.data.greenscreenmode ? "off" : "on") + " >";
+	}
+}
+
+class ScoreZoom extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.scoreZoom = !FlxG.save.data.scoreZoom;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Score zomming in beats: < " + (FlxG.save.data.scoreZoom ? "Enabled" : "Disabled") + " >";
 	}
 }
 
@@ -1627,6 +1900,43 @@ class HideHud extends Option
 	}
 }
 
+class SSmoothHealthArray extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+              if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.smoothHealthTypeNum--;
+		if (FlxG.save.data.smoothHealthTypeNum < 0)
+		FlxG.save.data.smoothHealthTypeNum = OptionsHelpers.SmoothHealthArray.length - 1;
+     OptionsHelpers.ChangeSmoothHealth(FlxG.save.data.smoothHealthTypeNum);
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		FlxG.save.data.smoothHealthTypeNum++;
+		if (FlxG.save.data.smoothHealthTypeNum > OptionsHelpers.SmoothHealthArray.length - 1)
+			FlxG.save.data.smoothHealthTypeNum = OptionsHelpers.SmoothHealthArray.length - 1;
+                  OptionsHelpers.ChangeSmoothHealth(FlxG.save.data.smoothHealthTypeNum);
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function getValue():String
+	{
+		return "Health Tween Type: < " + OptionsHelpers.getSmoothHealthByID(FlxG.save.data.smoothHealthTypeNum) + " >";
+	}
+}
+
 class IconBop extends Option
 {
 	public function new(desc:String)
@@ -1658,6 +1968,36 @@ class IconBop extends Option
 	public override function getValue():String
 	{
 		return "Icon bopping type: < " + OptionsHelpers.getIconBopByID(FlxG.save.data.hliconbopNum) + " >";
+	}
+}
+
+class InstaRestart extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		if (OptionsMenu.isInPause)
+			description = "This option cannot be toggled in the pause menu.";
+		else
+			description = desc;
+	}
+
+	public override function left():Bool
+	{
+		FlxG.save.data.instaRestart = !FlxG.save.data.instaRestart;
+		display = updateDisplay();
+		return true;
+	}
+
+	public override function right():Bool
+	{
+		left();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Instant Respawn: < " + (FlxG.save.data.instaRestart ? "On" : "Off") + " >";
 	}
 }
 
@@ -1808,6 +2148,27 @@ class MiddleScrollOption extends Option
 	}
 }
 
+class NoteClickOppoOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.donoteclickoppo = !FlxG.save.data.donoteclickoppo;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Note Click Opponent: < " + (!FlxG.save.data.donoteclickoppo ? "Enabled" : "Disabled") + " >";
+	}
+}
+
 class HitSoundOption extends Option
 {
 	public function new(desc:String)
@@ -1886,6 +2247,57 @@ class HitSoundVolume extends Option
 
 		if (FlxG.save.data.hitVolume > 1)
 			FlxG.save.data.hitVolume = 1;
+
+		return true;
+	}
+}
+
+class SafeFrames extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+
+		acceptValues = true;
+	}
+
+	public override function press():Bool
+	{
+		return false;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Safe Frames: < " + FlxG.save.data.safeFrames + " >";
+	}
+
+	override function right():Bool
+	{
+		FlxG.save.data.safeFrames += 1;
+
+		if (FlxG.save.data.safeFrames < 2)
+			FlxG.save.data.safeFrames = 2;
+
+		if (FlxG.save.data.safeFrames > 10)
+			FlxG.save.data.safeFrames = 10;
+		return true;
+	}
+
+	override function getValue():String
+	{
+		return "Safe Frames: < " + FlxG.save.data.safeFrames + " >";
+	}
+
+	override function left():Bool
+	{
+		FlxG.save.data.safeFrames -= 1;
+
+		if (FlxG.save.data.safeFrames < 2)
+			FlxG.save.data.safeFrames = 2;
+
+		if (FlxG.save.data.hitVolume > 10)
+			FlxG.save.data.safeFrames = 10;
 
 		return true;
 	}
@@ -2362,8 +2774,7 @@ class ResetSettings extends Option
 		FlxG.save.data.fps = null;
 		FlxG.save.data.changedHit = null;
 		FlxG.save.data.fpsRain = null;
-		FlxG.save.data.fpsCap = null;
-		FlxG.save.data.scrollSpeed = null;
+		FlxG.save.data.framerate = null;
 		FlxG.save.data.npsDisplay = null;
 		FlxG.save.data.frames = null;
 		FlxG.save.data.accuracyMod = null;

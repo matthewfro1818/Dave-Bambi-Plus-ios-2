@@ -23,8 +23,23 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 	var bg:FlxBackdrop;
 
+	var pausebg:FlxSprite;
+	var pausebg1:FlxSprite;
+	var iconBG:FlxSprite;
+	var icon:HealthIcon;
+
 	public static var goToOptions:Bool = false;
 	public static var goBack:Bool = false;
+
+	var colorArray:Array<FlxColor> = [
+		FlxColor.fromRGB(148, 0, 211),
+		FlxColor.fromRGB(75, 0, 130),
+		FlxColor.fromRGB(0, 0, 255),
+		FlxColor.fromRGB(0, 255, 0),
+		FlxColor.fromRGB(255, 255, 0),
+		FlxColor.fromRGB(255, 127, 0),
+		FlxColor.fromRGB(255, 0, 0)
+	];
 
 	var menuItems:Array<PauseOption> = [
 		new PauseOption('Resume'),
@@ -99,11 +114,62 @@ class PauseSubState extends MusicBeatSubstate
 		backBg.scrollFactor.set();
 		add(backBg);
 
-		bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), 1, 1, true, true, 1, 1);
-		bg.alpha = 0;
-		bg.antialiasing = FlxG.save.data.globalAntialiasing;
-		bg.scrollFactor.set();
-		add(bg);
+		if (!FlxG.save.data.lowQuality)
+		{
+			bg = new FlxBackdrop(Paths.image('ui/checkeredBG', 'preload'), 1, 1, true, true, 1, 1);
+			bg.alpha = 0;
+			bg.antialiasing = FlxG.save.data.globalAntialiasing;
+			bg.scrollFactor.set();
+			add(bg);
+
+			pausebg = new FlxSprite().loadGraphic(Paths.image('ui/pausemenubg'));
+			pausebg.color = 0xFF1E1E1E;
+			pausebg.scrollFactor.set();
+			pausebg.updateHitbox();
+			pausebg.screenCenter();
+			pausebg.antialiasing = FlxG.save.data.globalAntialiasing;
+			add(pausebg);
+			pausebg.x += 200;
+			pausebg.y -= 200;
+			pausebg.alpha = 0;
+			FlxTween.tween(pausebg, {
+				x: 0,
+				y: 0,
+				alpha: 1
+			}, 1, {ease: FlxEase.quadOut});
+	
+			pausebg1 = new FlxSprite().loadGraphic(Paths.image('ui/iconbackground'));
+			pausebg1.color = 0xFF141414;
+			pausebg1.scrollFactor.set();
+			pausebg1.updateHitbox();
+			pausebg1.screenCenter();
+			pausebg1.antialiasing = FlxG.save.data.globalAntialiasing;
+			add(pausebg1);
+			pausebg1.x -= 150;
+			pausebg1.y += 150;
+			pausebg1.alpha = 0;
+			FlxTween.tween(pausebg1, {
+				x: 0,
+				y: 0,
+				alpha: 1
+			}, 0.9, {ease: FlxEase.quadOut});
+	
+			iconBG = new FlxSprite().loadGraphic(Paths.image('ui/iconbackground'));
+			iconBG.flipX = true;
+			iconBG.scrollFactor.set();
+			iconBG.updateHitbox();
+			iconBG.screenCenter();
+			iconBG.antialiasing = FlxG.save.data.globalAntialiasing;
+			add(iconBG);
+			iconBG.x += 100;
+			iconBG.y += 100;
+			iconBG.alpha = 0;
+			FlxTween.tween(iconBG, {
+				x: 0,
+				y: 0,
+				alpha: 1
+			}, 0.8, {ease: FlxEase.quadOut});
+		}
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -173,6 +239,11 @@ class PauseSubState extends MusicBeatSubstate
 
 		changeSelection();
 
+		tweenColorShit();
+		tweenColorShit2();
+		tweenColorShit3();
+		tweenColorShit4();
+
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
@@ -241,6 +312,9 @@ class PauseSubState extends MusicBeatSubstate
 				}
 				FlxG.mouse.visible = false;
 				FlxG.resetState();
+			case "Options":
+				goToOptions = true;
+				close();
 			case "Change Character":
 				if (MathGameState.failedGame)
 					{
@@ -265,13 +339,10 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.camZooming = false;
 					FlxG.mouse.visible = false;
 					FlxG.switchState(new CharacterSelectState());
-				case "Options":
-					goToOptions = true;
-					close();	
 			case "No Miss Mode":
 				PlayState.instance.noMiss = !PlayState.instance.noMiss;
 				var nm = PlayState.SONG.song.toLowerCase();
-				if (['exploitation', 'cheating', 'unfairness', 'recursed', 'glitch', 'master', 'supernovae'].contains(nm))
+				if (['exploitation', 'cheating',  'rigged', 'unfairness', 'recursed', 'glitch', 'master', 'supernovae', 'secret', 'secret-mod-leak', 'importumania'].contains(nm))
 				{
 					PlayState.instance.health = 0;
 					close();
@@ -296,13 +367,73 @@ class PauseSubState extends MusicBeatSubstate
 						PlayState.window.close();
 					}
 				}
-				if (FlxG.save.data.fpsCap > 300)
+				if (FlxG.save.data.framerate > 300)
 					(cast(Lib.current.getChildAt(0), Main)).setFPSCap(300);
 				PlayState.instance.shakeCam = false;
 				PlayState.instance.camZooming = false;
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new MainMenuState());
 		}
+	}
+	function tweenColorShit()
+	{
+		var beforeInt = FlxG.random.int(0, 6);
+		var randomInt = FlxG.random.int(0, 6);
+	
+		FlxTween.color(iconBG, 4, iconBG.color, colorArray[beforeInt], {
+			onComplete: function(twn)
+			{
+				if (beforeInt != randomInt)
+					beforeInt = randomInt;
+	
+				tweenColorShit();
+			}
+		});
+	}
+	function tweenColorShit2()
+	{
+		var beforeInt = FlxG.random.int(0, 6);
+		var randomInt = FlxG.random.int(0, 6);
+		
+		FlxTween.color(pausebg, 4, pausebg.color, colorArray[beforeInt], {
+			onComplete: function(twn)
+			{
+				if (beforeInt != randomInt)
+					beforeInt = randomInt;
+		
+				tweenColorShit2();
+			}
+		});
+	}
+	function tweenColorShit3()
+	{
+		var beforeInt = FlxG.random.int(0, 6);
+		var randomInt = FlxG.random.int(0, 6);
+			
+		FlxTween.color(pausebg1, 4, pausebg1.color, colorArray[beforeInt], {
+			onComplete: function(twn)
+			{
+				if (beforeInt != randomInt)
+					beforeInt = randomInt;
+		
+				tweenColorShit3();
+			}
+		});
+	}
+	function tweenColorShit4()
+	{
+		var beforeInt = FlxG.random.int(0, 6);
+		var randomInt = FlxG.random.int(0, 6);
+				
+		FlxTween.color(bg, 4, bg.color, colorArray[beforeInt], {
+			onComplete: function(twn)
+			{
+				if (beforeInt != randomInt)
+					beforeInt = randomInt;
+				
+				tweenColorShit4();
+			}
+		});
 	}
 	override function close()
 	{
@@ -314,10 +445,10 @@ class PauseSubState extends MusicBeatSubstate
 	override function destroy()
 	{
 		if (!goToOptions)
-			{
-			 pauseMusic.destroy();
-				 playingPause = false;
-			}
+		{
+		    pauseMusic.destroy();
+			playingPause = false;
+		}
 		super.destroy();
 	}
 

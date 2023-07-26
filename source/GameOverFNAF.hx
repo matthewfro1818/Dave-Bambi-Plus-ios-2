@@ -25,6 +25,11 @@ class GameOverFNAF extends MusicBeatSubstate
 
 		Conductor.songPosition = 0;
 
+		if(FlxG.save.data.instaRestart)
+		{
+			FlxG.resetState();
+		}
+
 		camFollow = new FlxObject(FlxG.width / 2, FlxG.height / 2, 1, 1);
 		add(camFollow);
 

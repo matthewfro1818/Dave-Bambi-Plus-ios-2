@@ -81,6 +81,10 @@ class TitleState extends MusicBeatState
 		SaveDataHandler.initSave();
 		LanguageManager.init();
 
+		#if html5
+		FlxG.save.data.gpuRender = false;
+		#end
+
 		Highscore.load();
 		
 		CoolUtil.init();

@@ -7,8 +7,6 @@ import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import openfl.ui.Keyboard;
 import flixel.util.FlxCollision;
-import flixel.addons.display.FlxBackdrop;
-import flixel.util.FlxGradient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
@@ -46,12 +44,6 @@ class StoryMenuState extends MusicBeatState
 	var grpWeekText:FlxTypedGroup<MenuItem>;
 
 	var grpLocks:FlxTypedGroup<FlxSprite>;
-
-	var bg:FlxSprite = new FlxSprite();
-	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('ui/checkeredBG'), 0.2, 0.2, true, true);
-	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
-	var side:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('ui/Week_Top'));
-	var bottom:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('ui/Week_Bottom'));
 	
 	var weeks:Array<Week> = [
 		new Week(['Warmup'], LanguageManager.getTextString('story_tutorial'), 0xFF8A42B7, 'warmup'),  // WARMUP
@@ -94,25 +86,6 @@ class StoryMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		bg.loadGraphic(MainMenuState.randomizeBG());
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.03;
-		bg.updateHitbox();
-		bg.color = 0xE38502;
-		bg.scrollFactor.set();
-		bg.screenCenter();
-		bg.y -= bg.height;
-		add(bg);
-
-		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x55F8FFAB, 0xAAFFDEF2], 1, 90, true);
-		gradientBar.y = FlxG.height - gradientBar.height;
-		add(gradientBar);
-		gradientBar.scrollFactor.set(0, 0);
-
-		add(checker);
-		checker.scrollFactor.set(0, 0.07);
-
 		scoreText = new FlxText(10, 0, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("Comic Sans MS Bold", 32);
 		scoreText.antialiasing = true;
@@ -150,24 +123,9 @@ class StoryMenuState extends MusicBeatState
 			grpWeekText.add(weekThing);
 		}
 
-		side.scrollFactor.x = 0;
-		side.scrollFactor.y = 0;
-		side.antialiasing = true;
-		side.screenCenter();
-		add(side);
-		side.y = 0 - side.height;
-		side.x = FlxG.width / 2 - side.width / 2;
-
-		bottom.scrollFactor.x = 0;
-		bottom.scrollFactor.y = 0;
-		bottom.antialiasing = true;
-		bottom.screenCenter();
-		add(bottom);
-		bottom.y = FlxG.height + bottom.height;
-
 		add(yellowBG);
 
-		txtTrackdeco = new FlxText(0, yellowBG.x + yellowBG.height + 150, FlxG.width, LanguageManager.getTextString('story_track').toUpperCase(), 28);
+		txtTrackdeco = new FlxText(0, yellowBG.x + yellowBG.height + 50, FlxG.width, LanguageManager.getTextString('story_track').toUpperCase(), 28);
 		txtTrackdeco.alignment = CENTER;
 		txtTrackdeco.font = rankText.font;
 		txtTrackdeco.color = 0xFFe55777;
@@ -209,28 +167,11 @@ class StoryMenuState extends MusicBeatState
 			changeWeek(0);
 		}
 		super.create();
-
-		FlxTween.tween(bg, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
-		FlxTween.tween(side, {y: 0}, 0.8, {ease: FlxEase.quartInOut});
-		FlxTween.tween(bottom, {y: FlxG.height - bottom.height}, 0.8, {ease: FlxEase.quartInOut});
-
-		scoreText.alpha = txtWeekTitle.alpha = txtTrackdeco.alpha = 0;
-		FlxTween.tween(scoreText, {alpha: 1}, 0.8, {ease: FlxEase.quartInOut});
-		FlxTween.tween(txtTracklist, {y: 150 + 300}, 0.8, {ease: FlxEase.quartInOut});
-		FlxTween.tween(txtTrackdeco, {alpha: 0.7}, 0.8, {ease: FlxEase.quartInOut});
-		FlxTween.tween(txtWeekTitle, {alpha: 0.7}, 0.8, {ease: FlxEase.quartInOut});
-
-		FlxG.camera.zoom = 0.6;
-		FlxG.camera.alpha = 0;
-		FlxTween.tween(FlxG.camera, {zoom: 1, alpha: 1}, 0.7, {ease: FlxEase.quartInOut});
 	}
 
 
 	override function update(elapsed:Float)
 	{
-		checker.x -= -0.12;
-		checker.y -= -0.34;
-
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.5));
 
 		scoreText.text = LanguageManager.getTextString('story_weekScore') + lerpScore;
@@ -265,13 +206,6 @@ class StoryMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
 			FlxG.switchState(new MainMenuState());
-
-			FlxTween.tween(FlxG.camera, {zoom: 0.6, alpha: -0.6}, 0.8, {ease: FlxEase.quartInOut});
-			FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.quartInOut});
-			FlxTween.tween(checker, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
-			FlxTween.tween(gradientBar, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
-			FlxTween.tween(side, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
-			FlxTween.tween(bottom, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
 		}
 		if (FlxG.keys.justPressed.SEVEN && !FlxG.save.data.masterWeekUnlocked)
 		{

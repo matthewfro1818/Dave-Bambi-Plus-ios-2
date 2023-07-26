@@ -47,11 +47,6 @@ class MusicPlayerState extends MusicBeatState
   
     override function create()
     {
-        #if not web
-		Paths.clearUnusedMemory();
-        Paths.clearStoredMemory();
-		#end
-        
         FlxG.autoPause = false;
         var initSonglist = CoolUtil.coolTextFile(Paths.txt('djSonglist')); //ah yeah dj song list
         for (i in 0...initSonglist.length)
@@ -69,9 +64,11 @@ class MusicPlayerState extends MusicBeatState
             ['supernovae', 'bambi-joke'], ['glitch', 'bambi-joke'], ['master', 'bambi-joke', true],
             ['cheating', 'bambi-3d'], ['unfairness', 'bambi-unfair'], ['exploitation', 'expunged'],
             ['kabunga', 'exbungo'],
+            ['bananacore', 'bananacoreicon'], ['eletric-cockadoodledoo', 'old-cicons'], ['electric-cockaldoodledoo', 'electricicons'],
             ['roofs', 'baldi'],
+            ['importumania', 'importumania'], 
             ['recursed', 'recurser'],
-            ['vs-dave-rap-two', 'dave-cool'],  
+            ['vs-dave-rap-two', 'dave-cool'], 
         ];
         for (i in 0...secretSongs.length)
         {
@@ -83,9 +80,13 @@ class MusicPlayerState extends MusicBeatState
                 case 'unfairness': FlxG.save.data.unfairnessFound;
                 case 'exploitation': FlxG.save.data.exploitationFound;
                 case 'kabunga': FlxG.save.data.exbungoFound;
+                case 'bananacore', 'eletric-cockadoodledoo', 'electric-cockaldoodledoo': FlxG.save.data.electricCockaldoodledooUnlocked;
                 case 'roofs': FlxG.save.data.roofsUnlocked;
                 case 'recursed': FlxG.save.data.recursedUnlocked;
                 case 'vs-dave-rap-two': FlxG.save.data.vsDaveRapTwoFound;
+                case 'importumania': FlxG.save.data.importumaniaFound;
+                case 'rigged': FlxG.save.data.riggedFound;
+                case 'oppression':  FlxG.save.data.oppressionFound;
                 default: false;
             }
             if (unlockSong)
@@ -150,7 +151,7 @@ class MusicPlayerState extends MusicBeatState
 		barText.setFormat(Paths.font("comic.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		barText.scrollFactor.set();
         barText.borderSize = 1.5;
-		barText.antialiasing = FlxG.save.data.globalAntialiasing;
+		barText.antialiasing = true;
         barText.screenCenter(X);
 		add(barText);
 

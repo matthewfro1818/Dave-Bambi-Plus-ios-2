@@ -104,7 +104,7 @@ class Sustains extends Modifier
 	}
 }
 
-class NoMissesMode extends Modifier
+class PlaybackRate extends Modifier
 {
 	public function new(desc:String)
 	{
@@ -114,7 +114,7 @@ class NoMissesMode extends Modifier
 
 	public override function left():Bool
 	{
-		FlxG.save.data.noMisses = !FlxG.save.data.noMisses;
+		FlxG.save.data.randomspeed = !FlxG.save.data.randomspeed;
 
 		display = updateDisplay();
 		return true;
@@ -128,7 +128,7 @@ class NoMissesMode extends Modifier
 
 	private override function updateDisplay():String
 	{
-		return "No Misses mode: < " + (FlxG.save.data.noMisses ? "on" : "off") + " >";
+		return "Playback Rate: < " + (FlxG.save.data.randomspeed ? "on" : "off") + " >";
 	}
 }
 

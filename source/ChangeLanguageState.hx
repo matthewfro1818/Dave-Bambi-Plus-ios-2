@@ -28,11 +28,6 @@ class ChangeLanguageState extends MusicBeatState
 
    override function create()
 	{
-      #if not web
-		Paths.clearUnusedMemory();
-      Paths.clearStoredMemory();
-		#end
-
 	   languages = LanguageManager.getLanguages();
       add(languageTextGroup);
 
@@ -40,7 +35,7 @@ class ChangeLanguageState extends MusicBeatState
       menuBG.color = 0xFFea71fd;
       menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
       menuBG.updateHitbox();
-      menuBG.antialiasing = FlxG.save.data.antialiasing;
+      menuBG.antialiasing = true;
       menuBG.loadGraphic(MainMenuState.randomizeBG());
       add(menuBG);
 
@@ -92,7 +87,7 @@ class ChangeLanguageState extends MusicBeatState
 			}
          if (controls.BACK)
          {
-            FlxG.switchState(new OptionsMenu());
+            FlxG.switchState(new OptionsDirect());
          }
       }
       

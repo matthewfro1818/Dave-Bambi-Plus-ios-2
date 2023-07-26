@@ -74,12 +74,25 @@ class FreeplayState extends MusicBeatState
 		0xFF119A2B,    // CHEATING
 		0xFFFF0000,    // UNFAIRNESS
 		0xFF810000,    // EXPLOITATION
+		0xFF000000,    // Enter Terminal
+		0xFFCC5555,    // Electric-Cockaldoodledoo
+		0xFF008E00,    // longnosejohn
+		0xFFFFFFFF,    // cuzsiee
     ];
 	public static var skipSelect:Array<String> = 
 	[
 		'five-nights',
 		'vs-dave-rap',
-		'vs-dave-rap-two'
+		'vs-dave-rap-two',
+		'confronting-yourself',
+		'cob',
+		'cuzsie-x-kapi-shipping-cute',
+		'oppression',
+		'bananacore',
+		'eletric-cockadoodledoo',
+		'electric-cockaldoodledoo',
+		'super-saiyan',
+		'foolhardy'
 	];
 
 	public static var noExtraKeys:Array<String> = 
@@ -87,7 +100,37 @@ class FreeplayState extends MusicBeatState
 		'five-nights',
 		'vs-dave-rap',
 		'vs-dave-rap-two',
-		'overdrive'
+		'overdrive',
+		'confronting-yourself',
+		'cob',
+		'cuzsie-x-kapi-shipping-cute',
+		'oppression',
+		'bananacore',
+		'eletric-cockadoodledoo',
+		'electric-cockaldoodledoo',
+		'super-saiyan',
+		'foolhardy',
+		'crop',
+		'popcorn',
+		'no-legs',
+		'blitz',
+		'importumania',
+		'rigged',
+		'old-house',
+		'old-insanity',
+		'furiosity',
+		'old-blocked',
+		'old-corn-theft',
+		'old-maze',
+		'beta-maze',
+		'old-splitathon',
+		'old-screwed',
+		'screwed-v2',
+		'secret',
+		'secret-mod-leak',
+		'vs-dave-thanksgiving',
+		'bonkers',
+		'duper'
 	];
 
 	private var camFollow:FlxObject;
@@ -161,12 +204,16 @@ class FreeplayState extends MusicBeatState
 		}
 		if (FlxG.save.data.terminalFound && !awaitingExploitation)
 		{
-			Catagories = ['dave', 'joke', 'extras', 'terminal'];
+			Catagories = ['dave', 'joke', 'extras', 'dave2.5', 'classic', 'cover', 'fanmade', 'terminal'];
 			translatedCatagory = [
-			LanguageManager.getTextString('freeplay_dave'),
-			LanguageManager.getTextString('freeplay_joke'),
-			LanguageManager.getTextString('freeplay_extra'),
-			LanguageManager.getTextString('freeplay_terminal')];
+				LanguageManager.getTextString('freeplay_dave'),
+				LanguageManager.getTextString('freeplay_joke'),
+				LanguageManager.getTextString('freeplay_extra'),
+				LanguageManager.getTextString('freeplay_dave2.5'),
+				LanguageManager.getTextString('freeplay_classic'),
+				LanguageManager.getTextString('freeplay_cover'),
+				LanguageManager.getTextString('freeplay_fanmade'),
+				LanguageManager.getTextString('freeplay_terminal')];
 		}
 
 		for (i in 0...Catagories.length)
@@ -281,6 +328,8 @@ class FreeplayState extends MusicBeatState
 				if (FlxG.save.data.hasPlayedMasterWeek)
 				{
 					addWeek(['Supernovae', 'Glitch', 'Master'], 5, ['bambi-joke']);
+					addWeek(['Old-Supernovae', 'Old-Glitch'], 5, ['bambi-joke']);
+					addWeek(['Vs-Dave-Thanksgiving'], 5, ['bambi-joke']);
 				}				
 				if (!FlxG.save.data.terminalFound)
 				{
@@ -291,11 +340,23 @@ class FreeplayState extends MusicBeatState
 				}
 				if (FlxG.save.data.exbungoFound)
 					addWeek(['Kabunga'], 6, ['exbungo']);
-				
+	
+				if (FlxG.save.data.oppressionFound)
+					addWeek(['Oppression'], 14, ['bambi-3d-old']);
+					
 				if (FlxG.save.data.roofsUnlocked)
 					addWeek(['Roofs'], 7, ['baldi']);
-
-			    addWeek(['Vs-Dave-Rap'], 1, ['dave-cool']);
+	
+				if (FlxG.save.data.secretUnlocked)
+					addWeek(['Secret'], 5, ['marcello-dave']);
+	
+				if (FlxG.save.data.secretUnlocked)
+					addWeek(['Secret-Mod-Leak'], 7, ['baldi']);
+	
+				if (FlxG.save.data.electricCockaldoodledooUnlocked)
+					addWeek(['Bananacore', 'Eletric-Cockadoodledoo', 'Electric-Cockaldoodledoo'], 18, ['bananacoreicon', 'old-cicons', 'electricicons']);
+	
+				addWeek(['Vs-Dave-Rap'], 1, ['dave-cool']);
 				if(FlxG.save.data.vsDaveRapTwoFound)
 				{
 					addWeek(['Vs-Dave-Rap-Two'], 1, ['dave-cool']);
@@ -312,6 +373,26 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Mealie'], 2, ['bambi-loser']);
 				addWeek(['Indignancy'], 2, ['bambi-angey']);
 				addWeek(['Memory'], 1, ['dave']);
+			case 'dave2.5':
+				addWeek(['House-2.5', 'Insanity-2.5', 'Polygonized-2.5'], 1, ['dave-2.5', 'dave-annoyed-2.5', 'dave-angey-old']);
+				addWeek(['Bonus-Song-2.5'], 1, ['dave-2.5']);
+				addWeek(['Blocked-2.5', 'Corn-Theft-2.5', 'Maze-2.5'], 2, ['bambi-scrapped-3.0', 'bambi-scrapped-3.0', 'bambi-scrapped-3.0']);
+			case 'classic':
+				addWeek(['Old-House', 'Old-Insanity', 'Furiosity'], 1, ['dave-pre-alpha', 'dave-pre-alpha', 'furiosity-dave']);
+				addWeek(['Old-Blocked', 'Old-Corn-Theft', 'Old-Maze', 'Beta-Maze'], 2, ['bambi-1.0', 'bambi-beta-2', 'bambi-beta-2', 'bambi-2.0']);
+				addWeek(['Old-Splitathon'], 3, ['the-duo-old']);
+				addWeek(['Old-Screwed', 'Screwed-V2'], 2, ['bambi-angey-old', 'bambi-angey-old']);
+			case 'fanmade':
+				addWeek(['Blitz', 'No-Legs'], 1, ['dave-annoyed', 'dave']);
+				addWeek(['Duper'], 2, ['bambi-angey', 'bambi-new']);
+				if (FlxG.save.data.importumaniaFound)
+					addWeek(['Importumania'], 14, ['importumania']);
+			case 'cover':
+				addWeek(['Confronting-Yourself'], 4, ['tristan-festival']);
+				addWeek(['Cob', 'Super-Saiyan'], 1, ['dave', 'dave-annoyed']);
+				addWeek(['Foolhardy'], 2, ['zardyMyBeloved']);
+				if (FlxG.save.data.electricCockaldoodledooUnlocked)
+					addWeek(['Cuzsie-X-Kapi-Shipping-Cute'], 20, ['cuzsiee']);
 			case 'terminal':
 				if (FlxG.save.data.cheatingFound)
 					addWeek(['Cheating'], 14, ['bambi-3d']);
@@ -319,6 +400,8 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Unfairness'], 15, ['bambi-unfair']);
 				if (FlxG.save.data.exploitationFound)
 					addWeek(['Exploitation'], 16, ['expunged']);
+				if (FlxG.save.data.cheatingFound)
+					addWeek(['Bad-Apple-srPerez'], 14, ['flandre']);
 
 				addWeek(['Enter Terminal'], 17, ['terminal']);
 		}
