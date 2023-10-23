@@ -1197,8 +1197,14 @@ class PlayState extends MusicBeatState
 					boyfriend.y += 150;
 				}
 			case 'banana-hell':
-				dad.x -= 600;
-				dad.y -= 190;
+				boyfriend.x += 770;
+				boyfriend.y += 100;
+				dad.x -= 0;
+				dad.y -= -70;
+			case 'omission':
+				dad.setPosition(0, -70);
+				boyfriend.setPosition(400, 130);
+				gf.setPosition(950, -200);
 			case 'house-older':
 				dad.y -= 100;
 			case 'garrettLand':
