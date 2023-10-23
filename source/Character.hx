@@ -1242,6 +1242,31 @@ class Character extends FlxSprite
 				updateHitbox();
 				
 				playAnim('idle');
+
+			case 'dan':
+				frames = Paths.getSparrowAtlas('dan/dan', 'shared');
+				animation.addByPrefix('idle', 'bambi idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right'])
+				{
+					animation.addByPrefix('sing${anim.toUpperCase()}', 'bambi $anim', 24, false);
+					animation.addByPrefix('sing${anim.toUpperCase()}miss', 'miss $anim', 24, false);
+				}
+				for (anim in ['left', 'right'])
+				{
+					animation.addByPrefix('sing${anim.toUpperCase()}-alt', 'bambi alt $anim', 24, false);
+				}
+				animation.addByPrefix('hey', 'bambi look', 24, false);
+				animation.addByPrefix('singSmash', 'bambi phone', 24, false);
+				animation.addByPrefix('singThrow', 'bambi throw', 24, false);
+				
+				barColor = FlxColor.fromRGB(0, 0, 0);
+
+				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
+				
+				globalOffset = [37, 90];
+				skins.set('recursed', 'bambi-recursed');
+
+				playAnim('idle');
 			case 'bambi-joke':
 				frames = Paths.getSparrowAtlas('joke/bambi-joke', 'shared');
 
