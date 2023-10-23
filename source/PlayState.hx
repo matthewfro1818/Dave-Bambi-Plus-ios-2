@@ -2495,6 +2495,10 @@ class PlayState extends MusicBeatState
 						bg.setPosition(0, 200);
 						bg.setGraphicSize(Std.int(bg.width * 3));
 						stageName = 'unfairness';
+					case 'omission':
+						bgZoom = 0.8;
+						bg.loadGraphic(Paths.image('backgrounds/void/redsky', 'shared'));
+						stageName = 'omission';
 				}
 				sprites.add(bg);
 				add(bg);
