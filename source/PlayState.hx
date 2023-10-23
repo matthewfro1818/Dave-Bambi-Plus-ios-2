@@ -805,6 +805,8 @@ class PlayState extends MusicBeatState
 					stageCheck = 'scrapped-farm-sunset';
 				case 'foolhardy':
 					stageCheck = 'fuckyouZardyTime';
+				case 'omission':
+					stageCheck = 'omission';
 			}
 		}
 		else
