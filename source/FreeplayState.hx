@@ -78,6 +78,7 @@ class FreeplayState extends MusicBeatState
 		0xFFCC5555,    // Electric-Cockaldoodledoo
 		0xFF008E00,    // longnosejohn
 		0xFFFFFFFF,    // cuzsiee
+		0xFF000000,    // dan
     ];
 	public static var skipSelect:Array<String> = 
 	[
@@ -373,6 +374,7 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Mealie'], 2, ['bambi-loser']);
 				addWeek(['Indignancy'], 2, ['bambi-angey']);
 				addWeek(['Memory'], 1, ['dave']);
+				addWeek(['omission'], 21, ['dan']);
 			case 'dave2.5':
 				addWeek(['House-2.5', 'Insanity-2.5', 'Polygonized-2.5'], 1, ['dave-2.5', 'dave-annoyed-2.5', 'dave-angey-old']);
 				addWeek(['Bonus-Song-2.5'], 1, ['dave-2.5']);
