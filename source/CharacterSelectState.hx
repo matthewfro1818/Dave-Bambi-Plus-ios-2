@@ -133,6 +133,9 @@ class CharacterSelectState extends MusicBeatState
 			new CharacterForm('bambi-1.0', 'Bambi (1.0)', [0, 0, 3, 0]),
 			new CharacterForm('bambi-beta-2', 'Bambi (Beta 2)', [0, 0, 3, 0])
 		]),
+		new CharacterInSelect('dan', [0, 0, 3, 0], [
+			new CharacterForm('dan', 'Dan', [0, 0, 3, 0]),
+		]),
 		new CharacterInSelect('bambi-splitathon', [0, 0, 3, 0], [
 			new CharacterForm('bambi-splitathon', 'Splitathon Bambi', [0, 0, 3, 0]),
 			new CharacterForm('bambi-splitathon-2.5', 'Splitathon Bambi (2.5)', [0, 0, 3, 0]),
