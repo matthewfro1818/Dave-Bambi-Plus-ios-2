@@ -8828,6 +8828,7 @@ class PlayState extends MusicBeatState
 							}
 	
 						case 1282:
+                                                        switchDad('expunged-mad', dad.getPosition());
 							expungedBG.loadGraphic(Paths.image('backgrounds/void/exploit/broken_expunged_chain', 'shared'));
 							expungedBG.setGraphicSize(Std.int(expungedBG.width * 2));
 						case 1311:
@@ -8845,7 +8846,7 @@ class PlayState extends MusicBeatState
 						case 1503:
 							shakeCam = false;
 							FlxG.camera.zoom += 0.2;
-						case 1536:						
+						case 1536:				
 							expungedBG.loadGraphic(Paths.image('backgrounds/void/exploit/creepyRoom', 'shared'));
 							expungedBG.setGraphicSize(Std.int(expungedBG.width * 2));
 							expungedBG.setPosition(0, 200);
