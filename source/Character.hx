@@ -1224,11 +1224,33 @@ class Character extends FlxSprite
 			case 'expunged':
 				// EXPUNGED SHITE ANIMATION LOADING CODE
 				frames = Paths.getSparrowAtlas('expunged/ExpungedFinal', 'shared');
-				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+		
+				loadOffsetFile(curCharacter);
+				
+
+				barColor = FlxColor.fromRGB(82, 15, 15);
+				antialiasing = false;
+				
+				globalOffset = [0, -350];
+				
+				setGraphicSize(Std.int((width * 0.8) / furiosityScale));
+				updateHitbox();
+				
+				playAnim('idle');
+
+			case 'expunged-mad':
+				// EXPUNGED SHITE ANIMATION LOADING CODE
+				frames = Paths.getSparrowAtlas('expunged/ExpungedFinal', 'shared');
+				animation.addByPrefix('idle', 'idle alt', 24, false);
+				animation.addByPrefix('singUP', 'up alt', 24, false);
+				animation.addByPrefix('singRIGHT', 'right alt', 24, false);
+				animation.addByPrefix('singDOWN', 'down alt', 24, false);
+				animation.addByPrefix('singLEFT', 'left alt', 24, false);
 		
 				loadOffsetFile(curCharacter);
 				
