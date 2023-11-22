@@ -1224,11 +1224,11 @@ class Character extends FlxSprite
 			case 'expunged':
 				// EXPUNGED SHITE ANIMATION LOADING CODE
 				frames = Paths.getSparrowAtlas('expunged/ExpungedFinal', 'shared');
-				animation.addByPrefix('idle', 'idle', 24, false);
-				animation.addByPrefix('singUP', 'up', 24, false);
-				animation.addByPrefix('singRIGHT', 'right', 24, false);
-				animation.addByPrefix('singDOWN', 'down', 24, false);
-				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('idle', 'idle0', 24, false);
+				animation.addByPrefix('singUP', 'up0', 24, false);
+				animation.addByPrefix('singRIGHT', 'right0', 24, false);
+				animation.addByPrefix('singDOWN', 'down0', 24, false);
+				animation.addByPrefix('singLEFT', 'left0', 24, false);
 		
 				loadOffsetFile(curCharacter);
 				
