@@ -896,6 +896,22 @@ class Character extends FlxSprite
 				skins.set('recursed', 'bambi-recursed');
 
 				playAnim('idle');
+			case 'doge':
+				frames = Paths.getSparrowAtlas('doge/doge', 'shared');
+				animation.addByPrefix('idle', 'Doge', 24, false);
+				animation.addByPrefix('singLEFT' Doge note left', 24, false);
+				animation.addByPrefix('singRIGHT' Doge note right', 24, false);
+				animation.addByPrefix('singUP' Doge note up', 24, false);
+				animation.addByPrefix('singDOWN' Doge note down', 24, false);
+				
+				barColor = FlxColor.fromRGB(216, 176, 87);
+
+				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
+				
+				globalOffset = [0, 380];
+				skins.set('recursed', 'doge-recursed');
+
+				playAnim('idle');
 			case 'super-saiyan-bambi':
 				frames = Paths.getSparrowAtlas('bambi/duperBambiAssets', 'shared');
 				animation.addByPrefix('idle', 'duperBambiIdle', 24, false);
