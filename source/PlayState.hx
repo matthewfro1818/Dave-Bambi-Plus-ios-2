@@ -3034,14 +3034,6 @@ class PlayState extends MusicBeatState
 	}
 	function startCountdown():Void
 	{
-		if (SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness' || SONG.song.toLowerCase() == 'exploitation')
-		{
-			if(botPlay)
-			{
-				FlxG.switchState(new SusState());
-			}
-		}
-
 		inCutscene = false;
 
 		generateStaticArrows(0);
