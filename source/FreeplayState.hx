@@ -79,7 +79,7 @@ class FreeplayState extends MusicBeatState
 		0xFF008E00,    // longnosejohn
 		0xFFFFFFFF,    // cuzsiee
 		0xFF000000,    // dan
-		FlxColor.fromRGB(216, 176, 87); // Doge
+		FlxColor.fromRGB(216, 176, 87), // Doge
     ];
 	public static var skipSelect:Array<String> = 
 	[
