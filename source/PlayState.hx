@@ -2567,7 +2567,7 @@ class PlayState extends MusicBeatState
 					insert(members.indexOf(circle), hat);
 				}
 				
-				voidShader(bg)
+				voidShader(bg);
 			case 'rapBattle':
 				bgZoom = 1;
 				stageName = 'rapLand';
