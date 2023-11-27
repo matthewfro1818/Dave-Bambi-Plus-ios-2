@@ -79,6 +79,7 @@ class FreeplayState extends MusicBeatState
 		0xFF008E00,    // longnosejohn
 		0xFFFFFFFF,    // cuzsiee
 		0xFF000000,    // dan
+		FlxColor.fromRGB(216, 176, 87); // Doge
     ];
 	public static var skipSelect:Array<String> = 
 	[
@@ -93,7 +94,8 @@ class FreeplayState extends MusicBeatState
 		'eletric-cockadoodledoo',
 		'electric-cockaldoodledoo',
 		'super-saiyan',
-		'foolhardy'
+		'foolhardy',
+		'doge-vs-bambi'
 	];
 
 	public static var noExtraKeys:Array<String> = 
@@ -132,7 +134,8 @@ class FreeplayState extends MusicBeatState
 		'vs-dave-thanksgiving',
 		'bonkers',
 		'duper',
-                'omission'
+                'omission',
+		'doge-vs-bambi'
 	];
 
 	private var camFollow:FlxObject;
@@ -375,7 +378,6 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Mealie'], 2, ['bambi-loser']);
 				addWeek(['Indignancy'], 2, ['bambi-angey']);
 				addWeek(['Memory'], 1, ['dave']);
-				addWeek(['omission'], 21, ['dan']);
 			case 'dave2.5':
 				addWeek(['House-2.5', 'Insanity-2.5', 'Polygonized-2.5'], 1, ['dave-2.5', 'dave-annoyed-2.5', 'dave-angey-old']);
 				addWeek(['Bonus-Song-2.5'], 1, ['dave-2.5']);
@@ -390,6 +392,8 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Duper'], 2, ['bambi-angey', 'bambi-new']);
 				if (FlxG.save.data.importumaniaFound)
 					addWeek(['Importumania'], 14, ['importumania']);
+				addWeek(['omission'], 21, ['dan']);
+				addWeek(['Doge-Vs-Bambi'], 22, ['doge']);
 			case 'cover':
 				addWeek(['Confronting-Yourself'], 4, ['tristan-festival']);
 				addWeek(['Cob', 'Super-Saiyan'], 1, ['dave', 'dave-annoyed']);
