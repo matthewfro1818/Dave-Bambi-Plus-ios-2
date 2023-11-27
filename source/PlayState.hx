@@ -747,7 +747,7 @@ class PlayState extends MusicBeatState
 					stageCheck = 'red-void';
 				case 'bonus-song':
 					stageCheck = 'inside-house';
-				case 'blocked' | 'corn-theft' | 'maze':
+				case 'blocked' | 'corn-theft' | 'maze' | 'doge-vs-bambi':
 					stageCheck = 'farm';
 				case 'indignancy':
 					stageCheck = 'farm-night';
