@@ -899,10 +899,10 @@ class Character extends FlxSprite
 			case 'doge':
 				frames = Paths.getSparrowAtlas('doge/doge', 'shared');
 				animation.addByPrefix('idle', 'Doge', 24, false);
-				animation.addByPrefix('singLEFT', Doge note left', 24, false);
-				animation.addByPrefix('singRIGHT', Doge note right', 24, false);
-				animation.addByPrefix('singUP', Doge note up', 24, false);
-				animation.addByPrefix('singDOWN', Doge note down', 24, false);
+				animation.addByPrefix('singUP', 'Doge note up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Doge note right', 24, false);
+				animation.addByPrefix('singDOWN', 'Doge note down', 24, false);
+				animation.addByPrefix('singLEFT', 'Doge note left', 24, false);
 				
 				barColor = FlxColor.fromRGB(216, 176, 87);
 
