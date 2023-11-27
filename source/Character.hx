@@ -898,7 +898,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'doge':
 				frames = Paths.getSparrowAtlas('doge/doge', 'shared');
-				animation.addByPrefix('idle', 'Doge', 24, false);
+				animation.addByPrefix('idle', 'Doge0', 24, false);
 				animation.addByPrefix('singUP', 'Doge note up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Doge note right', 24, false);
 				animation.addByPrefix('singDOWN', 'Doge note down', 24, false);
@@ -908,7 +908,7 @@ class Character extends FlxSprite
 
 				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
 				
-				globalOffset = [0, 380];
+				globalOffset = [37, 90];
 				skins.set('recursed', 'doge-recursed');
 
 				playAnim('idle');
