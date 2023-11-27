@@ -98,6 +98,8 @@ class CreditsPopUp extends FlxSpriteGroup
 				songCreator = 'Cynda';
 			case 'rigged':
 				songCreator = 'pixe';
+			case 'doge-vs-bambi':
+				songCreator = 'sanco the fox';
 		}
 		switch (PlayState.storyWeek)
 		{
@@ -153,6 +155,8 @@ class CreditsPopUp extends FlxSpriteGroup
 				headingPath = {path: 'songHeadings/3D-daveHeading', antiAliasing: false, iconOffset: 0};
 			case 'interdimensional':
 				headingPath = {path: 'songHeadings/interdimensionalHeading', antiAliasing: false, iconOffset: 0};
+			case 'doge-vs-bambi':
+				headingPath = {path: 'songHeadings/bambiHeading', antiAliasing: false, iconOffset: 0};
 		}
 		if (PlayState.recursedStaticWeek)
 		{
