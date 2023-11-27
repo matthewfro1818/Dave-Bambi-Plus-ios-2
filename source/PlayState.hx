@@ -2482,7 +2482,7 @@ class PlayState extends MusicBeatState
 				sprites.add(expungedBG);
 				add(expungedBG);
 				voidShader(expungedBG);
-			case 'red-void' | 'green-void' | 'glitchy-void':
+			case 'red-void' | 'green-void' | 'glitchy-void' | 'omission' | "banana-hell":
 				bgZoom = 0.7;
 
 				var bg:BGSprite = new BGSprite('void', -600, -200, '', null, 1, 1, false, true);
@@ -2507,6 +2507,12 @@ class PlayState extends MusicBeatState
 						bgZoom = 0.8;
 						bg.loadGraphic(Paths.image('backgrounds/void/omission', 'shared'));
 						stageName = 'omission';
+					case 'banana-hell': // this is a Cockey moment
+						bg.loadGraphic(Paths.image('backgrounds/void/bananaVoid1'));
+					        bg.setPosition(-700, -300);
+						bg.setGraphicSize(Std.int(bg.width * 2.55), Std.int(bg.height * 2));
+					        weirdBG = bg;
+					        stageName = 'banana-land';
 				}
 				sprites.add(bg);
 				add(bg);
@@ -2547,8 +2553,21 @@ class PlayState extends MusicBeatState
 				place = new BGSprite('place', 860, -15, Paths.image('backgrounds/void/exbongo/Place'), null);
 				sprites.add(place);	
 				add(place);
+
+				if (['kabunga'].contains(SONG.song.toLowerCase()) && FlxG.random.int(0, 4) == 0)
+				{
+					FlxG.mouse.visible = true;
+					hat = new BGSprite('hat', -30, 550, 'eletric-cockadoodledoo/hat', [
+						new Animation('idle', 'hat', 24, true, [false, false])
+					], 1, 1, true, true);
+					hat.setGraphicSize(Std.int(hat.width * 0.36));
+					hat.animation.play('idle');
+					hat.updateHitbox();
+					sprites.insert(members.indexOf(circle), hat);
+					insert(members.indexOf(circle), hat);
+				}
 				
-				voidShader(bg);
+				voidShader(bg)
 			case 'rapBattle':
 				bgZoom = 1;
 				stageName = 'rapLand';
@@ -5548,6 +5567,8 @@ class PlayState extends MusicBeatState
 					{
 						case 'phone':
 							dad.playAnim('singSmash', true);
+						case 'phone-zardy':
+							boyfriend.playAnim('singSmash', true);
 						default:
 							if (daNote.noteStyle == 'phone-alt') { // I didn't notice bambi's alt animation has only left and right
 								if (noteToPlay == 'UP') noteToPlay = 'RIGHT';
@@ -7303,6 +7324,10 @@ class PlayState extends MusicBeatState
 						health -= 0.07;
 						updateAccuracy();
 						return;
+					case 'phone-zardy':
+						var Animation:Bool = boyfriend.animation.getByName("singSmash") != null;
+						boyfriend.playAnim(boyfriend.animation.getByName("singSmash") == null ? 'singSmash' : 'singSmash', true);
+						return;
 				}
 			}
 			var deathSound:FlxSound = new FlxSound();
@@ -7572,6 +7597,10 @@ class PlayState extends MusicBeatState
 					}
 					boyfriend.playAnim('sing' + fuckingDumbassBullshitFuckYou, true);
 					cameraMoveOnNote(fuckingDumbassBullshitFuckYou, 'bf');
+				case 'phone-zardy':
+					var Animation:Bool = boyfriend.animation.getByName("singSmash") != null;
+					var heyAnimation:Bool = boyfriend.animation.getByName("hey") != null;
+					boyfriend.playAnim(Animation ? 'singSmash' : (heyAnimation ? 'hey' : (isShaggy ? 'singRIGHT' : 'singUPmiss')), true);
 				case 'phone':
 					var hitAnimation:Bool = boyfriend.animation.getByName("dodge") != null;
 					var heyAnimation:Bool = boyfriend.animation.getByName("hey") != null;
