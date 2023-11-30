@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   ReleaseBuild:
-    runs-on: ios-latest
+    runs-on: mac-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
