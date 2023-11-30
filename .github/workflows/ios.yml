@@ -17,16 +17,24 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   ReleaseBuild:
-    runs-on: mac-latest
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2.3.0
 
+      - name: check xcode vresion
+        run: /usr/bin/xcodebuild -version
+
+      - name: install apple certificate and porovisioning profile
+         env:
+           BUILD_CERTIFICATE_BASE64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+main build-ios-app-spfexpert.yml
+
       - uses: krdlab/setup-haxe@master
         with:
           haxe-version: 4.2.5
-      # Runs a set of commands using the runners shell
+      # Runs a set of commands using the runners shell\
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
