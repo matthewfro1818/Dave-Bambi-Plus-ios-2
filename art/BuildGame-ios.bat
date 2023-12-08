@@ -1,3 +1,3 @@
 cd ..
-haxelib run haxelib run lime build ios -release
+haxelib run openfl build ios -release
 pause
