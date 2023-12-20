@@ -33,7 +33,6 @@ jobs:
 
       - name: Installing Libraries
         run: |
-          haxelib --global update haxelib
           haxelib --quiet install actuate
           haxelib --quiet install lime 8.0.0
           haxelib --quiet install openfl
