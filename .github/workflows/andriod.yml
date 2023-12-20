@@ -33,15 +33,20 @@ jobs:
 
       - name: Installing Libraries
         run: |
-          haxelib install lime --quiet
-          haxelib install openfl --quiet
-          haxelib install flixel --quiet
-          haxelib install flixel-addons --quiet
-          haxelib install flixel-ui --quiet
-          haxelib install hscript --quiet
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc.git --quiet
-          haxelib install extension-androidtools --quiet
-
+          haxelib --global update haxelib
+          haxelib --quiet install actuate
+          haxelib --quiet install lime 8.0.0
+          haxelib --quiet install openfl
+          haxelib --quiet install flixel 4.11.0
+          haxelib --quiet --never run lime setup
+          haxelib --quiet install flixel-ui
+          haxelib --quiet install flixel-addons 2.9.0
+          haxelib --quiet install polymod
+          haxelib --quiet install hscript
+          haxelib --quiet install hxcpp-debug-server
+          haxelib --quiet install hxCodec 2.5.1
+          haxelib --quiet git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib --quiet git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git
       - name: Setup Git hxcpp
         run: |
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
