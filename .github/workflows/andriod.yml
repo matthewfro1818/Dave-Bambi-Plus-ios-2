@@ -1,76 +1,76 @@
-name: andriod
+name: android
+
+# Controls when the action will run.
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  Android:
+  # This workflow contains a single job called "build"
+  android-debug:
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Setup Java
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@main
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+
+      - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
           java-version: '11'
           distribution: 'temurin'
 
+
       - name: Setup Haxe
         uses: krdlab/setup-haxe@master
         with:
-          haxe-version: latest
+          haxe-version: 4.2.5
 
-      - name: Installing Libraries
+      - name: Install Haxelibs
         run: |
-          haxelib install hxcpp > nul
-          haxelib install lime 8.0.0
-          haxelib install openfl
-          haxelib install flixel 4.11.0
-          haxelib run lime setup flixel
-          haxelib run lime setup         
-          haxelib remove flixel-addons
-          haxelib remove flixel-tools
-          haxelib remove flixel-ui
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 2.9.0
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec 2.5.1          
-          haxelib install linc_luajit
-          haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex.git
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc.git
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit.git
-          haxelib git faxe https://github.com/uhrobots/faxe.git
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib install hxcpp-debug-server
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc.git --quiet
-          haxelib install extension-androidtools --quiet
-          haxelib list
-
-      - name: Setup Git hxcpp
-        run: |
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
-          cd $(haxelib libpath hxcpp)/tools/hxcpp
-          haxe compile.hxml
-          cd ${{github.workspace}}
-
-      - name: Configure Android
+          haxelib --global update haxelib
+          haxelib --quiet install actuate
+          haxelib --quiet install lime 7.9.0
+          haxelib --quiet install openfl 9.1.0
+          haxelib --quiet install flixel 5.0.0
+          haxelib --quiet --never run lime setup
+          haxelib --quiet install flixel-ui
+          haxelib --quiet install flixel-addons
+          haxelib --quiet install polymod
+          haxelib --quiet install hscript
+          haxelib --quiet install hxcpp-debug-server
+          haxelib --quiet install hxCodec 2.5.1
+          haxelib --quiet git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib --quiet git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git
+      - name: Setup Lime
         run: |
           haxelib run lime setup -alias -y
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
+          haxelib set lime 7.9.0
+          haxelib set openfl 9.1.0
+          haxelib list
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
-      - name: Building
-        run: haxelib run lime build android -release
+      - name: Compile
+        run: haxelib run lime build android -debug
 
-      - name: Upload Artifact
+      - name: Publish Artifact
         uses: actions/upload-artifact@main
         with:
-          name: androidBuild
-          path: export/android/bin/app/build/outputs/apk/debug
-          if-no-files-found: warn
+          name: androidBuild-debug
