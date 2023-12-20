@@ -47,7 +47,7 @@ jobs:
           haxelib --quiet install flixel 4.11.0
           haxelib --quiet --never run lime setup
           haxelib --quiet install flixel-ui
-          haxelib --quiet install flixel-addonss 2.9.0
+          haxelib --quiet install flixel-addons 2.9.0
           haxelib --quiet install polymod
           haxelib --quiet install hscript
           haxelib --quiet install hxcpp-debug-server
