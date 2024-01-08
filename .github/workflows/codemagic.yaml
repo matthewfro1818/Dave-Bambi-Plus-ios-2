@@ -1,82 +1,82 @@
-name: android
+name: ios
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# Triggers the workflow on push or pull request events but only for the master branch
+push:
+branches: [ main ]
+pull_request:
+branches: [ main ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# Allows you to run this workflow manually from the Actions tab
+workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
- Android:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@main
+ IOS:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout
+uses: actions/checkout@main
 
-  name: iOS Native
-  max_build_duration: 120
-  instance_type: mac_mini_m1
+name: iOS Native
+max_build_duration: 120
+instance_type: mac_mini_m1
 integrations:
 app_store_connect: codemagic
 environment:
-        ios_signing:
-        distribution_type: app_store
-        bundle_identifier: io.codemagic.sample.iosnative
+ios_signing:
+distribution_type: app_store
+bundle_identifier: io.codemagic.sample.iosnative
 vars:
-        BUNDLE_ID: "io.codemagic.sample.iosnative"
-        XCODE_WORKSPACE: "CodemagicSample.xcworkspace" # <-- Put the name of your Xcode workspace here
-        XCODE_SCHEME: "CodemagicSample" # <-- Put the name of your Xcode scheme here
-        APP_STORE_APPLE_ID: 1555555551
-        xcode: latest
-        cocoapods: default
-        scripts:
-        - name: Install CocoaPods dependencies
-        script: | 
-          pod install
-          - name: Set up provisioning profiles settings on Xcode project
-                script: xcode-project use-profiles
-          - name: Increment build number
-                script: | 
-          cd $CM_BUILD_DIR
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
-          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-          - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: latest
-        name: Installing Libraries
-        run: |
-          haxelib --quiet install actuate
-          haxelib --quiet install lime 8.0.0
-          haxelib --quiet install openfl
-          haxelib --quiet install flixel 4.11.0
-          haxelib --quiet --never run lime setup
-          haxelib --quiet install flixel-ui
-          haxelib --quiet install flixel-addons 2.9.0
-          haxelib --quiet install polymod
-          haxelib --quiet install hscript
-          haxelib --quiet install hxcpp-debug-server
-          haxelib --quiet install hxCodec 2.5.1
-          haxelib --quiet git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib --quiet git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git
+BUNDLE_ID: "io.codemagic.sample.iosnative"
+XCODE_WORKSPACE: "CodemagicSample.xcworkspace" # <-- Put the name of your Xcode workspace here
+XCODE_SCHEME: "CodemagicSample" # <-- Put the name of your Xcode scheme here
+APP_STORE_APPLE_ID: 1555555551
+xcode: latest
+cocoapods: default
+scripts:
+- name: Install CocoaPods dependencies
+script: | 
+pod install
+- name: Set up provisioning profiles settings on Xcode project
+script: xcode-project use-profiles
+- name: Increment build number
+script: | 
+cd $CM_BUILD_DIR
+LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
+agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+- name: Setup Haxe
+uses: krdlab/setup-haxe@master
+with:
+haxe-version: latest
+name: Installing Libraries
+run: |
+haxelib --quiet install actuate
+haxelib --quiet install lime 8.0.0
+haxelib --quiet install openfl
+haxelib --quiet install flixel 4.11.0
+haxelib --quiet --never run lime setup
+haxelib --quiet install flixel-ui
+haxelib --quiet install flixel-addons 2.9.0
+haxelib --quiet install polymod
+haxelib --quiet install hscript
+haxelib --quiet install hxcpp-debug-server
+haxelib --quiet install hxCodec 2.5.1
+haxelib --quiet git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+haxelib --quiet git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools.git
  
-          name: Setup Git hxcpp
-          run: |
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
-          cd $(haxelib libpath hxcpp)/tools/hxcpp
-          haxe compile.hxml
-          cd ${{github.workspace}}
-          name: Building
-          run: haxelib run lime build ios
-          name: Upload Artifact
-          uses: actions/upload-artifact@main
-          with:
-          name: androidBuild
-          path: export/android/bin/build/ios/ipa/
-          if-no-files-found: warn
+name: Setup Git hxcpp
+run: |
+haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git --quiet
+cd $(haxelib libpath hxcpp)/tools/hxcpp
+haxe compile.hxml
+cd ${{github.workspace}}
+name: Building
+run: haxelib run lime build ios
+name: Upload Artifact
+uses: actions/upload-artifact@main
+with:
+name: androidBuild
+path: export/android/bin/build/ios/ipa/
+if-no-files-found: warn
