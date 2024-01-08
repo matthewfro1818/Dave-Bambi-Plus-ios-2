@@ -1,5 +1,5 @@
+
 workflows:
-  # This workflow contains a single job called "build"
   ios-native-workflow:
     name: iOS Native
     max_build_duration: 120
@@ -29,7 +29,7 @@ workflows:
           LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - name: Build ipa for distribution
-        script: |
+        script: | 
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
@@ -41,8 +41,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - user_1@example.com
-          - user_2@example.com
+          - matthewfroncek861@gmail.com
         notify:
           success: true
           failure: false
