@@ -16,77 +16,73 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
    - name: iOS Workflow 
-      ios_signing:
+     ios_signing:
         distribution_type: app_store # or: ad_hoc | development | enterprise
         bundle_identifier: com.example.id
-  scripts:
+        scripts:
     # ... your dependencies installation
     
-    - name: Set up code signing settings on Xcode project
-      script: xcode-project use-profiles
+   - name: Set up code signing settings on Xcode project
+     script: xcode-project use-profiles
     
     # ... your build commands
-ios-native:
-  environment:
-    vars:
+     vars:
       BUNDLE_ID: "io.codemagic.sample.iosnative"
       XCODE_WORKSPACE: "CodemagicSample.xcworkspace" # <-- Name of your Xcode workspace
       XCODE_SCHEME: "CodemagicSample" # <-- Name of your Xcode scheme
-scripts:
-  # ...
+      scripts:
         - uses: krdlab/setup-haxe@master
-        with:
+          with:
           haxe-version: 4.2.5
       # Runs a set of commands using the runners shell
-      - name: Install Haxelib
-        run: |
-          haxelib setup C:/haxelib
-          haxelib install hxcpp > nul
-          haxelib install lime 8.0.0
-          haxelib install openfl
-          haxelib install flixel 4.11.0
-          haxelib run lime setup flixel
-          haxelib run lime setup         
-          haxelib remove flixel-addons
-          haxelib remove flixel-tools
-          haxelib remove flixel-ui
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 2.9.0
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec 2.5.1          
-          haxelib install linc_luajit
-          haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git faxe https://github.com/uhrobots/faxe
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib install hxcpp-debug-server
-          haxelib list
-  - name: Build ipa for distribution
-    script: | 
-      haxelib run lime build windows
-      xcode-project build-ipa \
-        --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
-        --scheme "$XCODE_SCHEME"
-artifacts:
-  - build/ios/ipa/*.ipa
-  - /tmp/xcodebuild_logs/*.log
-  - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-  - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
-  - name: iOS Workflow
-    integrations:
-      app_store_connect: <App Store Connect API key name>
-    environment:
-      vars:
-        APP_STORE_APPLE_ID: 1555555551
-    scripts:
-      - name: Increment build number
-        script: | 
-          #!/bin/sh
-          cd $CM_BUILD_DIR
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
-          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      - name: Build ipa for distribution
+        - name: Install Haxelib
+          run: |
+           haxelib setup C:/haxelib
+           haxelib install hxcpp > nul
+           haxelib install lime 8.0.0
+           haxelib install openfl
+           haxelib install flixel 4.11.0
+           haxelib run lime setup flixel
+           haxelib run lime setup         
+           haxelib remove flixel-addons
+           haxelib remove flixel-tools
+           haxelib remove flixel-ui
+           haxelib install flixel-tools
+           haxelib install flixel-ui
+           haxelib install flixel-addons 2.9.0
+           haxelib install tjson
+           haxelib install hxjsonast
+           haxelib install hxCodec 2.5.1
+           haxelib install linc_luajit
+           haxelib install hscript
+           haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
+           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
+           haxelib git faxe https://github.com/uhrobots/faxe
+           haxelib git polymod https://github.com/larsiusprime/polymod.git
+           haxelib install hxcpp-debug-server
+           haxelib list
+        - name: Build ipa for distribution
+          script: | 
+           haxelib run lime build windows
+           xcode-project build-ipa \
+           --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
+           --scheme "$XCODE_SCHEME"
+             artifacts:
+            - build/ios/ipa/*.ipa
+            - /tmp/xcodebuild_logs/*.log
+            - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+            - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+            - name: iOS Workflow
+            integrations:
+            app_store_connect: <App Store Connect API key name>   
+            environment:
+            vars:
+            APP_STORE_APPLE_ID: 1555555551
+            scripts:
+           - name: Increment build number
+             script: | 
+             #!/bin/sh
+             cd $CM_BUILD_DIR
+             LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
+             agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
