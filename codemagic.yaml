@@ -54,13 +54,6 @@ jobs:
           haxelib git polymod https://github.com/larsiusprime/polymod.git
           haxelib install hxcpp-debug-server
           haxelib list
-      - name: Compile
-        run: haxelib run lime build ios -release
-      - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          name: ReleaseBuild
-          path: export/release/ios/bin/build/ios/ipa/VsDave.ipa
 workflows:
   # This workflow contains a single job called "build"
   ios-native-workflow:
@@ -92,7 +85,8 @@ workflows:
           LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - name: Build ipa for distribution
-        script: | 
+        script: |
+          haxelib build ios
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
