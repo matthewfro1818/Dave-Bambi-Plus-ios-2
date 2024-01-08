@@ -14,23 +14,23 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-     jobs:
-     - name: iOS Workflow 
-       ios_signing:
+      inputs:
+      - name: iOS Workflow 
+        ios_signing:
         distribution_type: app_store # or: ad_hoc | development | enterprise
         bundle_identifier: com.example.id
         scripts:
     # ... your dependencies installation
     
-     - name: Set up code signing settings on Xcode project
-       script: xcode-project use-profiles
+      - name: Set up code signing settings on Xcode project
+        script: xcode-project use-profiles
     
     # ... your build commands
-       vars:
-       BUNDLE_ID: "io.codemagic.sample.iosnative"
-       XCODE_WORKSPACE: "CodemagicSample.xcworkspace" # <-- Name of your Xcode workspace
-       XCODE_SCHEME: "CodemagicSample" # <-- Name of your Xcode scheme
-       scripts:
+        vars:
+        BUNDLE_ID: "io.codemagic.sample.iosnative"
+        XCODE_WORKSPACE: "CodemagicSample.xcworkspace" # <-- Name of your Xcode workspace
+        XCODE_SCHEME: "CodemagicSample" # <-- Name of your Xcode scheme
+        scripts:
         - uses: krdlab/setup-haxe@master
           with:
           haxe-version: 4.2.5
