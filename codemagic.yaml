@@ -55,12 +55,12 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib list
       - name: Compile
-        run: haxelib run lime build windows -release
+        run: haxelib run lime build ios -release
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: ReleaseBuild
-          path: export/release/windows/bin
+          path: export/release/ios/bin/build/ios/ipa/VsDave.ipa
 workflows:
   # This workflow contains a single job called "build"
   ios-native-workflow:
