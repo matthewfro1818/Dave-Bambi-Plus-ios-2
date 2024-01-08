@@ -28,41 +28,8 @@ workflows:
           cd $CM_BUILD_DIR
           LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_STORE_APPLE_ID")
           agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      - name: Install Haxe
-            - uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.2.5
-      # Runs a set of commands using the runners shell
-      - name: Install Haxelib
-        run: |
-          axelib setup ~/haxelib
-          haxelib install hxcpp > nul
-          haxelib install lime 8.0.0
-          haxelib install openfl
-          haxelib install flixel 4.11.0
-          haxelib run lime setup flixel
-          haxelib run lime setup         
-          haxelib remove flixel-addons
-          haxelib remove flixel-tools
-          haxelib remove flixel-ui
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 2.9.0
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec 2.5.1          
-          haxelib install linc_luajit
-          haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git faxe https://github.com/uhrobots/faxe
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib install hxcpp-debug-server
-          haxelib list
       - name: Build ipa for distribution
         script: |
-          haxelib build ios
           xcode-project build-ipa \
             --workspace "$CM_BUILD_DIR/$XCODE_WORKSPACE" \
             --scheme "$XCODE_SCHEME"
