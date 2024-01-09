@@ -1,11 +1,10 @@
 name: "Build iOS app"
 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # manual trigger but change to any supported event
+  # see addl: https://www.andrewhoog.com/post/how-to-build-react-native-android-app-with-github-actions/#3-run-build-workflow
+  workflow_dispatch:
+    branches: [main]
 
 jobs:
   build_with_signing:
@@ -18,41 +17,6 @@ jobs:
 
       - name: checkout repository
         uses: actions/checkout@v3
-
-      - name: install haxe
-      - uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.2.5
-      # Runs a set of commands using the runners shell
-      - name: Install Haxelib
-        run: |
-          haxelib setup "%HAXELIB_ROOT%"
-          haxelib install hxcpp > nul
-          haxelib install lime 8.0.0
-          haxelib install openfl
-          haxelib install flixel 4.11.0
-          haxelib run lime setup flixel
-          haxelib run lime setup         
-          haxelib remove flixel-addons
-          haxelib remove flixel-tools
-          haxelib remove flixel-ui
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons 2.9.0
-          haxelib install tjson
-          haxelib install hxjsonast
-          haxelib install hxCodec 2.5.1          
-          haxelib install linc_luajit
-          haxelib install hscript
-          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
-          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib git faxe https://github.com/uhrobots/faxe
-          haxelib git polymod https://github.com/larsiusprime/polymod.git
-          haxelib install hxcpp-debug-server
-          haxelib list
-      - name: Compile
-        run: haxelib run lime build windows -release
 
       - name: Install the Apple certificate and provisioning profile
         env:
@@ -90,7 +54,7 @@ jobs:
           -sdk iphoneos \
           -configuration Debug \
           -destination generic/platform=iOS \
-          clean archive
+          clean archive          
 
       - name: export ipa
         env:
