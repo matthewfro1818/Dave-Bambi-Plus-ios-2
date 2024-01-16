@@ -107,6 +107,7 @@ class ChartingState extends MusicBeatState
 	var curNoteType:Int;
 
 	var shagVoice:Bool;
+	var kogVoice:Bool;
 
 	override function create()
 	{
