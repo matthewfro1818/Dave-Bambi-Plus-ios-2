@@ -142,6 +142,7 @@ class ChartingState extends MusicBeatState
 		}
 
 		shagVoice = PlayState.shaggyVoice;
+		kogVoice = PlayState.kogreVoice;
 
 		gridBG = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
 		add(gridBG);
@@ -519,6 +520,7 @@ class ChartingState extends MusicBeatState
 
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
 		vocals = new FlxSound().loadEmbedded(Paths.voices(daSong, shagVoice ? "Shaggy" : ""));
+		vocals = new FlxSound().loadEmbedded(Paths.voices(daSong, kogVoice ? "Kogre" : ""));
 		FlxG.sound.list.add(vocals);
 
 		FlxG.sound.music.pause();
