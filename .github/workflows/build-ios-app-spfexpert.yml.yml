@@ -19,13 +19,7 @@ jobs:
         run: /usr/bin/xcodebuild -version
 
       - name: checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install the Apple certificate and provisioning profile
-        run: |
-          # apply provisioning profile
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles          
+        uses: actions/checkout@v3    
 
       - name: build archive
         run: |
