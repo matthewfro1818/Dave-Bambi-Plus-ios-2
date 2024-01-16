@@ -2317,6 +2317,22 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Sing Left', 24);
 				loadOffsetFile(curCharacter);
 				barColor = FlxColor.fromRGB(186, 123, 66);
+			case 'kogre':
+				frames = Paths.getSparrowAtlas('characters/kogre_assets', 'shared');
+				animation.addByPrefix('idle', 'rimur idle', 24, false);
+				for (anim in ['left', 'down', 'up', 'right'])
+				{
+					animation.addByPrefix('sing${anim.toUpperCase()}', 'rimur $anim', 24, false);
+				}
+				barColor = FlxColor.fromRGB(161, 161, 161);
+
+				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
+				
+				setGraphicSize(Std.int((width * 0.5) / furiosityScale));
+				globalOffset = [-1000, -300];
+
+				playAnim('idle');
+				nativelyPlayable = true;
 		}
 		dance();
 
