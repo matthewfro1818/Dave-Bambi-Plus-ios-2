@@ -484,7 +484,9 @@ class PlayState extends MusicBeatState
 	var noteWidth:Float = 0;
 
 	public static var shaggyVoice:Bool = false;
+	public static var kogreVoice:Bool = false;
 	var isShaggy:Bool = false;
+        var isKogre:Bool = false;
 	var legs:FlxSprite;
 	var shaggyT:FlxTrail;
 	var legT:FlxTrail;
@@ -1117,6 +1119,7 @@ class PlayState extends MusicBeatState
 		}
 		bfGroup.add(boyfriend);
 		isShaggy = boyfriend.curCharacter == 'shaggy' || boyfriend.curCharacter == 'supershaggy' || boyfriend.curCharacter == 'godshaggy' || boyfriend.curCharacter == 'redshaggy';
+                isKogre = boyfriend.curCharacter == 'kogre';
 
 		switch (stageCheck)
 		{
@@ -1188,6 +1191,7 @@ class PlayState extends MusicBeatState
 				if (isShaggy) boyfriend.y += 50;
 			case 'interdimension-void':
 				if (isShaggy) boyfriend.y += 100;
+				if (isKogre) boyfriend.setPosition(770, 150);
 			case 'green-void':
 				if (isShaggy) {
 					boyfriend.x += 150;
@@ -1260,6 +1264,8 @@ class PlayState extends MusicBeatState
 			'bonus-song', 'bonus-song-2.5', 'bot-trot', 'escape-from-california', 'adventure', 'mealie', 'indignancy', 'memory',
 			'roofs', 'supernovae', 'glitch', 'master', 'cheating', 'unfairness', 'kabunga', 'recursed', 'exploitation'
 		].contains(SONG.song.toLowerCase());
+
+		kogreVoice = isKogre && ['interdimensional'].contains(SONG.song.toLowerCase());
 
 		generateSong(SONG.song);
 
@@ -3393,6 +3399,8 @@ class PlayState extends MusicBeatState
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song, localFunny == CharacterFunnyEffect.Tristan ? "-Tristan" : shaggyVoice ? "Shaggy" : ""));
 		else
 			vocals = new FlxSound();
+		if (isKogre && SONG.needsVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song, localFunny == CharacterFunnyEffect.Tristan ? "-Tristan" : kogreVoice ? "Kogre" : ""));
 
 		FlxG.sound.list.add(vocals);
 
