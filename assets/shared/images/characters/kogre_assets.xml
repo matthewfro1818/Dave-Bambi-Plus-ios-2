@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="kogre_assets.png"><SubTexture name="rimur idle0000" x="1792" y="0" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0001" x="604" y="1301" width="607" height="1276" frameX="-940" frameY="-78" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0002" x="3635" y="0" width="639" height="1220" frameX="-970" frameY="-133" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0003" x="604" y="2582" width="642" height="1210" frameX="-978" frameY="-143" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0004" x="3000" y="1245" width="622" height="1243" frameX="-957" frameY="-111" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0005" x="1211" y="1301" width="609" height="1274" frameX="-941" frameY="-80" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0006" x="1792" y="0" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0007" x="2396" y="0" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0008" x="1792" y="0" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur idle0009" x="1792" y="0" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur left0000" x="3000" y="0" width="635" height="1245" frameX="-947" frameY="-109" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur left0001" x="1820" y="1301" width="634" height="1246" frameX="-950" frameY="-108" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur down0000" x="0" y="2582" width="604" height="1212" frameX="-953" frameY="-141" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur down0001" x="3635" y="1220" width="611" height="1218" frameX="-952" frameY="-135" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur up0000" x="0" y="0" width="592" height="1301" frameX="-931" frameY="-54" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur up0001" x="592" y="0" width="599" height="1289" frameX="-940" frameY="-66" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur right0000" x="0" y="1301" width="604" height="1281" frameX="-937" frameY="-73" frameWidth="2560" frameHeight="1440" />
+<SubTexture name="rimur right0001" x="1191" y="0" width="601" height="1288" frameX="-937" frameY="-66" frameWidth="2560" frameHeight="1440" />
+</TextureAtlas>
