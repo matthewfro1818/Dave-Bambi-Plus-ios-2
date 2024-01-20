@@ -2355,7 +2355,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
 				animation.addByPrefix('hit', 'BF hit', 24, false);
 
-				loadOffsetFile(curCharacter);;
+				loadOffsetFile(curCharacter);
 
 				barColor = FlxColor.fromRGB(125, 64, 178);
 
