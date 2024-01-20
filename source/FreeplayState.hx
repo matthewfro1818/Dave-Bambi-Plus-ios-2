@@ -80,6 +80,7 @@ class FreeplayState extends MusicBeatState
 		0xFFFFFFFF,    // cuzsiee
 		0xFF000000,    // dan
 		FlxColor.fromRGB(216, 176, 87), // Doge
+		FlxColor.fromRGB(125, 64, 178), // Nebula
     ];
 	public static var skipSelect:Array<String> = 
 	[
@@ -135,7 +136,8 @@ class FreeplayState extends MusicBeatState
 		'bonkers',
 		'duper',
                 'omission',
-		'doge-vs-bambi'
+		'doge-vs-bambi',
+		'interdimensional-zorua'
 	];
 
 	private var camFollow:FlxObject;
@@ -401,6 +403,7 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Foolhardy'], 2, ['zardyMyBeloved']);
 				if (FlxG.save.data.electricCockaldoodledooUnlocked)
 					addWeek(['Cuzsie-X-Kapi-Shipping-Cute'], 20, ['cuzsiee']);
+				addWeek(['Interdimensional-Zorua'], 23, ['nebula']);
 			case 'terminal':
 				if (FlxG.save.data.cheatingFound)
 					addWeek(['Cheating'], 14, ['bambi-3d']);
