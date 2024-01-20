@@ -757,7 +757,7 @@ class PlayState extends MusicBeatState
 					stageCheck = 'farm-night';
 				case 'shredder' | 'greetings':
 					stageCheck = 'festival';
-				case 'interdimensional':
+				case 'interdimensional' | 'interdimensional-zorua':
 					stageCheck = 'interdimension-void';
 				case 'rano':
 					stageCheck = 'backyard';
@@ -1572,7 +1572,7 @@ class PlayState extends MusicBeatState
 				{
 					preload('festival/shredder/${asset}');
 				}
-			case 'interdimensional':
+			case 'interdimensional' | 'interdimensional-zorua':
 				preload('backgrounds/void/interdimensions/interdimensionVoid');
 				preload('backgrounds/void/interdimensions/spike');
 				preload('backgrounds/void/interdimensions/darkSpace');
@@ -2346,6 +2346,11 @@ class PlayState extends MusicBeatState
 							];
 						}
 					case 'interdimensional':
+						mainChars = [
+							['bambi', 'bambi idle', 0.9, 400, 350],
+							['tristan', 'bop', 0.4, 800, 325]
+						];
+					case 'interdimensional-zorua':
 						mainChars = [
 							['bambi', 'bambi idle', 0.9, 400, 350],
 							['tristan', 'bop', 0.4, 800, 325]
@@ -3212,7 +3217,7 @@ class PlayState extends MusicBeatState
 							}, startDelay: 3});
 						}});
 					}
-					if (['polygonized', 'interdimensional', 'five-nights'].contains(SONG.song.toLowerCase()) && localFunny != CharacterFunnyEffect.Recurser)
+					if (['polygonized', 'interdimensional',  'interdimensional-zorua', 'five-nights'].contains(SONG.song.toLowerCase()) && localFunny != CharacterFunnyEffect.Recurser)
 					{
 						var shapeNoteWarning = new FlxSprite(0, FlxG.height * 2).loadGraphic(Paths.image(!inFiveNights ? 'ui/shapeNoteWarning' : 'ui/doorWarning'));
 						shapeNoteWarning.cameras = [camHUD];
@@ -4071,6 +4076,32 @@ class PlayState extends MusicBeatState
 			}
 		}
 		if (SONG.song.toLowerCase() == 'interdimensional')
+		{
+			var speed = 300;
+			flyingBgChars.forEach(function(bgChar:FlyingBGChar)
+			{
+				var moveDir = bgChar.direction == 'left' ? -1 : bgChar.direction == 'right' ? 1 : 0;
+				bgChar.x += speed * elapsed * moveDir * bgChar.randomSpeed;
+				bgChar.y += (Math.sin(elapsedtime) * 5);
+	
+				bgChar.angle += bgChar.angleChangeAmount * elapsed;
+
+				switch (bgChar.direction)
+				{
+					case 'left':
+						if (bgChar.x < bgChar.leftPosCheck)
+						{
+							bgChar.switchDirection();
+						}
+					case 'right':
+						if (bgChar.x > bgChar.rightPosCheck)
+						{
+							bgChar.switchDirection();
+						}
+				}
+			});
+		}
+		if (SONG.song.toLowerCase() == 'interdimensional-zorua')
 		{
 			var speed = 300;
 			flyingBgChars.forEach(function(bgChar:FlyingBGChar)
@@ -6918,7 +6949,7 @@ class PlayState extends MusicBeatState
 		var t10R = controls.T10_R;
 		var t11R = controls.T11_R;
 
-		var key5 = controls.KEY5 && ((SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'interdimensional') && localFunny != CharacterFunnyEffect.Recurser);
+		var key5 = controls.KEY5 && ((SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'interdimensional' || SONG.song.toLowerCase() == 'interdimensional-zorua') && localFunny != CharacterFunnyEffect.Recurser);
 
 		/*if (pressingKey5Global != key5)
 		{
@@ -8380,6 +8411,137 @@ class PlayState extends MusicBeatState
 							canFloat = false;
 							FlxG.camera.flash(FlxColor.WHITE, 0.25);
 							switchDad('dave-festival', dad.getPosition(), false);
+	
+							regenerateStaticArrows(0);
+							
+							var color = getBackgroundColor(curStage);
+	
+							FlxTween.color(dad, 0.6, dad.color, color);
+							if (formoverride != 'tristan-golden-glowing')
+							{
+								FlxTween.color(boyfriend, 0.6, boyfriend.color, color);
+							}
+							FlxTween.color(gf, 0.6, gf.color, color);
+	
+							FlxTween.linearMotion(dad, dad.x, dad.y, 100 + dad.globalOffset[0], 450 + dad.globalOffset[1], 0.6, true);
+							if (isShaggy) {
+								FlxTween.linearMotion(boyfriend, boyfriend.x, boyfriend.y, 770 + boyfriend.globalOffset[0], 450 + boyfriend.globalOffset[1], 0.6, true);
+								shx = 770 + boyfriend.globalOffset[0];
+								shy = 450 + boyfriend.globalOffset[1];
+							}
+							
+							if (!isShaggy) {
+								for (char in [boyfriend, gf])
+								{
+									if (char.animation.curAnim != null && char.animation.curAnim.name.startsWith('sing') && !char.animation.curAnim.finished)
+									{
+										char.animation.finishCallback = function(animation:String)
+										{
+											char.canDance = false;
+											char == boyfriend ? char.playAnim('hey', true) : char.playAnim('cheer', true);
+										}
+									}
+									else
+									{
+										char.canDance = false;
+										char == boyfriend ? char.playAnim('hey', true) : char.playAnim('cheer', true);
+									}
+								}
+							}
+					}		
+				case 'interdimensional-zorua':
+					switch(curStep)
+					{
+						case 378:
+							FlxG.camera.fade(FlxColor.WHITE, 0.3, false);
+						case 384:
+							black = new FlxSprite(0,0).makeGraphic(2560, 1440, FlxColor.BLACK);
+							black.screenCenter();
+							black.scrollFactor.set();
+							black.alpha = 0.4;
+							add(black);
+							defaultCamZoom += 0.2;
+							FlxG.camera.fade(FlxColor.WHITE, 0.5, true);
+						case 512:
+							defaultCamZoom -= 0.1;
+						case 639:
+							FlxG.camera.flash(FlxColor.WHITE, 0.3, false);
+							defaultCamZoom -= 0.1; // pooop
+							FlxTween.tween(black, {alpha: 0}, 0.5, 
+							{
+								onComplete: function(tween:FlxTween)
+								{
+									remove(black);
+								}
+							});
+							changeInterdimensionBg('spike-void');
+						case 1152:
+							FlxG.camera.flash(FlxColor.WHITE, 0.3, false);
+							changeInterdimensionBg('darkSpace');
+							
+							tweenList.push(FlxTween.color(gf, 1, gf.color, FlxColor.BLUE));
+							tweenList.push(FlxTween.color(dad, 1, dad.color, FlxColor.BLUE));
+							bfTween = FlxTween.color(boyfriend, 1, boyfriend.color, FlxColor.BLUE);
+							flyingBgChars.forEach(function(char:FlyingBGChar)
+							{
+								tweenList.push(FlxTween.color(char, 1, char.color, FlxColor.BLUE));
+							});
+						case 1408:
+							FlxG.camera.flash(FlxColor.WHITE, 0.3, false);
+							changeInterdimensionBg('hexagon-void');
+	
+							tweenList.push(FlxTween.color(dad, 1, dad.color, FlxColor.WHITE));
+							bfTween = FlxTween.color(boyfriend, 1, boyfriend.color, FlxColor.WHITE);
+							tweenList.push(FlxTween.color(gf, 1, gf.color, FlxColor.WHITE));
+							flyingBgChars.forEach(function(char:FlyingBGChar)
+							{
+								tweenList.push(FlxTween.color(char, 1, char.color, FlxColor.WHITE));
+							});
+						case 1792:
+							FlxG.camera.flash(FlxColor.WHITE, 0.3, false);
+	
+							nimbiLand = new BGSprite('nimbiLand', 200, 100, Paths.image('backgrounds/void/interdimensions/nimbi/nimbi_land'), null, 1, 1, false, true);
+							//backgroundSprites.add(nimbiLand);
+							nimbiLand.setGraphicSize(Std.int(nimbiLand.width * 1.5));
+							insert(members.indexOf(flyingBgChars), nimbiLand);
+							add(nimbiLand);
+			
+							nimbiSign = new BGSprite('sign', 800, -73, Paths.image('backgrounds/void/interdimensions/nimbi/sign'), null, 1, 1, false, true);
+							//backgroundSprites.add(nimbiSign);
+							nimbiSign.setGraphicSize(Std.int(nimbiSign.width * 0.2));
+							insert(members.indexOf(flyingBgChars), nimbiSign);
+							add(nimbiSign);						
+	
+							nimbi = new BGSprite('train', 1250, 275, 'backgrounds/void/interdimensions/nimbi/nimbi', [
+								new Animation('idle', 'lol hi dave and boyfriend fnf what a peculiar coincidence that we are here at this exact time', 24, true, [false, false])
+							], 1, 1, true, true);
+							nimbi.animation.play('idle');
+							nimbi.updateHitbox();
+							nimbi.setGraphicSize(Std.int(nimbi.width * 0.5));
+							//nimbi.antialiasing = FlxG.save.data.globalAntialiasing;
+							insert(members.indexOf(flyingBgChars), nimbi);
+							add(nimbi);
+	
+							changeInterdimensionBg('nimbi-void');
+						case 2176:
+							FlxG.camera.flash(FlxColor.WHITE, 0.3, false);
+							remove(nimbi);
+							remove(nimbiSign);
+							remove(nimbiLand);
+							changeInterdimensionBg('interdimension-void');
+						case 2688:
+							defaultCamZoom = 0.7;
+							for (bgSprite in backgroundSprites)
+							{
+								FlxTween.tween(bgSprite, {alpha: 0}, 1);
+							}
+							for (bgSprite in revertedBG)
+							{
+								FlxTween.tween(bgSprite, {alpha: 1}, 1);
+							}
+	
+							canFloat = false;
+							FlxG.camera.flash(FlxColor.WHITE, 0.25);
 	
 							regenerateStaticArrows(0);
 							
