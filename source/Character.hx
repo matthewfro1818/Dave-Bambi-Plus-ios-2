@@ -2333,6 +2333,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 				nativelyPlayable = true;
+
 			case 'nebula':
 				frames = Paths.getSparrowAtlas('characters/Nebula', 'shared');
 				
@@ -2361,7 +2362,6 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
-				}
 		}
 		dance();
 
