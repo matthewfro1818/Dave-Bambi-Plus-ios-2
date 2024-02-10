@@ -57,7 +57,7 @@ jobs:
         run: |
           cd export/release/ios/build/Release-iphoneos
           mkdir Payload
-          mv *.app Payload
+          mv dnbteam.daveandbambi Payload
           zip -r VsDave.ipa Payload
       - name: Upload Artifact
         if: ${{ success() }}
