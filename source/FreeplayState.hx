@@ -89,6 +89,7 @@ class FreeplayState extends MusicBeatState
 		'vs-dave-rap-two',
 		'confronting-yourself',
 		'cob',
+		'cob-bambi-and-bandu',
 		'cuzsie-x-kapi-shipping-cute',
 		'oppression',
 		'bananacore',
@@ -107,6 +108,7 @@ class FreeplayState extends MusicBeatState
 		'overdrive',
 		'confronting-yourself',
 		'cob',
+		'cob-bambi-and-bandu',
 		'cuzsie-x-kapi-shipping-cute',
 		'oppression',
 		'bananacore',
@@ -404,6 +406,7 @@ class FreeplayState extends MusicBeatState
 				if (FlxG.save.data.electricCockaldoodledooUnlocked)
 					addWeek(['Cuzsie-X-Kapi-Shipping-Cute'], 20, ['cuzsiee']);
 				addWeek(['Interdimensional-Zorua'], 23, ['nebula']);
+				addWeek(['Cob-Bambi-and-Bandu'], 1, ['bambi-and-bandu']);
 			case 'terminal':
 				if (FlxG.save.data.cheatingFound)
 					addWeek(['Cheating'], 14, ['bambi-3d']);

@@ -213,6 +213,12 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect('kapi', [1, 1, 1, 1], [
 			new CharacterForm('kapi', 'Kapi', [1, 1, 1, 1]),
 		]),
+		new CharacterInSelect('bf-chip', [1, 1, 1, 1], [
+			new CharacterForm('bf-chip', 'ChipFlake', [1,1,1,1]),
+		]),
+		new CharacterInSelect('kogre', [1, 1, 1, 1], [
+			new CharacterForm('kogre', 'Kogre', [1,1,1,1]),
+		]), 
 		new CharacterInSelect('shaggy', [1, 1, 1, 1], [
 			new CharacterForm('shaggy', 'Shaggy', [1, 1, 1, 1]),
 			new CharacterForm('supershaggy', 'Shaggy (0.001%)', [1, 1, 1, 1]),
@@ -234,6 +240,8 @@ class CharacterSelectState extends MusicBeatState
 	override public function create():Void 
 	{
 		unlockCharacter('shaggy');
+		unlockCharacter('kogre');
+		unlockCharacter('bf-chip');
 		if (PlayState.SONG.song.toLowerCase() == 'exploitation' && !FlxG.save.data.modchart)
 		{
 			if (FlxG.fullscreen)

@@ -485,8 +485,10 @@ class PlayState extends MusicBeatState
 
 	public static var shaggyVoice:Bool = false;
 	public static var kogreVoice:Bool = false;
+	public static var chipflakeVoice:Bool = false;
 	var isShaggy:Bool = false;
-        var isKogre:Bool = false;
+    var isKogre:Bool = false;
+    var isChipFlake:Bool = false;
 	var legs:FlxSprite;
 	var shaggyT:FlxTrail;
 	var legT:FlxTrail;
@@ -1120,6 +1122,7 @@ class PlayState extends MusicBeatState
 		bfGroup.add(boyfriend);
 		isShaggy = boyfriend.curCharacter == 'shaggy' || boyfriend.curCharacter == 'supershaggy' || boyfriend.curCharacter == 'godshaggy' || boyfriend.curCharacter == 'redshaggy';
                 isKogre = boyfriend.curCharacter == 'kogre';
+                isChipFlake = boyfriend.curCharacter == 'bf-chip';
 
 		switch (stageCheck)
 		{
@@ -1139,12 +1142,14 @@ class PlayState extends MusicBeatState
 			case 'farm' | 'farm-night'| 'farm-sunset':
 				dad.x += 200;
 				if (isShaggy) boyfriend.x += 150;
+				if (isChipFlake) boyfriend.setPosition(770, 150);
 			case 'house' | 'house-night' | 'house-sunset':
 				dad.setPosition(50, 270);
 				if (dadmirror != null)
 				{
 					dadmirror.setPosition(dad.x - 50, dad.y);
 				}
+				if (isChipFlake) boyfriend.setPosition(770, 150);
 				boyfriend.setPosition(843, 270);
 				gf.setPosition(300, -60);
 			case 'backyard':
@@ -1188,10 +1193,12 @@ class PlayState extends MusicBeatState
 				{
 					dad.y -= 70;
 				}
+				if (isChipFlake) boyfriend.setPosition(770, 150);
 				if (isShaggy) boyfriend.y += 50;
 			case 'interdimension-void':
 				if (isShaggy) boyfriend.y += 100;
 				if (isKogre) boyfriend.setPosition(770, 150);
+				if (isChipFlake) boyfriend.setPosition(770, 150);
 			case 'green-void':
 				if (isShaggy) {
 					boyfriend.x += 150;
@@ -1267,6 +1274,7 @@ class PlayState extends MusicBeatState
 
 		kogreVoice = isKogre && ['interdimensional'].contains(SONG.song.toLowerCase());
 
+		chipflakeVoice = isChipFlake && ['interdimensional'].contains(SONG.song.toLowerCase());
 		generateSong(SONG.song);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
@@ -3406,6 +3414,9 @@ class PlayState extends MusicBeatState
 			vocals = new FlxSound();
 		if (isKogre && SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song, localFunny == CharacterFunnyEffect.Tristan ? "-Tristan" : kogreVoice ? "Kogre" : ""));
+
+		if (isChipFlake && SONG.needsVoices)
+			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song, localFunny == CharacterFunnyEffect.Tristan ? "-Tristan" : chipflakeVoice ? "ChipFlake" : ""));
 
 		FlxG.sound.list.add(vocals);
 
