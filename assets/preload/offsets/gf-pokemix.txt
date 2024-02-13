@@ -1,0 +1,10 @@
+cheer 0 0
+sad 0 0
+idle 0 0
+singUP 0 0
+singRIGHT 0 0
+singLEFT 0 0
+singDOWN 0 0
+hairBlow 0 0
+hairFall 0 0
+scared 0 0
