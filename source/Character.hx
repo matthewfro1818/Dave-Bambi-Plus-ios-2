@@ -86,6 +86,42 @@ class Character extends FlxSprite
 				nativelyPlayable = true;
 
 				flipX = true;
+			case 'bf-pokemix':
+				frames = Paths.getSparrowAtlas('pokemix_skins/BOYFRIEND', 'shared');
+				
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
+
+				loadOffsetFile(curCharacter);
+
+				setGraphicSize(Std.int((width * 0.6) / furiosityScale));
+
+				skins.set('gfSkin', 'gf-pokemix');
+
+				barColor = FlxColor.fromRGB(49, 176, 209);
+
+				playAnim('idle');
+
+				nativelyPlayable = true;
+
+				flipX = true;
+				globalOffset = [-160, 10];
+
 			case 'bf-chip':
 				frames = Paths.getSparrowAtlas('chipflake/BOYFRIEND', 'shared');
 				
@@ -260,7 +296,30 @@ class Character extends FlxSprite
 
 				barColor = FlxColor.fromString('#33de39');
 
-				playAnim('danceRight');
+				playAnim('danceRight');	
+			case 'gf-pokemix':
+				// GIRLFRIEND CODE
+				frames = Paths.getSparrowAtlas('pokemix_skins/GF_assets', 'shared');
+
+				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
+				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
+				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
+				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
+				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByPrefix('idle', 'GF Dancing Beat', 24, false);
+				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
+				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+				animation.addByPrefix('scared', 'GF FEAR', 24);
+
+				loadOffsetFile(curCharacter);
+
+				setGraphicSize(Std.int((width * 0.5) / furiosityScale))
+
+				barColor = FlxColor.fromString('#33de39');
+
+				playAnim('idle');
+				globalOffset = [-290, 10];
 			case 'gf-bent':
 				// GIRLFRIEND CODE
 				frames = Paths.getSparrowAtlas('characters/GF_Bent_New', 'shared');
@@ -2358,7 +2417,7 @@ class Character extends FlxSprite
 				barColor = FlxColor.fromRGB(161, 161, 161);
 
 				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
-				
+
 				setGraphicSize(Std.int((width * 0.5) / furiosityScale));
 				globalOffset = [-1000, -300];
 
