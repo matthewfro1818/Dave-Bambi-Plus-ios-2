@@ -96,7 +96,6 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect('bf', [1, 1, 1, 1], [
 			new CharacterForm('bf', 'Boyfriend', [1,1,1,1]),
 			new CharacterForm('bf-pixel', 'Pixel Boyfriend', [1,1,1,1]),
-			new CharacterForm('bf-pokemix', 'Boyfriend-Riolu', [1,1,1,1]),
 		]),
 		new CharacterInSelect('dave', [0.25, 0.25, 2, 2], [
 			new CharacterForm('dave', 'Dave', [0.25, 0.25, 2, 2]),
@@ -219,7 +218,10 @@ class CharacterSelectState extends MusicBeatState
 		]),
 		new CharacterInSelect('kogre', [1, 1, 1, 1], [
 			new CharacterForm('kogre', 'Kogre', [1,1,1,1]),
-		]), 
+		]),
+		new CharacterInSelect('bf-pokemix', [1, 1, 1, 1], [
+			new CharacterForm('bf-pokemix', 'Boyfriend-Riolu', [1,1,1,1])
+		]),
 		new CharacterInSelect('shaggy', [1, 1, 1, 1], [
 			new CharacterForm('shaggy', 'Shaggy', [1, 1, 1, 1]),
 			new CharacterForm('supershaggy', 'Shaggy (0.001%)', [1, 1, 1, 1]),
@@ -243,6 +245,7 @@ class CharacterSelectState extends MusicBeatState
 		unlockCharacter('shaggy');
 		unlockCharacter('kogre');
 		unlockCharacter('bf-chip');
+		unlockCharacter('bf-pokemix');
 		if (PlayState.SONG.song.toLowerCase() == 'exploitation' && !FlxG.save.data.modchart)
 		{
 			if (FlxG.fullscreen)
