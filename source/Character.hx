@@ -314,7 +314,7 @@ class Character extends FlxSprite
 
 				loadOffsetFile(curCharacter);
 
-				setGraphicSize(Std.int((width * 0.5) / furiosityScale))
+				setGraphicSize(Std.int((width * 0.5) / furiosityScale));
 
 				barColor = FlxColor.fromString('#33de39');
 
