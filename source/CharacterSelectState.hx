@@ -229,7 +229,7 @@ class CharacterSelectState extends MusicBeatState
 			new CharacterForm('redshaggy', 'Red Shaggy', [1, 1, 1, 1]),
 		]),
 		new CharacterInSelect('spingbi', [0, 0, 3, 0], [
-			new CharacterForm('spingbi', 'Dan', [0, 0, 3, 0]),
+			new CharacterForm('spingbi', 'Spingbi', [0, 0, 3, 0]),
 		]),
 	];
 	#if SHADERS_ENABLED
@@ -249,6 +249,7 @@ class CharacterSelectState extends MusicBeatState
 		unlockCharacter('kogre');
 		unlockCharacter('bf-chip');
 		unlockCharacter('bf-pokemix');
+		unlockCharacter('spingbi');
 		if (PlayState.SONG.song.toLowerCase() == 'exploitation' && !FlxG.save.data.modchart)
 		{
 			if (FlxG.fullscreen)
