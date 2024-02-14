@@ -2455,17 +2455,9 @@ class Character extends FlxSprite
 				for (anim in ['left', 'down', 'up', 'right'])
 				{
 					animation.addByPrefix('sing${anim.toUpperCase()}', 'spingbi $anim', 24, false);
-					animation.addByPrefix('sing${anim.toUpperCase()}miss', 'miss $anim', 24, false);
 				}
-				for (anim in ['left', 'right'])
-				{
-					animation.addByPrefix('sing${anim.toUpperCase()}-alt', 'bambi alt $anim', 24, false);
-				}
-				animation.addByPrefix('hey', 'bambi look', 24, false);
-				animation.addByPrefix('singSmash', 'bambi phone', 24, false);
-				animation.addByPrefix('singThrow', 'bambi throw', 24, false);
 				
-				barColor = FlxColor.fromRGB(37, 191, 55);
+				barColor = FlxColor.fromRGB(90, 165, 222);
 
 				loadOffsetFile(curCharacter + (isPlayer ? '-playable' : ''));
 				
