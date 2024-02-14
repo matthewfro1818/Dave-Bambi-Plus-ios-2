@@ -228,6 +228,9 @@ class CharacterSelectState extends MusicBeatState
 			new CharacterForm('godshaggy', 'Shaggy (0.002%)', [1, 1, 1, 1]),
 			new CharacterForm('redshaggy', 'Red Shaggy', [1, 1, 1, 1]),
 		]),
+		new CharacterInSelect('spingbi', [0, 0, 3, 0], [
+			new CharacterForm('spingbi', 'Dan', [0, 0, 3, 0]),
+		]),
 	];
 	#if SHADERS_ENABLED
 	var bgShader:Shaders.GlitchEffect;
