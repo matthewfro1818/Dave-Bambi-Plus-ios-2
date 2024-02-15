@@ -301,13 +301,11 @@ class Character extends FlxSprite
 				// GIRLFRIEND CODE
 				frames = Paths.getSparrowAtlas('pokemix_skins/GF_assets', 'shared');
 
-				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
-				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
-				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
-				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
-				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
-				animation.addByPrefix('idle', 'GF Idle Dance', 24, false);
-				animation.addByPrefix('scared', 'GF FEAR', 24);
+				animation.addByPrefix('singLEFT', 'GF-Buneary SingLeft', 24, false);
+				animation.addByPrefix('singRIGHT', 'GF-Buneary SingRight', 24, false);
+				animation.addByPrefix('singUP', 'GF-Buneary SingUp', 24, false);
+				animation.addByPrefix('singDOWN', 'GF-Buneary SingDown', 24, false);
+				animation.addByPrefix('idle', 'GF-Buneary Idle', 24, false);
 
 				loadOffsetFile(curCharacter);
 
@@ -316,7 +314,10 @@ class Character extends FlxSprite
 				barColor = FlxColor.fromString('#33de39');
 
 				playAnim('idle');
-				globalOffset = [-290, 10];
+
+				flipX = true;
+				globalOffset = [-160, 10];
+
 			case 'gf-bent':
 				// GIRLFRIEND CODE
 				frames = Paths.getSparrowAtlas('characters/GF_Bent_New', 'shared');
